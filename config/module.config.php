@@ -70,7 +70,7 @@ return [
             ],
             'orm_default' => [
                 'drivers' => [
-                    'E4W\Board' => 'application_driver'
+                    'E4W\Zf2Board' => 'zf2board_driver'
                 ]
             ]
         ],

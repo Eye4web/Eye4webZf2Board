@@ -6,7 +6,7 @@
     <ignored path=".idea/workspace.xml" />
     <file path="/composer.json" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409148116075" ignored="false" />
     <file path="/README.md" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409145484798" ignored="false" />
-    <file path="/a.dummy" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409146729809" ignored="false" />
+    <file path="/a.dummy" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409148986512" ignored="false" />
     <file path="/BoardMapperInterface.php" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409147210700" ignored="false" />
     <file path="/DoctrineORMBoardMapper.php" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409148085015" ignored="false" />
     <file path="$PROJECT_DIR$/../potterworld/E4WZf2Board/src/E4W/Zf2Board/Mapper/BoardInterface.php" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409145697426" ignored="false" />
@@ -20,6 +20,8 @@
     <file path="/BoardService.php" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409147246888" ignored="false" />
     <file path="/ModuleOptions.php" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409147722720" ignored="false" />
     <file path="$PROJECT_DIR$/../potterworld/composer.json" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409148118854" ignored="false" />
+    <file path="$PROJECT_DIR$/../potterworld/config/application.config.php" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409148701488" ignored="false" />
+    <file path="/Module.php" changelist="7eaeb1ad-1dee-47c8-93e7-15464e04595c" time="1409148976449" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,10 +53,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DoctrineORMBoardMapper.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DoctrineORMBoardMapper.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/E4W/Zf2Board/Mapper/DoctrineORMBoardMapper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.0882353">
+            <state line="22" column="0" selection-start="1005" selection-end="1005" vertical-scroll-proportion="-4.375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Module.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Module.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="10" selection-start="937" selection-end="941" vertical-scroll-proportion="-2.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="module.config.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/module.config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="72" column="54" selection-start="2646" selection-end="2646" vertical-scroll-proportion="0.8002561">
               <folding />
             </state>
           </provider>
@@ -84,8 +104,6 @@
         <option value="$PROJECT_DIR$/LICENSE.md" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/config/module.config.php" />
-        <option value="$PROJECT_DIR$/Module.php" />
         <option value="$PROJECT_DIR$/config/controller.config.php" />
         <option value="$PROJECT_DIR$/src/E4W/Zf2Board/Factory/Mapper/DoctrineORMBoardMapperFactory.php" />
         <option value="$PROJECT_DIR$/src/E4W/Zf2Board/Factory/Controller/BoardControllerFactory.php" />
@@ -97,6 +115,8 @@
         <option value="$PROJECT_DIR$/src/E4W/Zf2Board/Options/ModuleOptions.php" />
         <option value="$PROJECT_DIR$/src/E4W/Zf2Board/Service/BoardService.php" />
         <option value="$PROJECT_DIR$/src/E4W/Zf2Board/Mapper/DoctrineORMBoardMapper.php" />
+        <option value="$PROJECT_DIR$/Module.php" />
+        <option value="$PROJECT_DIR$/config/module.config.php" />
       </list>
     </option>
   </component>
@@ -503,10 +523,11 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32930756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24980111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24980111" sideWeight="0.67069244" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -514,7 +535,6 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -582,23 +602,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/controller.config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/E4W/Zf2Board/Factory/Controller/BoardControllerFactory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="30" selection-start="1291" selection-end="1291" vertical-scroll-proportion="-19.375">
-          <folding>
-            <element signature="e#7#925#0" expanded="true" />
-            <element signature="e#971#1015#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/e4w.zf2board.global.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="2" selection-start="185" selection-end="185" vertical-scroll-proportion="-6.25">
@@ -699,7 +702,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/E4W/Zf2Board/Mapper/DoctrineORMBoardMapper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.0882353">
+        <state line="22" column="0" selection-start="1005" selection-end="1005" vertical-scroll-proportion="-4.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Module.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="10" selection-start="937" selection-end="941" vertical-scroll-proportion="-2.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/module.config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="54" selection-start="2646" selection-end="2646" vertical-scroll-proportion="0.8002561">
           <folding />
         </state>
       </provider>

@@ -17,7 +17,7 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Board;
+namespace E4W\Zf2Board;
 
 class Module
 {
@@ -34,18 +34,6 @@ class Module
     {
         return include __DIR__ . '/config/controller.config.php';
     }
-
-    /*
-    public function getServiceConfig()
-    {
-        return include __DIR__ . '/config/service.config.php';
-    }
-
-    public function getViewHelperConfig()
-    {
-        return include __DIR__ . '/config/helper.config.php';
-    }
-    */
 
     public function getAutoloaderConfig()
     {
