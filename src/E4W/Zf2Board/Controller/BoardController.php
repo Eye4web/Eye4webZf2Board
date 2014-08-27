@@ -62,7 +62,7 @@ class BoardController extends AbstractActionController
         }
 
         if ($boardService->create($prg)) {
-            die("created");
+            return true;
         }
 
         return $viewModel;
