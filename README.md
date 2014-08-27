@@ -1,6 +1,5 @@
-E4W\Zf2Board
-============
+# E4W\Zf2Board
 
-# Installation
+## Installation
 
-# Authors
+## Authors

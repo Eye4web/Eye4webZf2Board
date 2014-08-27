@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-0": {
-            "E4W\Zf2Board": "src/"
+            "E4W\\Zf2Board": "src/"
         },
         "classmap": [
             "./Module.php"
