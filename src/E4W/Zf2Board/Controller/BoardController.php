@@ -36,11 +36,34 @@ class BoardController extends AbstractActionController
     public function boardListAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->setTemplate('e4w-zf2-board/board/board-list.phtml');
+        $viewModel->setTemplate('e4w-zf2-board/board/board/list.phtml');
 
         $viewModel->setVariables([
             'boards' => $this->boardService->findAll()
         ]);
+
+        return $viewModel;
+    }
+
+    public function createBoardAction()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('e4w-zf2-board/board/board/create.phtml');
+
+        $redirectUrl = $this->url()->fromRoute('e4w/create-board');
+        $prg = $this->prg($redirectUrl, true);
+
+        $boardService = $this->boardService;
+
+        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+            return $prg;
+        } elseif ($prg === false) {
+            return $viewModel;
+        }
+
+        if ($boardService->create($prg)) {
+            die("created");
+        }
 
         return $viewModel;
     }

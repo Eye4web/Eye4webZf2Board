@@ -36,7 +36,17 @@ return [
                                 'action'     => 'boardList',
                             ],
                         ],
-                    ]
+                    ],
+                    'board-create' => [
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => [
+                            'route'    => 'create-board',
+                            'defaults' => [
+                                'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                'action'     => 'boardCreate',
+                            ],
+                        ],
+                    ],
                 ]
             ]
         ],

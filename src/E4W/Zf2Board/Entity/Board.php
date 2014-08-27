@@ -37,14 +37,14 @@ class Board implements BoardInterface
     protected $id;
 
     /**
-     * @var string|null
+     * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
     protected $name;
 
     /**
-     * @var string|null
+     * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
@@ -95,7 +95,7 @@ class Board implements BoardInterface
     }
 
     /**
-     * @param null|string $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -103,7 +103,7 @@ class Board implements BoardInterface
     }
 
     /**
-     * @return null|string
+     * @return string
      */
     public function getName()
     {
@@ -111,7 +111,7 @@ class Board implements BoardInterface
     }
 
     /**
-     * @param null|string $slug
+     * @param string $slug
      */
     public function setSlug($slug)
     {
@@ -119,7 +119,7 @@ class Board implements BoardInterface
     }
 
     /**
-     * @return null|string
+     * @return string
      */
     public function getSlug()
     {

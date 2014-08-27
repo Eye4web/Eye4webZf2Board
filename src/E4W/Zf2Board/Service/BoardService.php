@@ -60,4 +60,9 @@ class BoardService implements EventManagerAwareInterface
     {
         return $this->boardMapper->delete($id);
     }
+
+    public function create(array $data)
+    {
+        return false;
+    }
 }
