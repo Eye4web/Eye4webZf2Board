@@ -37,8 +37,16 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
      * @param int $id
      * @return \E4W\Zf2Board\Entity\BoardInterface
      */
-    public function getFromId($id)
+    public function find($id)
     {
         return $this->objectManager->getRepository('\E4W\Zf2Board\Entity\Board')->find($id);
+    }
+
+    /**
+     * @return \E4W\Zf2Board\Entity\BoardInterface[]
+     */
+    public function findAll()
+    {
+        return $this->objectManager->getRepository('\E4W\Zf2Board\Entity\Board')->findAll();
     }
 }

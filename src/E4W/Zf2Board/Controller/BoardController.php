@@ -19,18 +19,29 @@
 
 namespace E4W\Zf2Board\Controller;
 
+use E4W\Zf2Board\Service\BoardService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class BoardController extends AbstractActionController
 {
-    public function __construct()
-    {
+    /** @var BoardService */
+    protected $boardService;
 
+    public function __construct(BoardService $boardService)
+    {
+        $this->boardService = $boardService;
     }
 
-    public function indexAction()
+    public function boardListAction()
     {
-        return new ViewModel();
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('e4w-zf2-board/board/board-list.phtml');
+
+        $viewModel->setVariables([
+            'boards' => $this->boardService->findAll()
+        ]);
+
+        return $viewModel;
     }
 }

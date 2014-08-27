@@ -20,6 +20,25 @@
 return [
     'router' => [
         'routes' => [
+            'e4w' => [
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => [
+                    'route' => '/'
+                ],
+                'may_terminate' => false,
+                'child_routes' => [
+                    'board-list' => [
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => [
+                            'route'    => 'boards',
+                            'defaults' => [
+                                'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                'action'     => 'boardList',
+                            ],
+                        ],
+                    ]
+                ]
+            ]
         ],
     ],
     'service_manager' => [
@@ -62,7 +81,7 @@ return [
 
     'doctrine' => [
         'driver' => [
-            'application_driver' => [
+            'zf2board_driver' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'paths' => [
                     __DIR__ . '/../src/E4W/Zf2Board/Entity',

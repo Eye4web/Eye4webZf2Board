@@ -17,30 +17,32 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Controller;
+namespace E4W\Zf2Board\Factory\Options;
 
-use E4W\Zf2Board\Controller\BoardController;
+use E4W\Zf2Board\Options\ModuleOptions;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class BoardControllerFactory implements FactoryInterface
+class ModuleOptionsFactory implements FactoryInterface
 {
     /**
-     * Create controller
+     * Create options
      *
-     * @param ServiceLocatorInterface $controllerManager
-     * @return BoardController
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return ModuleOptions
      */
-    public function createService (ServiceLocatorInterface $controllerManager)
+    public function createService (ServiceLocatorInterface $serviceLocator)
     {
-        /** @var ServiceLocatorInterface $serviceManager */
-        $serviceManager = $controllerManager->getServiceLocator();
+        $config = $serviceLocator->get('Config');
 
-        /** @var \E4W\Zf2Board\Service\BoardService $boardService */
-        $boardService = $serviceManager->get('E4W\Zf2Board\Service\BoardService');
+        $boardConfig = [];
 
-        $controller = new BoardController($boardService);
+        if (isset($config['ew4']['board'])) {
+            $boardConfig = $config['ew4']['board'];
+        }
 
-        return $controller;
+        $options = new ModuleOptions($boardConfig);
+
+        return $options;
     }
 }

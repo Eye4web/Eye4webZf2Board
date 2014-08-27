@@ -21,9 +21,12 @@ namespace E4W\Zf2Board\Service;
 
 use E4W\Zf2Board\Mapper\BoardMapperInterface;
 use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 
 class BoardService implements EventManagerAwareInterface
 {
+    use EventManagerAwareTrait;
+
     /** @var BoardMapperInterface */
     protected $boardMapper;
 
@@ -36,8 +39,16 @@ class BoardService implements EventManagerAwareInterface
      * @param int $id
      * @return \E4W\Zf2Board\Entity\BoardInterface
      */
-    public function getFromId($id)
+    public function find($id)
     {
-        return $this->boardMapper->getFromId($id);
+        return $this->boardMapper->find($id);
+    }
+
+    /**
+     * @return \E4W\Zf2Board\Entity\BoardInterface[]
+     */
+    public function findAll()
+    {
+        return $this->boardMapper->findAll();
     }
 }

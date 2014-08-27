@@ -24,7 +24,15 @@ use Zend\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions
 {
+    /**
+     * @var string
+     */
     protected $boardEntity = 'E4W\Zf2Board\Entity\Board';
+
+    /**
+     * @var string
+     */
+    protected $boardMapper = 'E4W\Zf2Board\Mapper\DoctrineORMBoardMapper';
 
     /**
      * @param string $boardEntity
@@ -40,5 +48,37 @@ class ModuleOptions extends AbstractOptions
     public function getBoardEntity()
     {
         return $this->boardEntity;
+    }
+
+    /**
+     * @param boolean $_strictMode__
+     */
+    public function setStrictMode($_strictMode__)
+    {
+        $this->__strictMode__ = $_strictMode__;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getStrictMode()
+    {
+        return $this->__strictMode__;
+    }
+
+    /**
+     * @param string $boardMapper
+     */
+    public function setBoardMapper($boardMapper)
+    {
+        $this->boardMapper = $boardMapper;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBoardMapper()
+    {
+        return $this->boardMapper;
     }
 }

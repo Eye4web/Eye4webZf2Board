@@ -21,5 +21,7 @@ namespace E4W\Zf2Board\Mapper;
 
 interface BoardMapperInterface
 {
-    public function getFromId($id);
+    public function find($id);
+
+    public function findAll();
 }

@@ -3,9 +3,8 @@
 return [
     'e4w' => [
         'board' => [
-            'mappers' => [
-                'board' => 'E4W\Zf2Board\Mapper\DoctrineORMBoardMapper',
-            ],
+            'boardEntity' => 'E4W\Zf2Board\Entity\Board',
+            # 'boardMapper' => 'E4W\Zf2Board\Mapper\DoctrineORMBoardMapper',
         ]
     ]
 ];

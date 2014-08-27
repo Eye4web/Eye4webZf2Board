@@ -17,30 +17,17 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Controller;
+namespace E4W\Zf2Board\Entity;
 
-use E4W\Zf2Board\Controller\BoardController;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-
-class BoardControllerFactory implements FactoryInterface
+interface PostInterface
 {
-    /**
-     * Create controller
-     *
-     * @param ServiceLocatorInterface $controllerManager
-     * @return BoardController
-     */
-    public function createService (ServiceLocatorInterface $controllerManager)
-    {
-        /** @var ServiceLocatorInterface $serviceManager */
-        $serviceManager = $controllerManager->getServiceLocator();
+    public function getCreated();
 
-        /** @var \E4W\Zf2Board\Service\BoardService $boardService */
-        $boardService = $serviceManager->get('E4W\Zf2Board\Service\BoardService');
+    public function getId();
 
-        $controller = new BoardController($boardService);
+    public function getText();
 
-        return $controller;
-    }
+    public function getTopic();
+
+    public function getUser();
 }
