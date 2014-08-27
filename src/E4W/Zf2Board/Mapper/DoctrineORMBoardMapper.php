@@ -38,7 +38,7 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
 
     /**
      * @param int $id
-     * @return \E4W\Zf2Board\Entity\BoardInterface
+     * @return \E4W\Zf2Board\Entity\BoardInterface|null
      */
     public function find($id)
     {
