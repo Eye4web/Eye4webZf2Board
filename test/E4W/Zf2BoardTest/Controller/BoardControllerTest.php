@@ -53,6 +53,37 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 
+    public function testCreateBoardActionCreateSuccess()
+    {
+        $url = 'demo';
+        $data = [];
+
+        $url = $this->getMock('Zend\Mvc\Controller\Plugin\Url');
+        $url->expects($this->at(0))
+            ->method('fromRoute')
+            ->with('e4w/create-board')
+            ->willReturn($url);
+
+        $this->pluginManagerPlugins['url'] = $url;
+
+        $prg = $this->getMock('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->expects($this->once())
+            ->method('__invoke')
+            ->with($url, true)
+            ->willReturn($data);
+
+        $this->pluginManagerPlugins['prg'] = $prg;
+
+        $this->boardService->expects($this->once())
+                           ->method('create')
+                           ->with($data)
+                           ->willReturn(false);
+
+        $result = $this->controller->createBoardAction();
+
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
     public function helperMockCallbackPluginManagerGet($key)
     {
         return (array_key_exists($key, $this->pluginManagerPlugins))
