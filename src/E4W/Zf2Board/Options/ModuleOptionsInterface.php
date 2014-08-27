@@ -17,30 +17,16 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Mapper;
 
-use E4W\Zf2Board\Mapper\DoctrineORMBoardMapper;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+namespace E4W\Zf2Board\Options;
 
-class DoctrineORMBoardMapperFactory implements FactoryInterface
+use Zend\Stdlib\AbstractOptions;
+
+interface ModuleOptionsInterface
 {
-    /**
-     * Create mapper
-     *
-     * @param ServiceLocatorInterface $serviceManager
-     * @return DoctrineORMBoardMapper
-     */
-    public function createService (ServiceLocatorInterface $serviceManager)
-    {
-        /** @var \Doctrine\ORM\EntityManager $objectManager */
-        $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');
+    public function getBoardEntity();
 
-        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $options */
-        $options = $serviceManager->get('E4W\Zf2Board\Options\ModuleOptions');
+    public function getStrictMode();
 
-        $mapper = new DoctrineORMBoardMapper($objectManager, $options);
-
-        return $mapper;
-    }
+    public function getBoardMapper();
 }

@@ -22,7 +22,7 @@ namespace E4W\Zf2Board\Options;
 
 use Zend\Stdlib\AbstractOptions;
 
-class ModuleOptions extends AbstractOptions
+class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
 {
     /**
      * @var string

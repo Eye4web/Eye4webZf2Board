@@ -20,17 +20,20 @@
 namespace E4W\Zf2Board\Mapper;
 
 use E4W\Zf2Board\Mapper\BoardMapperInterface;
+use E4W\Zf2Board\Options\ModuleOptionsInterface;
 
 class DoctrineORMBoardMapper implements BoardMapperInterface
 {
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
+    /** @var ModuleOptionsInterface */
     protected $options;
 
-    public function __construct(\Doctrine\Common\Persistence\ObjectManager $objectManager)
+    public function __construct(\Doctrine\Common\Persistence\ObjectManager $objectManager, ModuleOptionsInterface $options)
     {
         $this->objectManager = $objectManager;
+        $this->options = $options;
     }
 
     /**
@@ -39,7 +42,7 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
      */
     public function find($id)
     {
-        return $this->objectManager->getRepository('\E4W\Zf2Board\Entity\Board')->find($id);
+        return $this->objectManager->getRepository($this->options->getBoardEntity())->find($id);
     }
 
     /**
@@ -47,6 +50,25 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
      */
     public function findAll()
     {
-        return $this->objectManager->getRepository('\E4W\Zf2Board\Entity\Board')->findAll();
+        return $this->objectManager->getRepository($this->options->getBoardEntity())->findAll();
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete($id)
+    {
+        $board = $this->find($id);
+
+        if (!$board) {
+            throw new \Exception('The board does not exist');
+        }
+
+        $this->objectManager->remove($board);
+        $this->objectManager->flush();
+
+        return true;
     }
 }

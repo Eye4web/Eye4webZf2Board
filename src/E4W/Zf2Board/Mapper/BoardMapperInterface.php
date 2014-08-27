@@ -24,4 +24,6 @@ interface BoardMapperInterface
     public function find($id);
 
     public function findAll();
+
+    public function delete($id);
 }

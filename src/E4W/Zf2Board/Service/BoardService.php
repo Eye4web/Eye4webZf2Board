@@ -51,4 +51,13 @@ class BoardService implements EventManagerAwareInterface
     {
         return $this->boardMapper->findAll();
     }
+
+    /**
+     * @param $id
+     * @return boolean
+     */
+    public function delete($id)
+    {
+        return $this->boardMapper->delete($id);
+    }
 }

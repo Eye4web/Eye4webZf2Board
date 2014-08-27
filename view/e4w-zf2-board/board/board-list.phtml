@@ -1,0 +1,21 @@
+<?php
+/** @var \E4W\Zf2Board\Entity\BoardInterface[] $boards */
+$boards = $this->boards;
+?>
+<table>
+    <thead>
+        <tr>
+            <th><?=$this->translate('Id')?></th>
+            <th><?=$this->translate('Name')?></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <?php foreach ($boards as $board) { ?>
+        <tr>
+            <td><?=$board->getId()?></td>
+            <td><?=$board->getName()?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
