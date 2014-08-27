@@ -17,17 +17,23 @@
  * and is licensed under the MIT license.
  */
 
-return [
-    'factories' => [
-        // Services
-        'E4W\Zf2Board\Service\BoardService' => 'E4W\Zf2Board\Factory\Service\BoardServiceFactory',
-        'E4W\Zf2Board\Service\TopicService' => 'E4W\Zf2Board\Factory\Service\TopicServiceFactory',
-        'E4W\Zf2Board\Service\PostService' => 'E4W\Zf2Board\Factory\Service\PostServiceFactory',
+namespace E4W\Zf2Board\Factory\Service;
 
-        // Mappers
-        'E4W\Zf2Board\Mapper\DoctrineORMBoardMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORMBoardMapperFactory',
+use E4W\Zf2Board\Service\PostService;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-        // Options
-        'E4W\Zf2Board\Options\ModuleOptions' => 'E4W\Zf2Board\Factory\Options\ModuleOptionsFactory',
-    ]
-];
+class PostServiceFactory implements FactoryInterface
+{
+    /**
+     * Create controller
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return PostService
+     */
+    public function createService (ServiceLocatorInterface $serviceLocator)
+    {
+        $service = new PostService();
+        return $service;
+    }
+}

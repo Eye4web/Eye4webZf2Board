@@ -17,17 +17,16 @@
  * and is licensed under the MIT license.
  */
 
-return [
-    'factories' => [
-        // Services
-        'E4W\Zf2Board\Service\BoardService' => 'E4W\Zf2Board\Factory\Service\BoardServiceFactory',
-        'E4W\Zf2Board\Service\TopicService' => 'E4W\Zf2Board\Factory\Service\TopicServiceFactory',
-        'E4W\Zf2Board\Service\PostService' => 'E4W\Zf2Board\Factory\Service\PostServiceFactory',
+namespace E4W\Zf2Board\Service;
 
-        // Mappers
-        'E4W\Zf2Board\Mapper\DoctrineORMBoardMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORMBoardMapperFactory',
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 
-        // Options
-        'E4W\Zf2Board\Options\ModuleOptions' => 'E4W\Zf2Board\Factory\Options\ModuleOptionsFactory',
-    ]
-];
+class PostService implements EventManagerAwareInterface
+{
+    use EventManagerAwareTrait;
+
+    public function __construct()
+    {
+    }
+}
