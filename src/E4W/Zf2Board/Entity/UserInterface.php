@@ -17,35 +17,17 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Mapper;
+namespace E4W\Zf2Board\Entity;
 
-use E4W\Zf2Board\Entity\BoardInterface;
-use E4W\Zf2Board\Entity\UserInterface;
-
-interface BoardMapperInterface
+interface UserInterface
 {
     /**
-     * @param int $id
-     * @return BoardInterface
+     * @return int
      */
-    public function find($id);
+    public function getId();
 
     /**
-     * @return BoardInterface[]
+     * @return string
      */
-    public function findAll();
-
-    /**
-     * @param int $id
-     * @return boolean
-     * @throws \Exception
-     */
-    public function delete($id);
-
-    /**
-     * @param $form
-     * @param UserInterface $user
-     * @return boolean|BoardInterface
-     */
-    public function create($form, UserInterface $user);
+    public function getDisplayName();
 }

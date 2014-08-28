@@ -20,6 +20,7 @@
 namespace E4W\Zf2Board\Controller;
 
 use E4W\Zf2Board\Service\BoardService;
+use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -30,10 +31,14 @@ class BoardController extends AbstractActionController
 
     protected $boardCreateForm;
 
-    public function __construct(BoardService $boardService, $boardCreateForm)
+    /** @var AuthenticationService */
+    protected $authenticationService;
+
+    public function __construct(BoardService $boardService, $boardCreateForm, AuthenticationService $authenticationService)
     {
         $this->boardService = $boardService;
         $this->boardCreateForm = $boardCreateForm;
+        $this->authenticationService = $authenticationService;
     }
 
     public function boardListAction()
@@ -53,7 +58,6 @@ class BoardController extends AbstractActionController
         $form = $this->boardCreateForm;
 
         $viewModel = new ViewModel();
-
         $viewModel->setTemplate('e4w-zf2-board/board/board/create.phtml');
         $viewModel->setVariable('form', $form);
 
@@ -62,13 +66,15 @@ class BoardController extends AbstractActionController
 
         $boardService = $this->boardService;
 
+        $identity = $this->authenticationService->getIdentity();
+
         if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
             return $prg;
         } elseif ($prg === false) {
             return $viewModel;
         }
 
-        if ($boardService->create($prg)) {
+        if ($board = $boardService->create($prg, $identity)) {
             die("Board created");
         }
 

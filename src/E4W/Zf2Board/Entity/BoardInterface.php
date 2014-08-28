@@ -40,4 +40,6 @@ interface BoardInterface
      * @return null|string
      */
     public function getSlug();
+
+    public function setUser();
 }

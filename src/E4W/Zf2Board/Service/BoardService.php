@@ -20,6 +20,7 @@
 namespace E4W\Zf2Board\Service;
 
 use E4W\Zf2Board\Entity\BoardInterface;
+use E4W\Zf2Board\Entity\UserInterface;
 use E4W\Zf2Board\Mapper\BoardMapperInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerAwareTrait;
@@ -67,13 +68,14 @@ class BoardService implements EventManagerAwareInterface
 
     /**
      * @param array $data
-     * @return BoardInterface|boolean
+     * @param UserInterface $user
+     * @return bool|BoardInterface
      */
-    public function create(array $data)
+    public function create(array $data, UserInterface $user)
     {
         $form = $this->boardCreateForm;
         $form->setData($data);
 
-        return $this->boardMapper->create($form);
+        return $this->boardMapper->create($form, $user);
     }
 }

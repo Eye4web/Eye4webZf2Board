@@ -46,6 +46,12 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
      */
     public function getBoardEntity()
     {
+        $boardEntity = $this->boardEntity;
+
+        if (substr($boardEntity, 0, 1) !== '\\') {
+            $boardEntity = '\\' . $boardEntity;
+        }
+
         return $this->boardEntity;
     }
 

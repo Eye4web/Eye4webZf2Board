@@ -20,6 +20,7 @@
 namespace E4W\Zf2Board\Mapper;
 
 use E4W\Zf2Board\Entity\BoardInterface;
+use E4W\Zf2Board\Entity\UserInterface;
 use E4W\Zf2Board\Mapper\BoardMapperInterface;
 use E4W\Zf2Board\Options\ModuleOptionsInterface;
 
@@ -75,9 +76,10 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
 
     /**
      * @param $form
+     * @param UserInterface $user
      * @return bool|BoardInterface
      */
-    public function create($form)
+    public function create($form, UserInterface $user)
     {
         if (!$form->isValid()) {
             return false;
@@ -85,7 +87,17 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
 
         /** @var BoardInterface $board */
         $board = $form->getData();
+        $board->setUser($user);
 
+        return $this->save($board);
+    }
+
+    /**
+     * @param BoardInterface $board
+     * @return BoardInterface
+     */
+    public function save(BoardInterface $board)
+    {
         $this->objectManager->persist($board);
         $this->objectManager->flush();
 
