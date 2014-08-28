@@ -57,11 +57,6 @@ class Board implements BoardInterface
      */
     protected $created;
 
-    /**
-     * @var \E4W\Zf2Board\Entity\UserInterface
-     */
-    protected $user;
-
     public function __construct()
     {
         $this->created = new \DateTime;
@@ -129,21 +124,5 @@ class Board implements BoardInterface
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * @param \E4W\Zf2Board\Entity\UserInterface $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * @return \E4W\Zf2Board\Entity\UserInterface
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }

@@ -29,7 +29,7 @@ class CreateForm extends Form implements InputFilterProviderInterface
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
-    public function __construct(ObjectManager $objectManager, $name = 'create-board')
+    public function __construct(ObjectManager $objectManager, $name = 'create-topic')
     {
         parent::__construct($name);
 
@@ -39,11 +39,11 @@ class CreateForm extends Form implements InputFilterProviderInterface
             'name' => 'name',
             'type'  => 'Zend\Form\Element\Text',
             'options' => [
-                'label' => 'Board name',
+                'label' => 'Subject',
             ],
             'attributes' => [
                 'class' => 'small form-control',
-                'placeholder' => 'Board name'
+                'placeholder' => 'Subject'
             ],
         ]);
 

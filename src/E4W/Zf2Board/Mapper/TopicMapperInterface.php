@@ -17,67 +17,37 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Service;
+namespace E4W\Zf2Board\Mapper;
 
 use E4W\Zf2Board\Entity\BoardInterface;
 use E4W\Zf2Board\Entity\TopicInterface;
 use E4W\Zf2Board\Entity\UserInterface;
-use E4W\Zf2Board\Mapper\TopicMapperInterface;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerAwareTrait;
 
-class TopicService implements EventManagerAwareInterface
+interface TopicMapperInterface
 {
-    use EventManagerAwareTrait;
-    
-    /** @var TopicMapperInterface */
-    protected $boardMapper;
-
-    protected $topicCreateForm;
-
-    public function __construct(TopicMapperInterface $topicMapper, $topicCreateForm)
-    {
-        $this->topicMapper = $topicMapper;
-        $this->topicCreateForm = $topicCreateForm;
-    }
-
     /**
      * @param int $id
      * @return TopicInterface
      */
-    public function find($id)
-    {
-        return $this->boardMapper->find($id);
-    }
+    public function find($id);
 
     /**
      * @return TopicInterface[]
      */
-    public function findAll()
-    {
-        return $this->boardMapper->findAll();
-    }
+    public function findAll();
 
     /**
-     * @param $id
+     * @param int $id
      * @return boolean
+     * @throws \Exception
      */
-    public function delete($id)
-    {
-        return $this->boardMapper->delete($id);
-    }
+    public function delete($id);
 
     /**
-     * @param array $data
+     * @param $form
      * @param BoardInterface $board
      * @param UserInterface $user
-     * @return \E4W\Zf2Board\Entity\TopicInterface|null
+     * @return TopicInterface|null
      */
-    public function create(array $data, BoardInterface $board, UserInterface $user)
-    {
-        $form = $this->topicCreateForm;
-        $form->setData($data);
-
-        return $this->boardMapper->create($form, $board, $user);
-    }
+    public function create($form, BoardInterface $board, UserInterface $user);
 }

@@ -37,6 +37,11 @@ class Topic implements TopicInterface
     protected $id;
 
     /**
+     * @var int
+     */
+    protected $user;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
@@ -63,11 +68,6 @@ class Topic implements TopicInterface
      * @ORM\Column(type="datetime")
      */
     protected $created;
-
-    /**
-     * @var int
-     */
-    protected $user;
 
     /**
      * @var int

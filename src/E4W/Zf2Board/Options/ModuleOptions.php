@@ -19,6 +19,8 @@
 
 namespace E4W\Zf2Board\Options;
 
+use Zend\Authentication\AuthenticationService;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
@@ -34,6 +36,19 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     protected $boardMapper = 'E4W\Zf2Board\Mapper\DoctrineORMBoardMapper';
 
     /**
+     * @var string
+     */
+    protected $topicEntity = 'E4W\Zf2Board\Entity\Topic';
+
+    /**
+     * @var string
+     */
+    protected $topicMapper = 'E4W\Zf2Board\Mapper\DoctrineORMTopicMapper';
+
+    /** @var AuthenticationService */
+    protected $authenticationService = null;
+
+    /**
      * @param string $boardEntity
      */
     public function setBoardEntity($boardEntity)
@@ -46,13 +61,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
      */
     public function getBoardEntity()
     {
-        $boardEntity = $this->boardEntity;
-
-        if (substr($boardEntity, 0, 1) !== '\\') {
-            $boardEntity = '\\' . $boardEntity;
-        }
-
-        return $this->boardEntity;
+        return $this->correctEntity($this->boardEntity);
     }
 
     /**
@@ -85,5 +94,68 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     public function getBoardMapper()
     {
         return $this->boardMapper;
+    }
+
+    /**
+     * @param AuthenticationService $authenticationService
+     */
+    public function setAuthenticationService($authenticationService)
+    {
+        $this->authenticationService = $authenticationService;
+    }
+
+    /**
+     * @return AuthenticationService
+     */
+    public function getAuthenticationService()
+    {
+        return $this->authenticationService;
+    }
+
+    /**
+     * @param string $topicEntity
+     */
+    public function setTopicEntity($topicEntity)
+    {
+        $this->topicEntity = $topicEntity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTopicEntity()
+    {
+        return $this->correctEntity($this->topicEntity);
+    }
+
+    /**
+     * @param string $topicMapper
+     */
+    public function setTopicMapper($topicMapper)
+    {
+        $this->topicMapper = $topicMapper;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTopicMapper()
+    {
+        return $this->topicMapper;
+    }
+
+    /**
+     * Ensure that the entity has the correct name
+     *
+     * @param $entityClass
+     * @return string
+     */
+    public function correctEntity($entityClass)
+    {
+        if (substr($entityClass, 0, 1) !== '\\') {
+            $entityClass = '\\' . $entityClass;
+        }
+
+        return $entityClass;
     }
 }

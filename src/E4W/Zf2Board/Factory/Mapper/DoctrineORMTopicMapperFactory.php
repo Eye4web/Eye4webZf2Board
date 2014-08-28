@@ -17,27 +17,30 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Entity;
+namespace E4W\Zf2Board\Factory\Mapper;
 
-interface BoardInterface
+use E4W\Zf2Board\Mapper\DoctrineORMTopicMapper;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+class DoctrineORMTopicMapperFactory implements FactoryInterface
 {
     /**
-     * @return \DateTime
+     * Create mapper
+     *
+     * @param ServiceLocatorInterface $serviceManager
+     * @return DoctrineORMTopicMapper
      */
-    public function getCreated();
+    public function createService (ServiceLocatorInterface $serviceManager)
+    {
+        /** @var \Doctrine\ORM\EntityManager $objectManager */
+        $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');
 
-    /**
-     * @return int|null
-     */
-    public function getId();
+        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $options */
+        $options = $serviceManager->get('E4W\Zf2Board\Options\ModuleOptions');
 
-    /**
-     * @return null|string
-     */
-    public function getName();
+        $mapper = new DoctrineORMTopicMapper($objectManager, $options);
 
-    /**
-     * @return null|string
-     */
-    public function getSlug();
+        return $mapper;
+    }
 }

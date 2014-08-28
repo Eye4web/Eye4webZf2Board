@@ -26,6 +26,7 @@ return [
 
         // Mappers
         'E4W\Zf2Board\Mapper\DoctrineORMBoardMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORMBoardMapperFactory',
+        'E4W\Zf2Board\Mapper\DoctrineORMTopicMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORMTopicMapperFactory',
 
         // Options
         'E4W\Zf2Board\Options\ModuleOptions' => 'E4W\Zf2Board\Factory\Options\ModuleOptionsFactory',

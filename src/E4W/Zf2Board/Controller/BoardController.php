@@ -20,6 +20,7 @@
 namespace E4W\Zf2Board\Controller;
 
 use E4W\Zf2Board\Service\BoardService;
+use E4W\Zf2Board\Service\TopicService;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -29,15 +30,22 @@ class BoardController extends AbstractActionController
     /** @var BoardService */
     protected $boardService;
 
+    /** @var TopicService */
+    protected $topicService;
+
     protected $boardCreateForm;
+
+    protected $topicCreateForm;
 
     /** @var AuthenticationService */
     protected $authenticationService;
 
-    public function __construct(BoardService $boardService, $boardCreateForm, AuthenticationService $authenticationService)
+    public function __construct(BoardService $boardService, TopicService $topicService, $boardCreateForm, $topicCreateForm, AuthenticationService $authenticationService)
     {
         $this->boardService = $boardService;
+        $this->topicService = $topicService;
         $this->boardCreateForm = $boardCreateForm;
+        $this->topicCreateForm = $topicCreateForm;
         $this->authenticationService = $authenticationService;
     }
 
@@ -75,6 +83,40 @@ class BoardController extends AbstractActionController
         }
 
         if ($board = $boardService->create($prg, $identity)) {
+            die("Board created");
+        }
+
+        return $viewModel;
+    }
+
+    public function topicCreateAction()
+    {
+        $board = $this->boardService->find($this->params('board'));
+
+        if (!$board) {
+            throw new \Exception('The board does not exist');
+        }
+
+        $form = $this->topicCreateForm;
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('e4w-zf2-board/board/topic/create.phtml');
+        $viewModel->setVariable('form', $form);
+
+        $redirectUrl = $this->url()->fromRoute('e4w/topic-create');
+        $prg = $this->prg($redirectUrl, true);
+
+        $topicService = $this->topicService;
+
+        $identity = $this->authenticationService->getIdentity();
+
+        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+            return $prg;
+        } elseif ($prg === false) {
+            return $viewModel;
+        }
+
+        if ($board = $topicService->create($prg, $board, $identity)) {
             die("Board created");
         }
 

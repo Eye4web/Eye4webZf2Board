@@ -47,6 +47,16 @@ return [
                             ],
                         ],
                     ],
+                    'topic-create' => [
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => [
+                            'route'    => 'create-topic/:board',
+                            'defaults' => [
+                                'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                'action'     => 'topicCreate',
+                            ],
+                        ],
+                    ],
                 ]
             ]
         ],

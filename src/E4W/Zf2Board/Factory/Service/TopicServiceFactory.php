@@ -33,7 +33,16 @@ class TopicServiceFactory implements FactoryInterface
      */
     public function createService (ServiceLocatorInterface $serviceLocator)
     {
-        $service = new TopicService();
+        /** @var \E4W\Zf2Board\Options\ModuleOptions $options */
+        $options = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
+
+        /** @var \E4W\Zf2Board\Mapper\TopicMapperInterface $mapper */
+        $mapper = $serviceLocator->get($options->getTopicMapper());
+
+        $topicCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Topic\CreateForm');
+
+        $service = new TopicService($mapper, $topicCreateForm);
+
         return $service;
     }
 }

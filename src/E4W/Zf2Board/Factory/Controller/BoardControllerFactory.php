@@ -36,13 +36,25 @@ class BoardControllerFactory implements FactoryInterface
         /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $controllerManager->getServiceLocator();
 
+        /** @var \E4W\Zf2Board\Options\ModuleOptions $moduleOptions */
+        $moduleOptions = $serviceManager->get('E4W\Zf2Board\Options\ModuleOptions');
+
         /** @var \E4W\Zf2Board\Service\BoardService $boardService */
         $boardService = $serviceManager->get('E4W\Zf2Board\Service\BoardService');
 
-        /** @var \E4W\Zf2Board\Form\Board\CreateForm $boardForm */
-        $boardForm = $serviceManager->get('E4W\Zf2Board\Form\Board\CreateForm');
+        /** @var \E4W\Zf2Board\Service\TopicService $topicService */
+        $topicService = $serviceManager->get('E4W\Zf2Board\Service\TopicService');
 
-        $controller = new BoardController($boardService, $boardForm);
+        /** @var \E4W\Zf2Board\Form\Board\CreateForm $boardCreateForm */
+        $boardCreateForm = $serviceManager->get('E4W\Zf2Board\Form\Board\CreateForm');
+
+        /** @var \E4W\Zf2Board\Form\Topic\CreateForm $topicCreateForm */
+        $topicCreateForm = $serviceManager->get('E4W\Zf2Board\Form\Topic\CreateForm');
+
+        /** @var \Zend\Authentication\AuthenticationService $authenticationService */
+        $authenticationService = $serviceManager->get($moduleOptions->getAuthenticationService());
+
+        $controller = new BoardController($boardService, $topicService, $boardCreateForm, $topicCreateForm, $authenticationService);
 
         return $controller;
     }

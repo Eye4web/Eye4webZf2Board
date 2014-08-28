@@ -1,0 +1,9 @@
+<?php
+$form = $this->form;
+?>
+
+<?=$this->form()->openTag($form)?>
+<?=$this->formRow($form->get('name'))?><br />
+<?=$this->formRow($form->get('text'))?><br />
+<?=$this->formButton($form->get('submit')->setLabel('Create topic'))?>
+<?=$this->form()->closeTag($form)?>
