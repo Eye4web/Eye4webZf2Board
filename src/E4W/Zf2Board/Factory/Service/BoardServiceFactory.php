@@ -39,7 +39,9 @@ class BoardServiceFactory implements FactoryInterface
         /** @var \E4W\Zf2Board\Mapper\BoardMapperInterface $mapper */
         $mapper = $serviceLocator->get($options->getBoardMapper());
 
-        $service = new BoardService($mapper);
+        $boardCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Board\CreateForm');
+
+        $service = new BoardService($mapper, $boardCreateForm);
 
         return $service;
     }

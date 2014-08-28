@@ -28,9 +28,12 @@ class BoardController extends AbstractActionController
     /** @var BoardService */
     protected $boardService;
 
-    public function __construct(BoardService $boardService)
+    protected $boardCreateForm;
+
+    public function __construct(BoardService $boardService, $boardCreateForm)
     {
         $this->boardService = $boardService;
+        $this->boardCreateForm = $boardCreateForm;
     }
 
     public function boardListAction()
@@ -45,12 +48,16 @@ class BoardController extends AbstractActionController
         return $viewModel;
     }
 
-    public function createBoardAction()
+    public function boardCreateAction()
     {
-        $viewModel = new ViewModel();
-        $viewModel->setTemplate('e4w-zf2-board/board/board/create.phtml');
+        $form = $this->boardCreateForm;
 
-        $redirectUrl = $this->url()->fromRoute('e4w/create-board');
+        $viewModel = new ViewModel();
+
+        $viewModel->setTemplate('e4w-zf2-board/board/board/create.phtml');
+        $viewModel->setVariable('form', $form);
+
+        $redirectUrl = $this->url()->fromRoute('e4w/board-create');
         $prg = $this->prg($redirectUrl, true);
 
         $boardService = $this->boardService;
@@ -62,7 +69,7 @@ class BoardController extends AbstractActionController
         }
 
         if ($boardService->create($prg)) {
-            return true;
+            die("Board created");
         }
 
         return $viewModel;

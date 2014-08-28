@@ -19,6 +19,7 @@
 
 namespace E4W\Zf2Board\Mapper;
 
+use E4W\Zf2Board\Entity\BoardInterface;
 use E4W\Zf2Board\Mapper\BoardMapperInterface;
 use E4W\Zf2Board\Options\ModuleOptionsInterface;
 
@@ -38,7 +39,7 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
 
     /**
      * @param int $id
-     * @return \E4W\Zf2Board\Entity\BoardInterface|null
+     * @return BoardInterface|null
      */
     public function find($id)
     {
@@ -46,7 +47,7 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
     }
 
     /**
-     * @return \E4W\Zf2Board\Entity\BoardInterface[]
+     * @return BoardInterface[]
      */
     public function findAll()
     {
@@ -70,5 +71,24 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
         $this->objectManager->flush();
 
         return true;
+    }
+
+    /**
+     * @param $form
+     * @return bool|BoardInterface
+     */
+    public function create($form)
+    {
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        /** @var BoardInterface $board */
+        $board = $form->getData();
+
+        $this->objectManager->persist($board);
+        $this->objectManager->flush();
+
+        return $board;
     }
 }

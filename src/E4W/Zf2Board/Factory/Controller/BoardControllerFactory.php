@@ -39,7 +39,10 @@ class BoardControllerFactory implements FactoryInterface
         /** @var \E4W\Zf2Board\Service\BoardService $boardService */
         $boardService = $serviceManager->get('E4W\Zf2Board\Service\BoardService');
 
-        $controller = new BoardController($boardService);
+        /** @var \E4W\Zf2Board\Form\Board\CreateForm $boardForm */
+        $boardForm = $serviceManager->get('E4W\Zf2Board\Form\Board\CreateForm');
+
+        $controller = new BoardController($boardService, $boardForm);
 
         return $controller;
     }

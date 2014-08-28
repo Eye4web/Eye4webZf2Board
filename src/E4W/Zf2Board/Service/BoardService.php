@@ -19,6 +19,7 @@
 
 namespace E4W\Zf2Board\Service;
 
+use E4W\Zf2Board\Entity\BoardInterface;
 use E4W\Zf2Board\Mapper\BoardMapperInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerAwareTrait;
@@ -30,14 +31,17 @@ class BoardService implements EventManagerAwareInterface
     /** @var BoardMapperInterface */
     protected $boardMapper;
 
-    public function __construct(BoardMapperInterface $boardMapper)
+    protected $boardCreateForm;
+
+    public function __construct(BoardMapperInterface $boardMapper, $boardCreateForm)
     {
         $this->boardMapper = $boardMapper;
+        $this->boardCreateForm = $boardCreateForm;
     }
 
     /**
      * @param int $id
-     * @return \E4W\Zf2Board\Entity\BoardInterface
+     * @return BoardInterface
      */
     public function find($id)
     {
@@ -45,7 +49,7 @@ class BoardService implements EventManagerAwareInterface
     }
 
     /**
-     * @return \E4W\Zf2Board\Entity\BoardInterface[]
+     * @return BoardInterface[]
      */
     public function findAll()
     {
@@ -61,8 +65,15 @@ class BoardService implements EventManagerAwareInterface
         return $this->boardMapper->delete($id);
     }
 
+    /**
+     * @param array $data
+     * @return BoardInterface|boolean
+     */
     public function create(array $data)
     {
-        return false;
+        $form = $this->boardCreateForm;
+        $form->setData($data);
+
+        return $this->boardMapper->create($form);
     }
 }
