@@ -17,7 +17,6 @@
  * and is licensed under the MIT license.
  */
 
-
 namespace E4W\Zf2Board\Options;
 
 use Zend\Stdlib\AbstractOptions;
