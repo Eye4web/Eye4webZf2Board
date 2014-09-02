@@ -17,30 +17,42 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Form\Post;
+namespace E4W\Zf2Board\Service;
 
-use E4W\Zf2Board\Form\Post\CreateForm;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use \E4W\Zf2Board\Service\SlugServiceInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 
-class CreateFormFactory implements FactoryInterface
+class SlugService implements EventManagerAwareInterface, SlugServiceInterface
 {
+    use EventManagerAwareTrait;
+
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return CreateForm
+     * @param $slug
+     * @param string $delimiter
+     * @return string
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function generate($slug, $delimiter = '-')
     {
-        /** @var \E4W\Zf2Board\Options\ModuleOptions $moduleOptions */
-        $moduleOptions = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
+        // Replace non letter or digits by delimiter
+        $slug = preg_replace('~[^\\pL\d]+~u', $delimiter, $slug);
 
-        $entityName = $moduleOptions->getPostEntity();
-        $object = new $entityName;
+        // Trim
+        $slug = trim($slug, $delimiter);
 
-        $form = new CreateForm($object);
+        // Transliterate
+        $slug = iconv('utf-8', 'us-ascii//TRANSLIT', $slug);
 
-        return $form;
+        // Lowercase
+        $slug = strtolower($slug);
+
+        // Remove unwanted characters
+        $slug = preg_replace('~[^-\w]+~', '', $slug);
+
+        if (empty($slug)) {
+            return uniqid();
+        }
+
+        return $slug;
     }
 }

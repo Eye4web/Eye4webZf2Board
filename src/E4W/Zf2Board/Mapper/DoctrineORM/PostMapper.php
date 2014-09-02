@@ -74,8 +74,8 @@ class PostMapper implements PostMapperInterface
         /** @var PostInterface $post */
         $post = $form->getData();
 
-        $post->setUser($user);
-        $post->setTopic($topic);
+        $post->setUser($user->getId());
+        $post->setTopic($topic->getId());
 
         return $this->save($post);
     }

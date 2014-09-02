@@ -16,7 +16,7 @@ $boards = $this->boards;
         <tr>
             <td><?=$board->getId()?></td>
             <td><?=$board->getName()?></td>
-            <td><a href="<?=$this->url('e4w/board/view', ['id' => $board->getId(), 'slug' => $board->getSlug()])?>" class="btn btn-primary"><?=$this->translate('View topics')?></a></td>
+            <td><a href="<?=$this->url('e4w/board/view', ['id' => $board->getId(), 'slug' => $board->getSlug()])?>"><?=$this->translate('View topics')?></a></td>
         </tr>
     <?php } ?>
     </tbody>

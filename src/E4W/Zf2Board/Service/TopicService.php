@@ -33,6 +33,7 @@ class TopicService implements EventManagerAwareInterface
     /** @var TopicMapperInterface */
     protected $topicMapper;
 
+    /** @var \Zend\Form\Form */
     protected $topicCreateForm;
 
     public function __construct(TopicMapperInterface $topicMapper, $topicCreateForm)
@@ -58,13 +59,17 @@ class TopicService implements EventManagerAwareInterface
         return $this->topicMapper->findAll();
     }
 
+    /**
+     * @param int $id
+     * @return \E4W\Zf2Board\Entity\TopicInterface[]
+     */
     public function findByBoard($id)
     {
         return $this->topicMapper->findByBoard($id);
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return boolean
      */
     public function delete($id)

@@ -5,7 +5,8 @@ $board = $this->board;
 /** @var \E4W\Zf2Board\Entity\TopicInterface[] $topics */
 $topics = $this->topics;
 ?>
-<h1><?=$board->getName()?></h1><br>
+<h1><?=$board->getName()?></h1>
+<a href="<?=$this->url('e4w/topic/create', ['board' => $board->getId()])?>"><?=$this->translate('Create new topic')?></a><br>
 <br>
 <table class="table">
     <thead>

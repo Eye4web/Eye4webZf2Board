@@ -33,10 +33,14 @@ class CreateFormFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /** @var \Doctrine\ORM\EntityManager $objectManager */
-        $objectManager = $serviceLocator->get('Doctrine\ORM\EntityManager');
+        /** @var \E4W\Zf2Board\Options\ModuleOptions $moduleOptions */
+        $moduleOptions = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
 
-        $form = new CreateForm($objectManager);
+        $entityName = $moduleOptions->getTopicEntity();
+        $object = new $entityName;
+
+        $form = new CreateForm($object);
+
         return $form;
     }
 }

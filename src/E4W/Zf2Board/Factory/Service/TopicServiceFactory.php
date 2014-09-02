@@ -39,6 +39,7 @@ class TopicServiceFactory implements FactoryInterface
         /** @var \E4W\Zf2Board\Mapper\TopicMapperInterface $mapper */
         $mapper = $serviceLocator->get($options->getTopicMapper());
 
+        /** @var \Zend\Form\Form $topicCreateForm */
         $topicCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Topic\CreateForm');
 
         $service = new TopicService($mapper, $topicCreateForm);

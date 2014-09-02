@@ -76,7 +76,7 @@ return [
                             'create' => [
                                 'type' => 'Zend\Mvc\Router\Http\Segment',
                                 'options' => [
-                                    'route'    => 'create/:board',
+                                    'route'    => '/create/:board',
                                     'defaults' => [
                                         'controller' => 'E4W\Zf2Board\Controller\BoardController',
                                         'action'     => 'topicCreate',

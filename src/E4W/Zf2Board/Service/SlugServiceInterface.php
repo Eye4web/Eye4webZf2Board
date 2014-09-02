@@ -17,30 +17,14 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Form\Post;
+namespace E4W\Zf2Board\Service;
 
-use E4W\Zf2Board\Form\Post\CreateForm;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-
-class CreateFormFactory implements FactoryInterface
+interface SlugServiceInterface
 {
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return CreateForm
+     * @param $string
+     * @param string $delimiter
+     * @return mixed
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        /** @var \E4W\Zf2Board\Options\ModuleOptions $moduleOptions */
-        $moduleOptions = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
-
-        $entityName = $moduleOptions->getPostEntity();
-        $object = new $entityName;
-
-        $form = new CreateForm($object);
-
-        return $form;
-    }
+    public function generate($string, $delimiter = '-');
 }

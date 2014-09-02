@@ -24,18 +24,26 @@ use E4W\Zf2Board\Entity\TopicInterface;
 use E4W\Zf2Board\Entity\UserInterface;
 use E4W\Zf2Board\Mapper\TopicMapperInterface;
 use E4W\Zf2Board\Options\ModuleOptionsInterface;
+use E4W\Zf2Board\Service\SlugServiceInterface;
 
 class TopicMapper implements TopicMapperInterface
 {
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
+    /** @var SlugServiceInterface */
+    protected $slugService;
+
     /** @var ModuleOptionsInterface */
     protected $options;
 
-    public function __construct(\Doctrine\Common\Persistence\ObjectManager $objectManager, ModuleOptionsInterface $options)
-    {
+    public function __construct(
+        \Doctrine\Common\Persistence\ObjectManager $objectManager,
+        SlugServiceInterface $slugService,
+        ModuleOptionsInterface $options
+    ) {
         $this->objectManager = $objectManager;
+        $this->slugService = $slugService;
         $this->options = $options;
     }
 
@@ -98,9 +106,12 @@ class TopicMapper implements TopicMapperInterface
             return false;
         }
 
-        /** @var TopicInterface $board */
+        /** @var TopicInterface $topic */
         $topic = $form->getData();
-        $topic->setUser($user);
+
+        $topic->setSlug($this->slugService->generate($topic->getName()));
+        $topic->setUser($user->getId());
+        $topic->setBoard($board->getId());
 
         return $this->save($topic);
     }

@@ -193,7 +193,7 @@ class BoardController extends AbstractActionController
         $viewModel->setTemplate('e4w-zf2-board/board/topic/create.phtml');
         $viewModel->setVariable('form', $form);
 
-        $redirectUrl = $this->url()->fromRoute('e4w/topic-create');
+        $redirectUrl = $this->url()->fromRoute('e4w/topic/create', ['board' => $board->getId()]);
         $prg = $this->prg($redirectUrl, true);
 
         $topicService = $this->topicService;
@@ -206,8 +206,8 @@ class BoardController extends AbstractActionController
             return $viewModel;
         }
 
-        if ($board = $topicService->create($prg, $board, $identity)) {
-            die("Board created");
+        if ($topic = $topicService->create($prg, $board, $identity)) {
+            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
         }
 
         return $viewModel;

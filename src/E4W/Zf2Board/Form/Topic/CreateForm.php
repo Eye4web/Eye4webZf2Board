@@ -19,7 +19,7 @@
 
 namespace E4W\Zf2Board\Form\Topic;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use E4W\Zf2Board\Entity\TopicInterface;
 use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -29,11 +29,12 @@ class CreateForm extends Form implements InputFilterProviderInterface
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
-    public function __construct(ObjectManager $objectManager, $name = 'create-topic')
+    public function __construct(TopicInterface $object, $name = 'create-topic')
     {
         parent::__construct($name);
 
-        $this->objectManager = $objectManager;
+        $this->setObject($object);
+        $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods(false));
 
         $this->add([
             'name' => 'name',

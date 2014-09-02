@@ -24,6 +24,7 @@ return [
         'E4W\Zf2Board\Service\BoardService' => 'E4W\Zf2Board\Factory\Service\BoardServiceFactory',
         'E4W\Zf2Board\Service\TopicService' => 'E4W\Zf2Board\Factory\Service\TopicServiceFactory',
         'E4W\Zf2Board\Service\PostService' => 'E4W\Zf2Board\Factory\Service\PostServiceFactory',
+        'E4W\Zf2Board\Service\SlugService' => 'E4W\Zf2Board\Factory\Service\SlugServiceFactory',
 
         // Mappers
         'E4W\Zf2Board\Mapper\DoctrineORM\AuthorMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\AuthorMapperFactory',
