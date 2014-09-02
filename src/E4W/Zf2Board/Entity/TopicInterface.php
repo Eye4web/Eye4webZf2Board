@@ -21,17 +21,48 @@ namespace E4W\Zf2Board\Entity;
 
 interface TopicInterface
 {
+    /**
+     * @return int
+     */
     public function getBoard();
 
+    /**
+     * @return \DateTime
+     */
     public function getCreated();
 
+    /**
+     * @return int
+     */
     public function getId();
 
+    /**
+     * @return string
+     */
     public function getName();
 
+    /**
+     * @return string
+     */
     public function getSlug();
 
+    /**
+     * @return string
+     */
     public function getText();
 
+    /**
+     * @return int
+     */
     public function getUser();
+
+    /**
+     * @return boolean
+     */
+    public function isPinned();
+
+    /**
+     * @return boolean
+     */
+    public function isLocked();
 }

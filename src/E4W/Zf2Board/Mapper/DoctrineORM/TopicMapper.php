@@ -65,7 +65,9 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
      */
     public function findAll()
     {
-        return $this->objectManager->getRepository($this->options->getTopicEntity())->findAll();
+        return $this->objectManager->getRepository($this->options->getTopicEntity())->findBy([], [
+            'pinned' => 'desc',
+        ]);
     }
 
     /**
@@ -76,6 +78,9 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
     {
         return $this->objectManager->getRepository($this->options->getTopicEntity())->findBy([
             'board' => $boardId,
+        ],
+        [
+            'pinned' => 'desc',
         ]);
     }
 

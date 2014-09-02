@@ -17,6 +17,7 @@ class BoardServiceTest extends PHPUnit_Framework_TestCase
     {
         /** @var \E4W\Zf2Board\Mapper\BoardMapperInterface $mapper */
         $mapper = $this->getMock('E4W\Zf2Board\Mapper\BoardMapperInterface');
+
         $this->boardMapper = $mapper;
 
         $service = new BoardService($mapper);

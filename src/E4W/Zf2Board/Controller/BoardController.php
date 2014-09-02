@@ -102,34 +102,6 @@ class BoardController extends AbstractActionController
         return $viewModel;
     }
 
-    public function boardCreateAction()
-    {
-        $form = $this->boardCreateForm;
-
-        $viewModel = new ViewModel();
-        $viewModel->setTemplate('e4w-zf2-board/board/board/create.phtml');
-        $viewModel->setVariable('form', $form);
-
-        $redirectUrl = $this->url()->fromRoute('e4w/board-create');
-        $prg = $this->prg($redirectUrl, true);
-
-        $boardService = $this->boardService;
-
-        $identity = $this->authenticationService->getIdentity();
-
-        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
-            return $prg;
-        } elseif ($prg === false) {
-            return $viewModel;
-        }
-
-        if ($board = $boardService->create($prg, $identity)) {
-            die("Board created");
-        }
-
-        return $viewModel;
-    }
-
     public function topicAction()
     {
         $boardService = $this->boardService;
@@ -172,7 +144,7 @@ class BoardController extends AbstractActionController
             return $viewModel;
         }
 
-        if ($board = $postService->create($prg, $topic, $identity)) {
+        if (!$topic->isLocked() && $postService->create($prg, $topic, $identity)) {
             return $this->redirect()->toUrl($redirectUrl);
         }
 

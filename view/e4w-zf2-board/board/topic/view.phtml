@@ -22,9 +22,10 @@ $postForm = $this->postCreateForm;
     <hr />
 <?php } ?>
 
-<?php if ($this->zf2BoardHelper()->getAuth()->hasIdentity()) { ?>
+<?php if ($this->zf2BoardHelper()->getAuth()->hasIdentity() && !$topic->isLocked()) { ?>
 <?=$this->form()->openTag($postForm)?>
 <?=$this->formRow($postForm->get('text'))?><br />
 <?=$this->formButton($postForm->get('submit')->setLabel('Post'))?>
+<?=$this->formRow($postForm->get('csrf'))?>
 <?=$this->form()->closeTag($postForm)?>
 <?php } ?>

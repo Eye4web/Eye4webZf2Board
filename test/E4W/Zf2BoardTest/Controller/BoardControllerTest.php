@@ -16,6 +16,24 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
     /** @var \Zend\Mvc\Controller\PluginManager */
     protected $pluginManager;
 
+    /** @var \E4W\Zf2Board\Service\TopicService */
+    protected $topicService;
+
+    /** @var \E4W\Zf2Board\Service\PostService */
+    protected $postService;
+
+    /** @var \E4W\Zf2Board\Form\Board\CreateForm */
+    protected $boardCreateForm;
+
+    /** @var \E4W\Zf2Board\Form\Topic\CreateForm */
+    protected $topicCreateForm;
+
+    /** @var \E4W\Zf2Board\Form\Post\CreateForm */
+    protected $postCreateForm;
+
+    /** @var \Zend\Authentication\AuthenticationService */
+    protected $authenticationService;
+
     public $pluginManagerPlugins = [];
 
     public function setUp()
@@ -36,7 +54,47 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
         $this->pluginManager = $pluginManager;
 
-        $controller = new BoardController($boardService);
+        /** @var \E4W\Zf2Board\Service\TopicService $topicService */
+        $topicService = $this->getMockBuilder('E4W\Zf2Board\Service\TopicService')
+                             ->disableOriginalConstructor()
+                             ->getMock();
+
+        $this->topicService = $topicService;
+
+        /** @var \E4W\Zf2Board\Service\PostService $postService */
+        $postService = $this->getMockBuilder('E4W\Zf2Board\Service\PostService')
+                            ->disableOriginalConstructor()
+                            ->getMock();
+
+        $this->postService = $postService;
+
+        /** @var \Zend\Form\Form $boardCreateForm */
+        $boardCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Board\CreateForm')
+                                ->disableOriginalConstructor()
+                                ->getMock();
+
+        $this->boardCreateForm = $boardCreateForm;
+
+        /** @var \Zend\Form\Form $topicCreateForm */
+        $topicCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Topic\CreateForm')
+                                ->disableOriginalConstructor()
+                                ->getMock();
+
+        $this->topicCreateForm = $topicCreateForm;
+
+        /** @var \Zend\Form\Form $postCreateForm */
+        $postCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Post\CreateForm')
+                               ->disableOriginalConstructor()
+                               ->getMock();
+
+        $this->postCreateForm = $postCreateForm;
+
+        /** @var \Zend\Authentication\AuthenticationService $authenticationService */
+        $authenticationService = $this->getMock('Zend\Authentication\AuthenticationService');
+
+        $this->authenticationService = $authenticationService;
+
+        $controller = new BoardController($boardService, $topicService, $postService, $boardCreateForm, $topicCreateForm, $postCreateForm, $authenticationService);
         $controller->setPluginManager($pluginManager);
 
         $this->controller = $controller;
@@ -49,37 +107,6 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
                            ->willReturn([]);
 
         $result = $this->controller->boardListAction();
-
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
-    }
-
-    public function testCreateBoardActionCreateSuccess()
-    {
-        $url = 'demo';
-        $data = [];
-
-        $url = $this->getMock('Zend\Mvc\Controller\Plugin\Url');
-        $url->expects($this->at(0))
-            ->method('fromRoute')
-            ->with('e4w/create-board')
-            ->willReturn($url);
-
-        $this->pluginManagerPlugins['url'] = $url;
-
-        $prg = $this->getMock('Zend\Mvc\Controller\Plugin\PostRedirectGet');
-        $prg->expects($this->once())
-            ->method('__invoke')
-            ->with($url, true)
-            ->willReturn($data);
-
-        $this->pluginManagerPlugins['prg'] = $prg;
-
-        $this->boardService->expects($this->once())
-                           ->method('create')
-                           ->with($data)
-                           ->willReturn(false);
-
-        $result = $this->controller->createBoardAction();
 
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }

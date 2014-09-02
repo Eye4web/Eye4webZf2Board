@@ -78,9 +78,25 @@ class Topic implements TopicInterface
      */
     protected $user;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pinned", type="boolean")
+     */
+    protected $pinned;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="locked", type="boolean")
+     */
+    protected $locked;
+
     public function __construct()
     {
         $this->created = new \DateTime;
+        $this->pin = false;
+        $this->lock = false;
     }
 
     /**
@@ -193,5 +209,53 @@ class Topic implements TopicInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @param boolean $locked
+     */
+    public function setLocked($locked)
+    {
+        $this->locked = $locked;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isLocked()
+    {
+        return $this->getLocked();
+    }
+
+    /**
+     * @param boolean $pinned
+     */
+    public function setPinned($pinned)
+    {
+        $this->pinned = $pinned;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPinned()
+    {
+        return $this->getPinned();
     }
 }

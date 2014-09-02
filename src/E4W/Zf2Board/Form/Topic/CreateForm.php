@@ -48,6 +48,11 @@ class CreateForm extends Form implements InputFilterProviderInterface
             ],
         ]);
 
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Csrf',
+            'name' => 'csrf',
+        ));
+
         $this->add([
             'name' => 'text',
             'type'  => 'Zend\Form\Element\Textarea',
@@ -108,6 +113,10 @@ class CreateForm extends Form implements InputFilterProviderInterface
                         ],
                     ],
                 ],
+            ],
+            [
+                'name' => 'csrf',
+                'required' => true,
             ],
         ];
     }
