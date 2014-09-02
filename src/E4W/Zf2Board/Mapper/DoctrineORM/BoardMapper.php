@@ -73,34 +73,4 @@ class BoardMapper implements BoardMapperInterface
 
         return true;
     }
-
-    /**
-     * @param $form
-     * @param UserInterface $user
-     * @return bool|BoardInterface
-     */
-    public function create($form, UserInterface $user)
-    {
-        if (!$form->isValid()) {
-            return false;
-        }
-
-        /** @var BoardInterface $board */
-        $board = $form->getData();
-        $board->setUser($user);
-
-        return $this->save($board);
-    }
-
-    /**
-     * @param BoardInterface $board
-     * @return BoardInterface
-     */
-    public function save(BoardInterface $board)
-    {
-        $this->objectManager->persist($board);
-        $this->objectManager->flush();
-
-        return $board;
-    }
 }

@@ -88,6 +88,19 @@ class TopicService implements EventManagerAwareInterface
         $form = $this->topicCreateForm;
         $form->setData($data);
 
-        return $this->topicMapper->create($form, $board, $user);
+        $this->getEventManager()->trigger('create.pre', $this, [
+            'data' => $data,
+            'board' => $board,
+            'user' => $user,
+        ]);
+
+        $topic = $this->topicMapper->create($form, $board, $user);
+
+        $this->getEventManager()->trigger('create.post', $this, [
+            'data' => $data,
+            'board' => $board,
+            'user' => $user,
+            'topic' => $topic,
+        ]);
     }
 }

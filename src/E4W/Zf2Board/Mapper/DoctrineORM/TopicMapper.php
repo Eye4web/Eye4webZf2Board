@@ -25,9 +25,13 @@ use E4W\Zf2Board\Entity\UserInterface;
 use E4W\Zf2Board\Mapper\TopicMapperInterface;
 use E4W\Zf2Board\Options\ModuleOptionsInterface;
 use E4W\Zf2Board\Service\SlugServiceInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 
-class TopicMapper implements TopicMapperInterface
+class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
 {
+    use EventManagerAwareTrait;
+
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
@@ -113,7 +117,21 @@ class TopicMapper implements TopicMapperInterface
         $topic->setUser($user->getId());
         $topic->setBoard($board->getId());
 
-        return $this->save($topic);
+        $this->getEventManager()->trigger('create.pre', $this, [
+            'topic' => $topic,
+            'user' => $user,
+            'board' => $board,
+        ]);
+
+        $topic = $this->save($topic);
+
+        $this->getEventManager()->trigger('create.post', $this, [
+            'topic' => $topic,
+            'user' => $user,
+            'board' => $board,
+        ]);
+
+        return $topic;
     }
 
     /**

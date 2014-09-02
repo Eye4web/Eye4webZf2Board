@@ -24,9 +24,13 @@ use E4W\Zf2Board\Entity\TopicInterface;
 use E4W\Zf2Board\Entity\UserInterface;
 use E4W\Zf2Board\Mapper\PostMapperInterface;
 use E4W\Zf2Board\Options\ModuleOptionsInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 
-class PostMapper implements PostMapperInterface
+class PostMapper implements PostMapperInterface, EventManagerAwareInterface
 {
+    use EventManagerAwareTrait;
+
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
@@ -77,7 +81,19 @@ class PostMapper implements PostMapperInterface
         $post->setUser($user->getId());
         $post->setTopic($topic->getId());
 
-        return $this->save($post);
+        $this->getEventManager()->trigger('create.pre', $this, [
+            'post' => $post,
+            'user' => $user,
+        ]);
+
+        $post = $this->save($post);
+
+        $this->getEventManager()->trigger('create.post', $this, [
+            'post' => $post,
+            'user' => $user,
+        ]);
+
+        return $post;
     }
 
     /**

@@ -41,11 +41,4 @@ interface BoardMapperInterface
      * @throws \Exception
      */
     public function delete($id);
-
-    /**
-     * @param $form
-     * @param UserInterface $user
-     * @return boolean|BoardInterface
-     */
-    public function create($form, UserInterface $user);
 }
