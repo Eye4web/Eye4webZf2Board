@@ -15,12 +15,29 @@ $postForm = $this->postCreateForm;
 <i><?=sprintf('Written by %s on %s.', $this->zf2BoardHelper()->getAuthor($topic->getUser())->getDisplayName(), $topic->getCreated()->format('Y/m/d H:i'))?></i><br>
 <br>
 <?=$topic->getText()?>
+<br>
+<?=$this->paginationControl($posts, 'sliding', ['e4w-zf2-board/board/partials/paginator.phtml', 'E4W\Zf2Board'], [
+    'route' => 'e4w/topic/view',
+    'params' => [
+        'id' => $topic->getId(),
+        'slug' => $topic->getSlug(),
+    ]
+]);?>
 <hr>
+
 <?php foreach($posts as $post) { ?>
     <strong><?=$this->zf2BoardHelper()->getAuthor($post->getUser())->getDisplayName()?></strong><i>, <?=$post->getCreated()->format('Y/m/d H:i')?></i><br />
     <?=$post->getText()?>
     <hr />
 <?php } ?>
+
+<?=$this->paginationControl($posts, 'sliding', ['e4w-zf2-board/board/partials/paginator.phtml', 'E4W\Zf2Board'], [
+    'route' => 'e4w/topic/view',
+    'params' => [
+        'id' => $topic->getId(),
+        'slug' => $topic->getSlug(),
+    ]
+]);?>
 
 <?php if ($this->zf2BoardHelper()->getAuth()->hasIdentity() && !$topic->isLocked()) { ?>
 <?=$this->form()->openTag($postForm)?>

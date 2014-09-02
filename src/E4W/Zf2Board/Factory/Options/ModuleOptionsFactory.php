@@ -37,8 +37,8 @@ class ModuleOptionsFactory implements FactoryInterface
 
         $boardConfig = [];
 
-        if (isset($config['ew4']['board'])) {
-            $boardConfig = $config['ew4']['board'];
+        if (isset($config['e4w']['board'])) {
+            $boardConfig = $config['e4w']['board'];
         }
 
         $options = new ModuleOptions($boardConfig);

@@ -35,7 +35,7 @@ return [
                         'may_terminate' => true,
                         'child_routes' => [
                             'list' => [
-                                'type' => 'Zend\Mvc\Router\Http\Literal',
+                                'type' => 'Zend\Mvc\Router\Http\Segment',
                                 'options' => [
                                     'route'    => '/list',
                                     'defaults' => [
@@ -47,10 +47,11 @@ return [
                             'view' => [
                                 'type' => 'Zend\Mvc\Router\Http\Segment',
                                 'options' => [
-                                    'route'    => '/view/:id{-}-:slug',
+                                    'route'    => '/view/:id{-}-:slug[/page/:page]',
                                     'defaults' => [
                                         'controller' => 'E4W\Zf2Board\Controller\BoardController',
                                         'action'     => 'board',
+                                        'page'       => 1,
                                     ],
                                 ],
                             ],
@@ -66,10 +67,11 @@ return [
                             'view' => [
                                 'type' => 'Zend\Mvc\Router\Http\Segment',
                                 'options' => [
-                                    'route'    => '/view/:id{-}-:slug',
+                                    'route'    => '/view/:id{-}-:slug[/page/:page]',
                                     'defaults' => [
                                         'controller' => 'E4W\Zf2Board\Controller\BoardController',
                                         'action'     => 'topic',
+                                        'page'       => 1,
                                     ],
                                 ],
                             ],

@@ -8,6 +8,15 @@ $topics = $this->topics;
 <h1><?=$board->getName()?></h1>
 <a href="<?=$this->url('e4w/topic/create', ['board' => $board->getId()])?>"><?=$this->translate('Create new topic')?></a><br>
 <br>
+
+<?=$this->paginationControl($topics, 'sliding', ['e4w-zf2-board/board/partials/paginator.phtml', 'E4W\Zf2Board'], [
+    'route' => 'e4w/board/view',
+    'params' => [
+        'id' => $board->getId(),
+        'slug' => $board->getSlug(),
+    ]
+]);?>
+
 <table class="table">
     <thead>
         <tr>
@@ -27,3 +36,11 @@ $topics = $this->topics;
     <?php } ?>
     </tbody>
 </table>
+
+<?=$this->paginationControl($topics, 'sliding', ['e4w-zf2-board/board/partials/paginator.phtml', 'E4W\Zf2Board'], [
+    'route' => 'e4w/board/view',
+    'params' => [
+        'id' => $board->getId(),
+        'slug' => $board->getSlug(),
+    ]
+]);?>

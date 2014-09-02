@@ -62,4 +62,14 @@ interface ModuleOptionsInterface
      * @return \E4W\Zf2Board\Mapper\AuthorMapperInterface
      */
     public function getAuthorMapper();
+
+    /**
+     * @return int
+     */
+    public function getTopicsPerBoard();
+
+    /**
+     * @return int
+     */
+    public function getPostsPerTopic();
 }

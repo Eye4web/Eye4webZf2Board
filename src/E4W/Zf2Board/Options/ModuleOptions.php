@@ -52,6 +52,12 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     /** @var AuthenticationService */
     protected $authenticationService = null;
 
+    /** @var int */
+    protected $topicsPerBoard = 25;
+
+    /** @var int */
+    protected $postsPerTopic = 15;
+
     /**
      * Ensure that the entity has the correct name
      *
@@ -209,5 +215,37 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     public function getTopicEntity()
     {
         return $this->correctEntity($this->topicEntity);
+    }
+
+    /**
+     * @param int $topicsPerBoard
+     */
+    public function setTopicsPerBoard($topicsPerBoard)
+    {
+        $this->topicsPerBoard = $topicsPerBoard;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTopicsPerBoard()
+    {
+        return $this->topicsPerBoard;
+    }
+
+    /**
+     * @param int $postsPerTopic
+     */
+    public function setPostsPerTopic($postsPerTopic)
+    {
+        $this->postsPerTopic = $postsPerTopic;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostsPerTopic()
+    {
+        return $this->postsPerTopic;
     }
 }

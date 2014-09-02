@@ -60,7 +60,7 @@ class BoardControllerFactory implements FactoryInterface
         /** @var \Zend\Authentication\AuthenticationService $authenticationService */
         $authenticationService = $serviceManager->get($moduleOptions->getAuthenticationService());
 
-        $controller = new BoardController($boardService, $topicService, $postService, $boardCreateForm, $topicCreateForm, $postCreateForm, $authenticationService);
+        $controller = new BoardController($boardService, $topicService, $postService, $boardCreateForm, $topicCreateForm, $postCreateForm, $authenticationService, $moduleOptions);
 
         return $controller;
     }

@@ -19,12 +19,15 @@
 
 namespace E4W\Zf2Board\Controller;
 
+use E4W\Zf2Board\Options\ModuleOptionsInterface;
 use E4W\Zf2Board\Service\BoardService;
 use E4W\Zf2Board\Service\PostService;
 use E4W\Zf2Board\Service\TopicService;
 use Zend\Authentication\AuthenticationService;
 use Zend\Form\Form;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Paginator\Adapter\ArrayAdapter;
+use Zend\Paginator\Paginator;
 use Zend\View\Model\ViewModel;
 
 class BoardController extends AbstractActionController
@@ -50,7 +53,10 @@ class BoardController extends AbstractActionController
     /** @var AuthenticationService */
     protected $authenticationService;
 
-    public function __construct(BoardService $boardService, TopicService $topicService, PostService $postService, Form $boardCreateForm, Form $topicCreateForm, Form $postCreateForm, AuthenticationService $authenticationService)
+    /** @var ModuleOptionsInterface */
+    protected $options;
+
+    public function __construct(BoardService $boardService, TopicService $topicService, PostService $postService, Form $boardCreateForm, Form $topicCreateForm, Form $postCreateForm, AuthenticationService $authenticationService, ModuleOptionsInterface $options)
     {
         $this->boardService = $boardService;
         $this->topicService = $topicService;
@@ -59,6 +65,7 @@ class BoardController extends AbstractActionController
         $this->topicCreateForm = $topicCreateForm;
         $this->postCreateForm = $postCreateForm;
         $this->authenticationService = $authenticationService;
+        $this->options = $options;
     }
 
     public function boardListAction()
@@ -91,12 +98,19 @@ class BoardController extends AbstractActionController
 
         $topics = $topicService->findByBoard($board->getId());
 
+        // Paginator
+        $paginator = new Paginator(new ArrayAdapter($topics));
+        $page = $this->params('page');
+
+        $paginator->setDefaultItemCountPerPage($this->options->getTopicsPerBoard());
+        $paginator->setCurrentPageNumber($page);
+
         $viewModel = new ViewModel();
         $viewModel->setTemplate('e4w-zf2-board/board/board/view.phtml');
 
         $viewModel->setVariables([
             'board' => $board,
-            'topics' => $topics,
+            'topics' => $paginator,
         ]);
 
         return $viewModel;
@@ -121,7 +135,15 @@ class BoardController extends AbstractActionController
         }
 
         $board = $boardService->find($topic->getBoard());
+
+        // Paginator
         $posts = $postService->findByTopic($topic->getId());
+        $paginator = new Paginator(new ArrayAdapter($posts));
+        $page = $this->params('page');
+
+        $paginator->setDefaultItemCountPerPage($this->options->getPostsPerTopic());
+        $paginator->setCurrentPageNumber($page);
+
 
         $viewModel = new ViewModel();
         $viewModel->setTemplate('e4w-zf2-board/board/topic/view.phtml');
@@ -129,7 +151,7 @@ class BoardController extends AbstractActionController
         $viewModel->setVariables([
             'board' => $board,
             'topic' => $topic,
-            'posts' => $posts,
+            'posts' => $paginator,
             'postCreateForm' => $postCreateForm,
         ]);
 
