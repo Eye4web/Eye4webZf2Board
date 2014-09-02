@@ -17,34 +17,38 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Service;
+namespace E4W\Zf2Board\Factory\View\Helper;
 
-use E4W\Zf2Board\Service\PostService;
-use Zend\Form\Form;
+use E4W\Zf2Board\View\Helper\BoardHelper;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class PostServiceFactory implements FactoryInterface
+class BoardHelperFactory implements FactoryInterface
 {
     /**
-     * Create controller
+     * Create helper
      *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return PostService
+     * @param ServiceLocatorInterface $helperManager
+     * @return BoardHelper
+     * @throws \Exception
      */
-    public function createService (ServiceLocatorInterface $serviceLocator)
+    public function createService (ServiceLocatorInterface $helperManager)
     {
-        /** @var \E4W\Zf2Board\Options\ModuleOptions $options */
-        $options = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
+        /** @var ServiceLocatorInterface $serviceLocator */
+        $serviceLocator = $helperManager->getServiceLocator();
 
-        /** @var \E4W\Zf2Board\Mapper\PostMapperInterface $mapper */
-        $mapper = $serviceLocator->get($options->getPostMapper());
+        /** @var \E4W\Zf2Board\Service\AuthorService $authorService */
+        $authorService = $serviceLocator->get('E4W\Zf2Board\Service\AuthorService');
 
-        /** @var Form $postCreateForm */
-        $postCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Post\CreateForm');
+        /** @var \Zend\Authentication\AuthenticationService $authenticationService */
+        $authenticationService = $serviceLocator->get('E4W\Zf2Board\Service\AuthenticationService');
 
-        $service = new PostService($mapper, $postCreateForm);
+        if (!$authenticationService) {
+            throw new \Exception('No authentication service has been provided');
+        }
 
-        return $service;
+        $helper = new Boardhelper($authorService, $authenticationService);
+
+        return $helper;
     }
 }

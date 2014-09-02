@@ -17,34 +17,30 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Service;
+namespace E4W\Zf2Board\Factory\Mapper\DoctrineORM;
 
-use E4W\Zf2Board\Service\PostService;
-use Zend\Form\Form;
+use E4W\Zf2Board\Mapper\DoctrineORM\TopicMapper;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class PostServiceFactory implements FactoryInterface
+class TopicMapperFactory implements FactoryInterface
 {
     /**
-     * Create controller
+     * Create mapper
      *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return PostService
+     * @param ServiceLocatorInterface $serviceManager
+     * @return TopicMapper
      */
-    public function createService (ServiceLocatorInterface $serviceLocator)
+    public function createService (ServiceLocatorInterface $serviceManager)
     {
-        /** @var \E4W\Zf2Board\Options\ModuleOptions $options */
-        $options = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
+        /** @var \Doctrine\ORM\EntityManager $objectManager */
+        $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');
 
-        /** @var \E4W\Zf2Board\Mapper\PostMapperInterface $mapper */
-        $mapper = $serviceLocator->get($options->getPostMapper());
+        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $options */
+        $options = $serviceManager->get('E4W\Zf2Board\Options\ModuleOptions');
 
-        /** @var Form $postCreateForm */
-        $postCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Post\CreateForm');
+        $mapper = new TopicMapper($objectManager, $options);
 
-        $service = new PostService($mapper, $postCreateForm);
-
-        return $service;
+        return $mapper;
     }
 }

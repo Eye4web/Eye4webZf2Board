@@ -31,7 +31,7 @@ class TopicService implements EventManagerAwareInterface
     use EventManagerAwareTrait;
     
     /** @var TopicMapperInterface */
-    protected $boardMapper;
+    protected $topicMapper;
 
     protected $topicCreateForm;
 
@@ -47,7 +47,7 @@ class TopicService implements EventManagerAwareInterface
      */
     public function find($id)
     {
-        return $this->boardMapper->find($id);
+        return $this->topicMapper->find($id);
     }
 
     /**
@@ -55,7 +55,12 @@ class TopicService implements EventManagerAwareInterface
      */
     public function findAll()
     {
-        return $this->boardMapper->findAll();
+        return $this->topicMapper->findAll();
+    }
+
+    public function findByBoard($id)
+    {
+        return $this->topicMapper->findByBoard($id);
     }
 
     /**
@@ -64,7 +69,7 @@ class TopicService implements EventManagerAwareInterface
      */
     public function delete($id)
     {
-        return $this->boardMapper->delete($id);
+        return $this->topicMapper->delete($id);
     }
 
     /**
@@ -78,6 +83,6 @@ class TopicService implements EventManagerAwareInterface
         $form = $this->topicCreateForm;
         $form->setData($data);
 
-        return $this->boardMapper->create($form, $board, $user);
+        return $this->topicMapper->create($form, $board, $user);
     }
 }

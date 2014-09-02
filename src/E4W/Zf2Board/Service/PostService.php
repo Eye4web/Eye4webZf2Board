@@ -19,14 +19,53 @@
 
 namespace E4W\Zf2Board\Service;
 
+use E4W\Zf2Board\Entity\PostInterface;
+use E4W\Zf2Board\Entity\TopicInterface;
+use E4W\Zf2Board\Entity\UserInterface;
+use E4W\Zf2Board\Mapper\PostMapperInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerAwareTrait;
+use Zend\Form\Form;
 
 class PostService implements EventManagerAwareInterface
 {
     use EventManagerAwareTrait;
 
-    public function __construct()
+    /** @var PostMapperInterface */
+    protected $postMapper;
+
+    /** @var Form */
+    protected $postCreateForm;
+
+    public function __construct(PostMapperInterface $postMapper, Form $postCreateForm)
     {
+        $this->postMapper = $postMapper;
+        $this->postCreateForm = $postCreateForm;
+    }
+
+    /**
+     * @param int $id
+     * @return PostInterface
+     */
+    public function find($id)
+    {
+        return $this->postMapper->find($id);
+    }
+
+    /**
+     * @param int $topicId
+     * @return PostInterface[]
+     */
+    public function findByTopic($topicId)
+    {
+        return $this->postMapper->findByTopic($topicId);
+    }
+
+    public function create(array $data, TopicInterface $topic, UserInterface $user)
+    {
+        $form = $this->postCreateForm;
+        $form->setData($data);
+
+        return $this->postMapper->create($form, $topic, $user);
     }
 }

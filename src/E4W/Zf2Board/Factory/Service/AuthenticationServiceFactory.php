@@ -17,30 +17,27 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Mapper;
+namespace E4W\Zf2Board\Factory\Service;
 
-use E4W\Zf2Board\Mapper\DoctrineORMTopicMapper;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class DoctrineORMTopicMapperFactory implements FactoryInterface
+class AuthenticationServiceFactory implements FactoryInterface
 {
     /**
-     * Create mapper
+     * Create controller
      *
-     * @param ServiceLocatorInterface $serviceManager
-     * @return DoctrineORMTopicMapper
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return \Zend\Authentication\AuthenticationService
      */
-    public function createService (ServiceLocatorInterface $serviceManager)
+    public function createService (ServiceLocatorInterface $serviceLocator)
     {
-        /** @var \Doctrine\ORM\EntityManager $objectManager */
-        $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');
+        /** @var \E4W\Zf2Board\Options\ModuleOptions $options */
+        $options = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
 
-        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $options */
-        $options = $serviceManager->get('E4W\Zf2Board\Options\ModuleOptions');
+        /** @var \Zend\Authentication\AuthenticationService $service */
+        $service = $serviceLocator->get($options->getAuthenticationService());
 
-        $mapper = new DoctrineORMTopicMapper($objectManager, $options);
-
-        return $mapper;
+        return $service;
     }
 }

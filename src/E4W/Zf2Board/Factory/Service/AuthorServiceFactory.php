@@ -19,31 +19,27 @@
 
 namespace E4W\Zf2Board\Factory\Service;
 
-use E4W\Zf2Board\Service\PostService;
-use Zend\Form\Form;
+use E4W\Zf2Board\Service\AuthorService;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class PostServiceFactory implements FactoryInterface
+class AuthorServiceFactory implements FactoryInterface
 {
     /**
      * Create controller
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return PostService
+     * @return AuthorService
      */
     public function createService (ServiceLocatorInterface $serviceLocator)
     {
         /** @var \E4W\Zf2Board\Options\ModuleOptions $options */
         $options = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
 
-        /** @var \E4W\Zf2Board\Mapper\PostMapperInterface $mapper */
-        $mapper = $serviceLocator->get($options->getPostMapper());
+        /** @var \E4W\Zf2Board\Mapper\AuthorMapperInterface $mapper */
+        $mapper = $serviceLocator->get($options->getAuthorMapper());
 
-        /** @var Form $postCreateForm */
-        $postCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Post\CreateForm');
-
-        $service = new PostService($mapper, $postCreateForm);
+        $service = new AuthorService($mapper);
 
         return $service;
     }

@@ -37,11 +37,6 @@ class Topic implements TopicInterface
     protected $id;
 
     /**
-     * @var int
-     */
-    protected $user;
-
-    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
@@ -71,8 +66,17 @@ class Topic implements TopicInterface
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="board_id", type="integer")
      */
     protected $board;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="user_id", type="integer")
+     */
+    protected $user;
 
     public function __construct()
     {

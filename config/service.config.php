@@ -20,13 +20,16 @@
 return [
     'factories' => [
         // Services
+        'E4W\Zf2Board\Service\AuthorService' => 'E4W\Zf2Board\Factory\Service\AuthorServiceFactory',
         'E4W\Zf2Board\Service\BoardService' => 'E4W\Zf2Board\Factory\Service\BoardServiceFactory',
         'E4W\Zf2Board\Service\TopicService' => 'E4W\Zf2Board\Factory\Service\TopicServiceFactory',
         'E4W\Zf2Board\Service\PostService' => 'E4W\Zf2Board\Factory\Service\PostServiceFactory',
 
         // Mappers
-        'E4W\Zf2Board\Mapper\DoctrineORMBoardMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORMBoardMapperFactory',
-        'E4W\Zf2Board\Mapper\DoctrineORMTopicMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORMTopicMapperFactory',
+        'E4W\Zf2Board\Mapper\DoctrineORM\AuthorMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\AuthorMapperFactory',
+        'E4W\Zf2Board\Mapper\DoctrineORM\BoardMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\BoardMapperFactory',
+        'E4W\Zf2Board\Mapper\DoctrineORM\TopicMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\TopicMapperFactory',
+        'E4W\Zf2Board\Mapper\DoctrineORM\PostMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\PostMapperFactory',
 
         // Options
         'E4W\Zf2Board\Options\ModuleOptions' => 'E4W\Zf2Board\Factory\Options\ModuleOptionsFactory',
@@ -35,5 +38,8 @@ return [
         'E4W\Zf2Board\Form\Board\CreateForm' => 'E4W\Zf2Board\Factory\Form\Board\CreateFormFactory',
         'E4W\Zf2Board\Form\Topic\CreateForm' => 'E4W\Zf2Board\Factory\Form\Topic\CreateFormFactory',
         'E4W\Zf2Board\Form\Post\CreateForm' => 'E4W\Zf2Board\Factory\Form\Post\CreateFormFactory',
+
+        // Authentication Service
+        'E4W\Zf2Board\Service\AuthenticationService' => 'E4W\Zf2Board\Factory\Service\AuthenticationServiceFactory',
     ]
 ];

@@ -38,6 +38,12 @@ interface TopicMapperInterface
 
     /**
      * @param int $id
+     * @return TopicInterface[]
+     */
+    public function findByBoard($id);
+
+    /**
+     * @param int $id
      * @return boolean
      * @throws \Exception
      */

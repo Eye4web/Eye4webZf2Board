@@ -17,34 +17,32 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Service;
+namespace E4W\Zf2Board\Service;
 
-use E4W\Zf2Board\Service\PostService;
-use Zend\Form\Form;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use E4W\Zf2Board\Entity\UserInterface;
+use E4W\Zf2Board\Mapper\AuthorMapperInterface;
+use Zend\Authentication\AuthenticationServiceInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 
-class PostServiceFactory implements FactoryInterface
+class AuthorService implements EventManagerAwareInterface
 {
-    /**
-     * Create controller
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return PostService
-     */
-    public function createService (ServiceLocatorInterface $serviceLocator)
+    use EventManagerAwareTrait;
+
+    /** @var \E4W\Zf2Board\Mapper\AuthorMapperInterface */
+    protected $authorMapper;
+
+    public function __construct(AuthorMapperInterface $authorMapper)
     {
-        /** @var \E4W\Zf2Board\Options\ModuleOptions $options */
-        $options = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
+        $this->authorMapper = $authorMapper;
+    }
 
-        /** @var \E4W\Zf2Board\Mapper\PostMapperInterface $mapper */
-        $mapper = $serviceLocator->get($options->getPostMapper());
-
-        /** @var Form $postCreateForm */
-        $postCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Post\CreateForm');
-
-        $service = new PostService($mapper, $postCreateForm);
-
-        return $service;
+    /**
+     * @param int $id
+     * @return UserInterface
+     */
+    public function find($id)
+    {
+        return $this->authorMapper->find($id);
     }
 }

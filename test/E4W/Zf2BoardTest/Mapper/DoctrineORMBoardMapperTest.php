@@ -2,12 +2,12 @@
 
 namespace E4W\Zf2BoardTest\Mapper;
 
-use E4W\Zf2Board\Mapper\DoctrineORMBoardMapper;
+use E4W\Zf2Board\Mapper\DoctrineORM\BoardMapper;
 use PHPUnit_Framework_TestCase;
 
-class DoctrineORMBoardMapperTest extends PHPUnit_Framework_TestCase
+class BoardMapperTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \E4W\Zf2Board\Mapper\DoctrineORMBoardMapper */
+    /** @var \E4W\Zf2Board\Mapper\DoctrineORM\BoardMapper */
     protected $mapper;
 
     /** @var \Doctrine\Common\Persistence\ObjectManager */
@@ -26,7 +26,7 @@ class DoctrineORMBoardMapperTest extends PHPUnit_Framework_TestCase
         $moduleOptions = $this->getMock('E4W\Zf2Board\Options\ModuleOptionsInterface');
         $this->moduleOptions = $moduleOptions;
 
-        $mapper = new DoctrineORMBoardMapper($objectManager, $moduleOptions);
+        $mapper = new BoardMapper($objectManager, $moduleOptions);
         $this->mapper = $mapper;
     }
 

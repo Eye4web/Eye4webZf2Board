@@ -45,16 +45,22 @@ class BoardControllerFactory implements FactoryInterface
         /** @var \E4W\Zf2Board\Service\TopicService $topicService */
         $topicService = $serviceManager->get('E4W\Zf2Board\Service\TopicService');
 
-        /** @var \E4W\Zf2Board\Form\Board\CreateForm $boardCreateForm */
+        /** @var \E4W\Zf2Board\Service\PostService $postService */
+        $postService = $serviceManager->get('E4W\Zf2Board\Service\PostService');
+
+        /** @var \Zend\Form\Form $boardCreateForm */
         $boardCreateForm = $serviceManager->get('E4W\Zf2Board\Form\Board\CreateForm');
 
-        /** @var \E4W\Zf2Board\Form\Topic\CreateForm $topicCreateForm */
+        /** @var \Zend\Form\Form $topicCreateForm */
         $topicCreateForm = $serviceManager->get('E4W\Zf2Board\Form\Topic\CreateForm');
+
+        /** @var \Zend\Form\Form $postCreateForm */
+        $postCreateForm = $serviceManager->get('E4W\Zf2Board\Form\Post\CreateForm');
 
         /** @var \Zend\Authentication\AuthenticationService $authenticationService */
         $authenticationService = $serviceManager->get($moduleOptions->getAuthenticationService());
 
-        $controller = new BoardController($boardService, $topicService, $boardCreateForm, $topicCreateForm, $authenticationService);
+        $controller = new BoardController($boardService, $topicService, $postService, $boardCreateForm, $topicCreateForm, $postCreateForm, $authenticationService);
 
         return $controller;
     }

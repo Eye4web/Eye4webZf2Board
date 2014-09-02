@@ -27,36 +27,64 @@ return [
                 ],
                 'may_terminate' => false,
                 'child_routes' => [
-                    'board-list' => [
+                    'board' => [
                         'type' => 'Zend\Mvc\Router\Http\Literal',
                         'options' => [
-                            'route'    => 'boards',
-                            'defaults' => [
-                                'controller' => 'E4W\Zf2Board\Controller\BoardController',
-                                'action'     => 'boardList',
-                            ],
+                            'route' => 'board'
                         ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'list' => [
+                                'type' => 'Zend\Mvc\Router\Http\Literal',
+                                'options' => [
+                                    'route'    => '/list',
+                                    'defaults' => [
+                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'action'     => 'boardList',
+                                    ],
+                                ],
+                            ],
+                            'view' => [
+                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'options' => [
+                                    'route'    => '/view/:id{-}-:slug',
+                                    'defaults' => [
+                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'action'     => 'board',
+                                    ],
+                                ],
+                            ],
+                        ]
                     ],
-                    'board-create' => [
+                    'topic' => [
                         'type' => 'Zend\Mvc\Router\Http\Literal',
                         'options' => [
-                            'route'    => 'create-board',
-                            'defaults' => [
-                                'controller' => 'E4W\Zf2Board\Controller\BoardController',
-                                'action'     => 'boardCreate',
-                            ],
+                            'route' => 'topic'
                         ],
-                    ],
-                    'topic-create' => [
-                        'type' => 'Zend\Mvc\Router\Http\Segment',
-                        'options' => [
-                            'route'    => 'create-topic/:board',
-                            'defaults' => [
-                                'controller' => 'E4W\Zf2Board\Controller\BoardController',
-                                'action'     => 'topicCreate',
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'view' => [
+                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'options' => [
+                                    'route'    => '/view/:id{-}-:slug',
+                                    'defaults' => [
+                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'action'     => 'topic',
+                                    ],
+                                ],
                             ],
-                        ],
-                    ],
+                            'create' => [
+                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'options' => [
+                                    'route'    => 'create/:board',
+                                    'defaults' => [
+                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'action'     => 'topicCreate',
+                                    ],
+                                ],
+                            ],
+                        ]
+                    ]
                 ]
             ]
         ],

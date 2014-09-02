@@ -17,34 +17,31 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Service;
+namespace E4W\Zf2Board\Mapper;
 
-use E4W\Zf2Board\Service\PostService;
-use Zend\Form\Form;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use E4W\Zf2Board\Entity\PostInterface;
+use E4W\Zf2Board\Entity\TopicInterface;
+use E4W\Zf2Board\Entity\UserInterface;
 
-class PostServiceFactory implements FactoryInterface
+interface PostMapperInterface
 {
     /**
-     * Create controller
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return PostService
+     * @param int $id
+     * @return PostInterface
      */
-    public function createService (ServiceLocatorInterface $serviceLocator)
-    {
-        /** @var \E4W\Zf2Board\Options\ModuleOptions $options */
-        $options = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
+    public function find($id);
 
-        /** @var \E4W\Zf2Board\Mapper\PostMapperInterface $mapper */
-        $mapper = $serviceLocator->get($options->getPostMapper());
+    /**
+     * @param int $topicId
+     * @return PostInterface[]
+     */
+    public function findByTopic($topicId);
 
-        /** @var Form $postCreateForm */
-        $postCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Post\CreateForm');
-
-        $service = new PostService($mapper, $postCreateForm);
-
-        return $service;
-    }
+    /**
+     * @param $form
+     * @param TopicInterface $topic
+     * @param UserInterface $user
+     * @return PostInterface|boolean
+     */
+    public function create($form, TopicInterface $topic, UserInterface $user);
 }

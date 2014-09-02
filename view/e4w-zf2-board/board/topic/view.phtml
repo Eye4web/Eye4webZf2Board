@@ -1,0 +1,30 @@
+<?php
+/** @var \E4W\Zf2Board\Entity\BoardInterface $board */
+$board = $this->board;
+
+/** @var \E4W\Zf2Board\Entity\TopicInterface $topic */
+$topic = $this->topic;
+
+/** @var \E4W\Zf2Board\Entity\PostInterface[] $posts */
+$posts = $this->posts;
+
+/** @var \E4W\Zf2Board\Form\Post\CreateForm $postForm */
+$postForm = $this->postCreateForm;
+?>
+<h1><?=$board->getName()?> > <?=$topic->getName()?></h1>
+<i><?=sprintf('Written by %s on %s.', $this->zf2BoardHelper()->getAuthor($topic->getUser())->getDisplayName(), $topic->getCreated()->format('Y/m/d H:i'))?></i><br>
+<br>
+<?=$topic->getText()?>
+<hr>
+<?php foreach($posts as $post) { ?>
+    <strong><?=$this->zf2BoardHelper()->getAuthor($post->getUser())->getDisplayName()?></strong><i>, <?=$post->getCreated()->format('Y/m/d H:i')?></i><br />
+    <?=$post->getText()?>
+    <hr />
+<?php } ?>
+
+<?php if ($this->zf2BoardHelper()->getAuth()->hasIdentity()) { ?>
+<?=$this->form()->openTag($postForm)?>
+<?=$this->formRow($postForm->get('text'))?><br />
+<?=$this->formButton($postForm->get('submit')->setLabel('Post'))?>
+<?=$this->form()->closeTag($postForm)?>
+<?php } ?>

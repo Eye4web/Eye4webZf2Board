@@ -2,11 +2,12 @@
 /** @var \E4W\Zf2Board\Entity\BoardInterface[] $boards */
 $boards = $this->boards;
 ?>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th><?=$this->translate('Id')?></th>
             <th><?=$this->translate('Name')?></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -15,6 +16,7 @@ $boards = $this->boards;
         <tr>
             <td><?=$board->getId()?></td>
             <td><?=$board->getName()?></td>
+            <td><a href="<?=$this->url('e4w/board/view', ['id' => $board->getId(), 'slug' => $board->getSlug()])?>" class="btn btn-primary"><?=$this->translate('View topics')?></a></td>
         </tr>
     <?php } ?>
     </tbody>

@@ -17,15 +17,14 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Mapper;
+namespace E4W\Zf2Board\Mapper\DoctrineORM;
 
 use E4W\Zf2Board\Entity\BoardInterface;
-use E4W\Zf2Board\Entity\TopicInterface;
 use E4W\Zf2Board\Entity\UserInterface;
-use E4W\Zf2Board\Mapper\TopicMapperInterface;
+use E4W\Zf2Board\Mapper\BoardMapperInterface;
 use E4W\Zf2Board\Options\ModuleOptionsInterface;
 
-class DoctrineORMTopicMapper implements TopicMapperInterface
+class BoardMapper implements BoardMapperInterface
 {
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
@@ -41,7 +40,7 @@ class DoctrineORMTopicMapper implements TopicMapperInterface
 
     /**
      * @param int $id
-     * @return TopicInterface|null
+     * @return BoardInterface|null
      */
     public function find($id)
     {
@@ -49,7 +48,7 @@ class DoctrineORMTopicMapper implements TopicMapperInterface
     }
 
     /**
-     * @return TopicInterface[]
+     * @return BoardInterface[]
      */
     public function findAll()
     {
@@ -77,17 +76,16 @@ class DoctrineORMTopicMapper implements TopicMapperInterface
 
     /**
      * @param $form
-     * @param BoardInterface $board
      * @param UserInterface $user
-     * @return bool|TopicInterface|null
+     * @return bool|BoardInterface
      */
-    public function create($form, BoardInterface $board, UserInterface $user)
+    public function create($form, UserInterface $user)
     {
         if (!$form->isValid()) {
             return false;
         }
 
-        /** @var TopicInterface $board */
+        /** @var BoardInterface $board */
         $board = $form->getData();
         $board->setUser($user);
 
@@ -95,10 +93,10 @@ class DoctrineORMTopicMapper implements TopicMapperInterface
     }
 
     /**
-     * @param TopicInterface $board
-     * @return TopicInterface
+     * @param BoardInterface $board
+     * @return BoardInterface
      */
-    public function save(TopicInterface $board)
+    public function save(BoardInterface $board)
     {
         $this->objectManager->persist($board);
         $this->objectManager->flush();

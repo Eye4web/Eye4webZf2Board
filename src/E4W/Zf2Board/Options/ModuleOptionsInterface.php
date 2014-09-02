@@ -23,9 +23,43 @@ use Zend\Stdlib\AbstractOptions;
 
 interface ModuleOptionsInterface
 {
+    /**
+     * @return string
+     */
     public function getBoardEntity();
 
-    public function getStrictMode();
-
+    /**
+     * @return \E4W\Zf2Board\Mapper\BoardMapperInterface
+     */
     public function getBoardMapper();
+
+    /**
+     * @return string
+     */
+    public function getTopicEntity();
+
+    /**
+     * @return \E4W\Zf2Board\Mapper\TopicMapperInterface
+     */
+    public function getTopicMapper();
+
+    /**
+     * @return string
+     */
+    public function getPostEntity();
+
+    /**
+     * @return \E4W\Zf2Board\Mapper\PostMapperInterface
+     */
+    public function getPostMapper();
+
+    /**
+     * @return string
+     */
+    public function getAuthorEntity();
+
+    /**
+     * @return \E4W\Zf2Board\Mapper\AuthorMapperInterface
+     */
+    public function getAuthorMapper();
 }

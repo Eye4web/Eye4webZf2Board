@@ -52,11 +52,15 @@ class Post implements PostInterface
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="user_id", type="integer")
      */
     protected $user;
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="topic_id", type="integer")
      */
     protected $topic;
 

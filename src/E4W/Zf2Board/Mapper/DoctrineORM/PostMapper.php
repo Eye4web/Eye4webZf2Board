@@ -17,14 +17,15 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Mapper;
+namespace E4W\Zf2Board\Mapper\DoctrineORM;
 
-use E4W\Zf2Board\Entity\BoardInterface;
+use E4W\Zf2Board\Entity\PostInterface;
+use E4W\Zf2Board\Entity\TopicInterface;
 use E4W\Zf2Board\Entity\UserInterface;
-use E4W\Zf2Board\Mapper\BoardMapperInterface;
+use E4W\Zf2Board\Mapper\PostMapperInterface;
 use E4W\Zf2Board\Options\ModuleOptionsInterface;
 
-class DoctrineORMBoardMapper implements BoardMapperInterface
+class PostMapper implements PostMapperInterface
 {
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
@@ -40,67 +41,54 @@ class DoctrineORMBoardMapper implements BoardMapperInterface
 
     /**
      * @param int $id
-     * @return BoardInterface|null
+     * @return PostInterface|null
      */
     public function find($id)
     {
-        return $this->objectManager->getRepository($this->options->getBoardEntity())->find($id);
+        return $this->objectManager->getRepository($this->options->getPostEntity())->find($id);
     }
 
     /**
-     * @return BoardInterface[]
+     * @param int $topicId
+     * @return PostInterface[]|array
      */
-    public function findAll()
+    public function findByTopic($topicId)
     {
-        return $this->objectManager->getRepository($this->options->getBoardEntity())->findAll();
-    }
-
-    /**
-     * @param $id
-     * @return bool
-     * @throws \Exception
-     */
-    public function delete($id)
-    {
-        $board = $this->find($id);
-
-        if (!$board) {
-            throw new \Exception('The board does not exist');
-        }
-
-        $this->objectManager->remove($board);
-        $this->objectManager->flush();
-
-        return true;
+        return $this->objectManager->getRepository($this->options->getPostEntity())->findBy([
+            'topic' => $topicId
+        ]);
     }
 
     /**
      * @param $form
+     * @param TopicInterface $topic
      * @param UserInterface $user
-     * @return bool|BoardInterface
+     * @return bool|PostInterface
      */
-    public function create($form, UserInterface $user)
+    public function create($form, TopicInterface $topic, UserInterface $user)
     {
         if (!$form->isValid()) {
             return false;
         }
 
-        /** @var BoardInterface $board */
-        $board = $form->getData();
-        $board->setUser($user);
+        /** @var PostInterface $post */
+        $post = $form->getData();
 
-        return $this->save($board);
+        $post->setUser($user);
+        $post->setTopic($topic);
+
+        return $this->save($post);
     }
 
     /**
-     * @param BoardInterface $board
-     * @return BoardInterface
+     * @param PostInterface $post
+     * @return PostInterface
      */
-    public function save(BoardInterface $board)
+    public function save(PostInterface $post)
     {
-        $this->objectManager->persist($board);
+        $this->objectManager->persist($post);
         $this->objectManager->flush();
 
-        return $board;
+        return $post;
     }
 }

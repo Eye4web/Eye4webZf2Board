@@ -17,30 +17,32 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\Mapper;
+namespace E4W\Zf2Board\Mapper\DoctrineORM;
 
-use E4W\Zf2Board\Mapper\DoctrineORMBoardMapper;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use E4W\Zf2Board\Entity\UserInterface;
+use E4W\Zf2Board\Mapper\AuthorMapperInterface;
+use E4W\Zf2Board\Options\ModuleOptionsInterface;
 
-class DoctrineORMBoardMapperFactory implements FactoryInterface
+class AuthorMapper implements AuthorMapperInterface
 {
-    /**
-     * Create mapper
-     *
-     * @param ServiceLocatorInterface $serviceManager
-     * @return DoctrineORMBoardMapper
-     */
-    public function createService (ServiceLocatorInterface $serviceManager)
+    /** @var \Doctrine\ORM\EntityManager */
+    protected $objectManager;
+
+    /** @var ModuleOptionsInterface */
+    protected $options;
+
+    public function __construct(\Doctrine\Common\Persistence\ObjectManager $objectManager, ModuleOptionsInterface $options)
     {
-        /** @var \Doctrine\ORM\EntityManager $objectManager */
-        $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');
+        $this->objectManager = $objectManager;
+        $this->options = $options;
+    }
 
-        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $options */
-        $options = $serviceManager->get('E4W\Zf2Board\Options\ModuleOptions');
-
-        $mapper = new DoctrineORMBoardMapper($objectManager, $options);
-
-        return $mapper;
+    /**
+     * @param int $id
+     * @return UserInterface|null
+     */
+    public function find($id)
+    {
+        return $this->objectManager->getRepository($this->options->getAuthorEntity())->find($id);
     }
 }

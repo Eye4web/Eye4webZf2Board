@@ -1,0 +1,28 @@
+<?php
+/** @var \E4W\Zf2Board\Entity\BoardInterface $board */
+$board = $this->board;
+
+/** @var \E4W\Zf2Board\Entity\TopicInterface[] $topics */
+$topics = $this->topics;
+?>
+<h1><?=$board->getName()?></h1><br>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th><?=$this->translate('Topic')?></th>
+            <th><?=$this->translate('Author')?></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <?php foreach($topics as $topic) { ?>
+        <tr>
+            <td><?=$topic->getName()?></td>
+            <td><?=$this->zf2BoardHelper()->getAuthor($topic->getUser())->getDisplayName()?></td>
+            <td><a href="<?=$this->url('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()])?>"><?=$this->translate('View topic')?></a></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>

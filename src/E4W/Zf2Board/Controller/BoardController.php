@@ -20,8 +20,10 @@
 namespace E4W\Zf2Board\Controller;
 
 use E4W\Zf2Board\Service\BoardService;
+use E4W\Zf2Board\Service\PostService;
 use E4W\Zf2Board\Service\TopicService;
 use Zend\Authentication\AuthenticationService;
+use Zend\Form\Form;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -33,19 +35,29 @@ class BoardController extends AbstractActionController
     /** @var TopicService */
     protected $topicService;
 
+    /** @var PostService */
+    protected $postService;
+
+    /** @var Form */
     protected $boardCreateForm;
 
+    /** @var Form */
     protected $topicCreateForm;
+
+    /** @var Form */
+    protected $postCreateForm;
 
     /** @var AuthenticationService */
     protected $authenticationService;
 
-    public function __construct(BoardService $boardService, TopicService $topicService, $boardCreateForm, $topicCreateForm, AuthenticationService $authenticationService)
+    public function __construct(BoardService $boardService, TopicService $topicService, PostService $postService, Form $boardCreateForm, Form $topicCreateForm, Form $postCreateForm, AuthenticationService $authenticationService)
     {
         $this->boardService = $boardService;
         $this->topicService = $topicService;
+        $this->postService = $postService;
         $this->boardCreateForm = $boardCreateForm;
         $this->topicCreateForm = $topicCreateForm;
+        $this->postCreateForm = $postCreateForm;
         $this->authenticationService = $authenticationService;
     }
 
@@ -56,6 +68,35 @@ class BoardController extends AbstractActionController
 
         $viewModel->setVariables([
             'boards' => $this->boardService->findAll()
+        ]);
+
+        return $viewModel;
+    }
+
+    public function boardAction()
+    {
+        $boardService = $this->boardService;
+        $topicService = $this->topicService;
+
+        $board = $boardService->find($this->params('id'));
+        $slug = $this->params('slug');
+
+        if (!$board) {
+            throw new \Exception('The board does not exist');
+        }
+
+        if ($slug != $board->getSlug()) {
+            return $this->redirect()->toRoute('e4w/board/view', ['id' => $board->getId(), 'slug' => $board->getSlug()]);
+        }
+
+        $topics = $topicService->findByBoard($board->getId());
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('e4w-zf2-board/board/board/view.phtml');
+
+        $viewModel->setVariables([
+            'board' => $board,
+            'topics' => $topics,
         ]);
 
         return $viewModel;
@@ -84,6 +125,55 @@ class BoardController extends AbstractActionController
 
         if ($board = $boardService->create($prg, $identity)) {
             die("Board created");
+        }
+
+        return $viewModel;
+    }
+
+    public function topicAction()
+    {
+        $boardService = $this->boardService;
+        $topicService = $this->topicService;
+        $postService = $this->postService;
+        $postCreateForm = $this->postCreateForm;
+
+        $topic = $topicService->find($this->params('id'));
+        $slug = $this->params('slug');
+
+        if (!$topic) {
+            throw new \Exception('The topic does not exist');
+        }
+
+        if ($slug != $topic->getSlug()) {
+            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+        }
+
+        $board = $boardService->find($topic->getBoard());
+        $posts = $postService->findByTopic($topic->getId());
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('e4w-zf2-board/board/topic/view.phtml');
+
+        $viewModel->setVariables([
+            'board' => $board,
+            'topic' => $topic,
+            'posts' => $posts,
+            'postCreateForm' => $postCreateForm,
+        ]);
+
+        $redirectUrl = $this->url()->fromRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+        $prg = $this->prg($redirectUrl, true);
+
+        $identity = $this->authenticationService->getIdentity();
+
+        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+            return $prg;
+        } elseif ($prg === false) {
+            return $viewModel;
+        }
+
+        if ($board = $postService->create($prg, $topic, $identity)) {
+            return $this->redirect()->toUrl($redirectUrl);
         }
 
         return $viewModel;
