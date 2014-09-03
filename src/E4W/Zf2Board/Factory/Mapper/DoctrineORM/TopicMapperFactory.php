@@ -40,7 +40,7 @@ class TopicMapperFactory implements FactoryInterface
         $options = $serviceManager->get('E4W\Zf2Board\Options\ModuleOptions');
 
         /** @var \E4W\Zf2Board\Service\SlugServiceInterface $slugService */
-        $slugService = $serviceManager->get('\E4W\Zf2Board\Service\SlugService');
+        $slugService = $serviceManager->get('E4W\Zf2Board\Service\SlugService');
 
         $mapper = new TopicMapper($objectManager, $slugService, $options);
 
