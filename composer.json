@@ -37,5 +37,5 @@
         "phpunit/phpunit" : ">=3.7,<4",
         "squizlabs/php_codesniffer" : "1.4.*",
         "zendframework/zend-captcha" : "~2.1"
-    },
+    }
 }
