@@ -97,6 +97,39 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
     }
 
     /**
+     * @param $form
+     * @param TopicInterface $topic
+     * @param UserInterface $user
+     * @return bool|PostInterface
+     */
+    public function update($form, TopicInterface $topic, UserInterface $user)
+    {
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        /** @var PostInterface $post */
+        $post = $form->getData();
+
+        $post->setUser($user->getId());
+        $post->setTopic($topic->getId());
+
+        $this->getEventManager()->trigger('update.pre', $this, [
+            'post' => $post,
+            'user' => $user,
+        ]);
+
+        $post = $this->save($post);
+
+        $this->getEventManager()->trigger('update.post', $this, [
+            'post' => $post,
+            'user' => $user,
+        ]);
+
+        return $post;
+    }
+
+    /**
      * @param PostInterface $post
      * @return PostInterface
      */

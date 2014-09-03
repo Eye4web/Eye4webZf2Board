@@ -1,0 +1,8 @@
+<?php
+$form = $this->form;
+?>
+<h1><?=$this->translate('Edit post')?></h1><br />
+<?=$this->form()->openTag($form)?>
+<?=$this->formRow($form->get('text'))?><br />
+<?=$this->formButton($form->get('submit')->setLabel('Edit'))?>
+<?=$this->form()->closeTag($form)?>

@@ -86,6 +86,35 @@ return [
                                 ],
                             ],
                         ]
+                    ],
+                    'post' => [
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => [
+                            'route' => 'post'
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'edit' => [
+                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'options' => [
+                                    'route'    => '/edit/:id',
+                                    'defaults' => [
+                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'action'     => 'postEdit',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'options' => [
+                                    'route'    => '/delete/:id',
+                                    'defaults' => [
+                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'action'     => 'postDelete',
+                                    ],
+                                ],
+                            ],
+                        ]
                     ]
                 ]
             ]

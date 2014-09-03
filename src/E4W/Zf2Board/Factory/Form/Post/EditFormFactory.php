@@ -17,39 +17,30 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Mapper;
+namespace E4W\Zf2Board\Factory\Form\Post;
 
-use E4W\Zf2Board\Entity\PostInterface;
-use E4W\Zf2Board\Entity\TopicInterface;
-use E4W\Zf2Board\Entity\UserInterface;
+use E4W\Zf2Board\Form\Post\EditForm;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-interface PostMapperInterface
+class EditFormFactory implements FactoryInterface
 {
     /**
-     * @param int $id
-     * @return PostInterface
+     * Create service
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return EditForm
      */
-    public function find($id);
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        /** @var \E4W\Zf2Board\Options\ModuleOptions $moduleOptions */
+        $moduleOptions = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');
 
-    /**
-     * @param int $topicId
-     * @return PostInterface[]
-     */
-    public function findByTopic($topicId);
+        $entityName = $moduleOptions->getPostEntity();
+        $object = new $entityName;
 
-    /**
-     * @param $form
-     * @param TopicInterface $topic
-     * @param UserInterface $user
-     * @return PostInterface|boolean
-     */
-    public function create($form, TopicInterface $topic, UserInterface $user);
+        $form = new EditForm($object);
 
-    /**
-     * @param $form
-     * @param TopicInterface $topic
-     * @param UserInterface $user
-     * @return PostInterface|boolean
-     */
-    public function update($form, TopicInterface $topic, UserInterface $user);
+        return $form;
+    }
 }

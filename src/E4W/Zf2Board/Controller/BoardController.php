@@ -50,21 +50,38 @@ class BoardController extends AbstractActionController
     /** @var Form */
     protected $postCreateForm;
 
+    /** @var Form */
+    protected $postEditForm;
+
     /** @var AuthenticationService */
     protected $authenticationService;
 
     /** @var ModuleOptionsInterface */
     protected $options;
 
-    public function __construct(BoardService $boardService, TopicService $topicService, PostService $postService, Form $boardCreateForm, Form $topicCreateForm, Form $postCreateForm, AuthenticationService $authenticationService, ModuleOptionsInterface $options)
-    {
+    public function __construct(
+        BoardService $boardService,
+        TopicService $topicService,
+        PostService $postService,
+        Form $boardCreateForm,
+        Form $topicCreateForm,
+        Form $postCreateForm,
+        Form $postEditForm,
+        AuthenticationService $authenticationService,
+        ModuleOptionsInterface $options
+    ) {
         $this->boardService = $boardService;
-        $this->topicService = $topicService;
-        $this->postService = $postService;
         $this->boardCreateForm = $boardCreateForm;
+
+        $this->topicService = $topicService;
         $this->topicCreateForm = $topicCreateForm;
+
+        $this->postService = $postService;
         $this->postCreateForm = $postCreateForm;
+        $this->postEditForm = $postEditForm;
+
         $this->authenticationService = $authenticationService;
+
         $this->options = $options;
     }
 
@@ -201,6 +218,59 @@ class BoardController extends AbstractActionController
         }
 
         if ($topic = $topicService->create($prg, $board, $identity)) {
+            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+        }
+
+        return $viewModel;
+    }
+
+    public function postEditAction()
+    {
+        $postService = $this->postService;
+        $topicService = $this->topicService;
+        $authenticationService = $this->authenticationService;
+
+        /** @var \E4W\Zf2Board\Entity\UserInterface $identity */
+        $identity = $authenticationService->getIdentity();
+
+        if (!$authenticationService->hasIdentity()) {
+            throw new \Exception('You need to be signed in to edit posts');
+        }
+
+        $postId = $this->params('id');
+        $post = $postService->find($postId);
+
+        if (!$post) {
+            throw new \Exception('The post does not exist');
+        }
+
+        if ($post->getUser() != $identity->getId()) {
+            throw new \Exception('You do not have the rights to edit this post');
+        }
+
+        $form = $this->postEditForm;
+        $form->bind($post);
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('e4w-zf2-board/board/post/edit.phtml');
+
+        $viewModel->setVariables([
+            'form' => $form,
+            'post' => $post,
+        ]);
+
+        $redirectUrl = $this->url()->fromRoute('e4w/post/edit', ['id' => $post->getId()]);
+        $prg = $this->prg($redirectUrl, true);
+
+        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+            return $prg;
+        } elseif ($prg === false) {
+            return $viewModel;
+        }
+
+        $topic = $topicService->find($post->getTopic());
+
+        if ($post = $postService->update($prg, $topic, $identity)) {
             return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
         }
 

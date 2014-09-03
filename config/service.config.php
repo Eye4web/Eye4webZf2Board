@@ -37,8 +37,11 @@ return [
 
         // Forms
         'E4W\Zf2Board\Form\Board\CreateForm' => 'E4W\Zf2Board\Factory\Form\Board\CreateFormFactory',
+
         'E4W\Zf2Board\Form\Topic\CreateForm' => 'E4W\Zf2Board\Factory\Form\Topic\CreateFormFactory',
+
         'E4W\Zf2Board\Form\Post\CreateForm' => 'E4W\Zf2Board\Factory\Form\Post\CreateFormFactory',
+        'E4W\Zf2Board\Form\Post\EditForm' => 'E4W\Zf2Board\Factory\Form\Post\EditFormFactory',
 
         // Authentication Service
         'E4W\Zf2Board\Service\AuthenticationService' => 'E4W\Zf2Board\Factory\Service\AuthenticationServiceFactory',

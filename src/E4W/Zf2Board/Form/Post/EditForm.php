@@ -24,9 +24,9 @@ use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class CreateForm extends Form implements InputFilterProviderInterface
+class EditForm extends Form implements InputFilterProviderInterface
 {
-    public function __construct(PostInterface $object, $name = 'create-post')
+    public function __construct(PostInterface $object, $name = 'edit-post')
     {
         parent::__construct($name);
 

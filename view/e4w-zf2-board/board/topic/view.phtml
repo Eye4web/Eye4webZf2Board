@@ -27,6 +27,15 @@ $postForm = $this->postCreateForm;
 
 <?php foreach($posts as $post) { ?>
     <strong><?=$this->zf2BoardHelper()->getAuthor($post->getUser())->getDisplayName()?></strong><i>, <?=$post->getCreated()->format('Y/m/d H:i')?></i><br />
+    <?php
+    if (
+            $this->zf2BoardHelper()->getAuth()->hasIdentity() &&
+            $post->getUser() == $this->zf2BoardHelper()->getAuth()->getIdentity()->getId()
+    ) {
+    ?>
+        <a href="<?=$this->url('e4w/post/edit', ['id' => $post->getId()])?>"><em><?=$this->translate('Edit')?></em></a> -
+        <a href="<?=$this->url('e4w/post/delete', ['id' => $post->getId()])?>"><strong><?=$this->translate('Delete')?></strong></a><br />
+    <?php } ?>
     <?=$post->getText()?>
     <hr />
 <?php } ?>

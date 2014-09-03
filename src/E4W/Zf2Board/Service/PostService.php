@@ -61,11 +61,31 @@ class PostService implements EventManagerAwareInterface
         return $this->postMapper->findByTopic($topicId);
     }
 
+    /**
+     * @param array $data
+     * @param TopicInterface $topic
+     * @param UserInterface $user
+     * @return bool|PostInterface
+     */
     public function create(array $data, TopicInterface $topic, UserInterface $user)
     {
         $form = $this->postCreateForm;
         $form->setData($data);
 
         return $this->postMapper->create($form, $topic, $user);
+    }
+
+    /**
+     * @param array $data
+     * @param TopicInterface $topic
+     * @param UserInterface $user
+     * @return bool|PostInterface
+     */
+    public function update(array $data, TopicInterface $topic, UserInterface $user)
+    {
+        $form = $this->postUpdateForm;
+        $form->setData($data);
+
+        return $this->postMapper->update($form, $topic, $user);
     }
 }
