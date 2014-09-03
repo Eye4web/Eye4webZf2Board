@@ -1,6 +1,6 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Mapper;
+namespace E4W\Zf2BoardTest\Controller;
 
 use E4W\Zf2Board\Controller\BoardController;
 use PHPUnit_Framework_TestCase;
