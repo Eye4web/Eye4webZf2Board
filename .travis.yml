@@ -12,3 +12,4 @@ before_script:
 script:
   - ./vendor/bin/phpunit ./test --coverage-clover ./build/logs/clover.xml
   - ./vendor/bin/phpcs --standard=PSR2 ./src/ ./test/ -n
+  - ./vendor/bin/test-reporter
