@@ -20,10 +20,14 @@ class BoardServiceTest extends PHPUnit_Framework_TestCase
     {
         /** @var \E4W\Zf2Board\Mapper\BoardMapperInterface $mapper */
         $mapper = $this->getMock('\E4W\Zf2Board\Mapper\BoardMapperInterface');
+
         $this->mapper = $mapper;
 
         /** @var \Zend\Form\Form $form */
-        $boardCreateForm = $this->getMock('\E4W\Zf2Board\Form\Board\CreateForm');
+        $boardCreateForm = $this->getMockBuilder('\E4W\Zf2Board\Form\Board\CreateForm')
+                                ->disableOriginalConstructor()
+                                ->getMock();
+
         $this->boardCreateForm = $boardCreateForm;
 
         $service = new BoardService($mapper, $boardCreateForm);
@@ -45,6 +49,8 @@ class BoardServiceTest extends PHPUnit_Framework_TestCase
     {
         $this->mapper->expects($this->once())
                      ->method('findAll');
+
+        $this->service->findAll();
     }
 
     public function testDelete()
@@ -56,25 +62,5 @@ class BoardServiceTest extends PHPUnit_Framework_TestCase
                      ->with($id);
 
         $this->service->delete($id);
-    }
-
-    public function testCreate()
-    {
-        $data = [];
-
-        /** @var \E4W\Zf2Board\Entity\UserInterface $userMock */
-        $userMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
-
-        $boardCreateForm = $this->boardCreateForm;
-
-        $boardCreateForm->expects($this->once())
-                        ->method('setData')
-                        ->with($data);
-
-        $this->mapper->expects($this->once())
-                     ->method('create')
-                     ->with($boardCreateForm, $userMock);
-
-        $this->service->create($data, $userMock);
     }
 }

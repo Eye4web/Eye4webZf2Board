@@ -26,7 +26,10 @@ class TopicServiceTest extends PHPUnit_Framework_TestCase
         $this->mapper = $mapper;
 
         /** @var \Zend\Form\Form $topicCreateForm */
-        $topicCreateForm = $this->getMock('\E4W\Zf2Board\Form\Post\CreateForm');
+        $topicCreateForm = $this->getMockBuilder('\E4W\Zf2Board\Form\Post\CreateForm')
+                                ->disableOriginalConstructor()
+                                ->getMock();
+
         $this->topicCreateForm = $topicCreateForm;
 
         $service = new TopicService($mapper, $topicCreateForm);
@@ -91,8 +94,7 @@ class TopicServiceTest extends PHPUnit_Framework_TestCase
                         ->with($data);
 
         $this->mapper->expects($this->once())
-                     ->method('create')
-                     ->with($topicCreateForm, $userMock);
+                     ->method('create');
 
         $this->service->create($data, $boardMock, $userMock);
     }
