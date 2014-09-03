@@ -78,8 +78,7 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
     {
         return $this->objectManager->getRepository($this->options->getTopicEntity())->findBy([
             'board' => $boardId,
-        ],
-        [
+        ], [
             'pinned' => 'desc',
         ]);
     }

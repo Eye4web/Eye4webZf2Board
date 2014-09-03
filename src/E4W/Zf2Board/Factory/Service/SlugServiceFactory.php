@@ -31,7 +31,7 @@ class SlugServiceFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator
      * @return SlugService
      */
-    public function createService (ServiceLocatorInterface $serviceLocator)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $service = new SlugService();
 

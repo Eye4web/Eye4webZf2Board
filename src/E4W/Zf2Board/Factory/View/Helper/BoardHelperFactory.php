@@ -32,7 +32,7 @@ class BoardHelperFactory implements FactoryInterface
      * @return BoardHelper
      * @throws \Exception
      */
-    public function createService (ServiceLocatorInterface $helperManager)
+    public function createService(ServiceLocatorInterface $helperManager)
     {
         /** @var ServiceLocatorInterface $serviceLocator */
         $serviceLocator = $helperManager->getServiceLocator();

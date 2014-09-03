@@ -1,4 +1,5 @@
 <?php
+
 namespace E4W\Zf2BoardTest;
 
 use Zend\Loader\AutoloaderFactory;
@@ -32,7 +33,9 @@ class Bootstrap
         }
 
         $zf2ModulePaths  = implode(PATH_SEPARATOR, $zf2ModulePaths) . PATH_SEPARATOR;
-        $zf2ModulePaths .= getenv('ZF2_MODULES_TEST_PATHS') ?: (defined('ZF2_MODULES_TEST_PATHS') ? ZF2_MODULES_TEST_PATHS : '');
+        $zf2ModulePaths .= getenv('ZF2_MODULES_TEST_PATHS') ?:
+            (defined('ZF2_MODULES_TEST_PATHS') ?
+            ZF2_MODULES_TEST_PATHS : '');
 
         static::initAutoloader();
 
@@ -64,10 +67,15 @@ class Bootstrap
             $loader = include $vendorPath . '/autoload.php';
         }
 
-        $zf2Path = getenv('ZF2_PATH') ?: (defined('ZF2_PATH') ? ZF2_PATH : (is_dir($vendorPath . '/ZF2/library') ? $vendorPath . '/ZF2/library' : false));
+        $zf2Path = getenv('ZF2_PATH') ?:
+            (defined('ZF2_PATH') ?
+            ZF2_PATH : (is_dir($vendorPath . '/ZF2/library') ?
+            $vendorPath . '/ZF2/library' : false));
 
         if (!$zf2Path) {
-            throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
+            throw new RuntimeException(
+                'Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.'
+            );
         }
 
         if (isset($loader)) {
@@ -91,7 +99,11 @@ class Bootstrap
         $previousDir = '.';
         while (!is_dir($dir . '/' . $path)) {
             $dir = dirname($dir);
-            if ($previousDir === $dir) return false;
+
+            if ($previousDir === $dir) {
+                return false;
+            }
+
             $previousDir = $dir;
         }
         return $dir . '/' . $path;

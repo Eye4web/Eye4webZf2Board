@@ -172,7 +172,11 @@ class BoardController extends AbstractActionController
             'postCreateForm' => $postCreateForm,
         ]);
 
-        $redirectUrl = $this->url()->fromRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+        $redirectUrl = $this->url()->fromRoute('e4w/topic/view', [
+            'id' => $topic->getId(),
+            'slug' => $topic->getSlug()
+        ]);
+
         $prg = $this->prg($redirectUrl, true);
 
         $identity = $this->authenticationService->getIdentity();

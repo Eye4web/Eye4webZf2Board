@@ -37,8 +37,10 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
     /** @var ModuleOptionsInterface */
     protected $options;
 
-    public function __construct(\Doctrine\Common\Persistence\ObjectManager $objectManager, ModuleOptionsInterface $options)
-    {
+    public function __construct(
+        \Doctrine\Common\Persistence\ObjectManager $objectManager,
+        ModuleOptionsInterface $options
+    ) {
         $this->objectManager = $objectManager;
         $this->options = $options;
     }

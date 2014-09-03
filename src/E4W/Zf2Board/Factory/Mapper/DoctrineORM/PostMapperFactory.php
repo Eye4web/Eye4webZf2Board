@@ -31,7 +31,7 @@ class PostMapperFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceManager
      * @return PostMapper
      */
-    public function createService (ServiceLocatorInterface $serviceManager)
+    public function createService(ServiceLocatorInterface $serviceManager)
     {
         /** @var \Doctrine\ORM\EntityManager $objectManager */
         $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');

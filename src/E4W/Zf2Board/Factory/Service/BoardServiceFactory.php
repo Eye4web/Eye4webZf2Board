@@ -31,7 +31,7 @@ class BoardServiceFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator
      * @return BoardService
      */
-    public function createService (ServiceLocatorInterface $serviceLocator)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
         /** @var \E4W\Zf2Board\Options\ModuleOptions $options */
         $options = $serviceLocator->get('E4W\Zf2Board\Options\ModuleOptions');

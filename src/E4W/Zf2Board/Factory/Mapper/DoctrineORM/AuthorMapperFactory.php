@@ -31,7 +31,7 @@ class AuthorMapperFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceManager
      * @return AuthorMapper
      */
-    public function createService (ServiceLocatorInterface $serviceManager)
+    public function createService(ServiceLocatorInterface $serviceManager)
     {
         /** @var \Doctrine\ORM\EntityManager $objectManager */
         $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');

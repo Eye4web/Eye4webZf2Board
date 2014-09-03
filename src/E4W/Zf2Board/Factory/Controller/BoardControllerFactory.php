@@ -31,7 +31,7 @@ class BoardControllerFactory implements FactoryInterface
      * @param ServiceLocatorInterface $controllerManager
      * @return BoardController
      */
-    public function createService (ServiceLocatorInterface $controllerManager)
+    public function createService(ServiceLocatorInterface $controllerManager)
     {
         /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $controllerManager->getServiceLocator();
@@ -63,7 +63,17 @@ class BoardControllerFactory implements FactoryInterface
         /** @var \Zend\Authentication\AuthenticationService $authenticationService */
         $authenticationService = $serviceManager->get($moduleOptions->getAuthenticationService());
 
-        $controller = new BoardController($boardService, $topicService, $postService, $boardCreateForm, $topicCreateForm, $postCreateForm, $postEditForm, $authenticationService, $moduleOptions);
+        $controller = new BoardController(
+            $boardService,
+            $topicService,
+            $postService,
+            $boardCreateForm,
+            $topicCreateForm,
+            $postCreateForm,
+            $postEditForm,
+            $authenticationService,
+            $moduleOptions
+        );
 
         return $controller;
     }
