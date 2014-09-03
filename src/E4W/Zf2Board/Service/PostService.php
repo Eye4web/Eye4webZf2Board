@@ -37,10 +37,14 @@ class PostService implements EventManagerAwareInterface
     /** @var Form */
     protected $postCreateForm;
 
-    public function __construct(PostMapperInterface $postMapper, Form $postCreateForm)
+    /** @var Form */
+    protected $postEditForm;
+
+    public function __construct(PostMapperInterface $postMapper, Form $postCreateForm, Form $postEditForm)
     {
         $this->postMapper = $postMapper;
         $this->postCreateForm = $postCreateForm;
+        $this->postEditForm = $postEditForm;
     }
 
     /**
@@ -83,7 +87,7 @@ class PostService implements EventManagerAwareInterface
      */
     public function update(array $data, TopicInterface $topic, UserInterface $user)
     {
-        $form = $this->postUpdateForm;
+        $form = $this->postEditForm;
         $form->setData($data);
 
         return $this->postMapper->update($form, $topic, $user);

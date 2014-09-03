@@ -43,7 +43,10 @@ class PostServiceFactory implements FactoryInterface
         /** @var Form $postCreateForm */
         $postCreateForm = $serviceLocator->get('E4W\Zf2Board\Form\Post\CreateForm');
 
-        $service = new PostService($mapper, $postCreateForm);
+        /** @var Form $postEditForm */
+        $postEditForm = $serviceLocator->get('E4W\Zf2Board\Form\Post\EditForm');
+
+        $service = new PostService($mapper, $postCreateForm, $postEditForm);
 
         return $service;
     }
