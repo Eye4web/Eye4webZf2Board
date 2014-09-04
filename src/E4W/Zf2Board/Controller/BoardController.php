@@ -135,7 +135,12 @@ class BoardController extends AbstractActionController
 
     public function topicAction()
     {
-        $topic = $this->topicService->find($this->params('id'));
+        $boardService = $this->boardService;
+        $topicService = $this->topicService;
+        $postService = $this->postService;
+        $postCreateForm = $this->postCreateForm;
+
+        $topic = $topicService->find($this->params('id'));
         $slug = $this->params('slug');
 
         if (!$topic) {
@@ -146,10 +151,10 @@ class BoardController extends AbstractActionController
             return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
         }
 
-        $board = $this->boardService->find($topic->getBoard());
+        $board = $boardService->find($topic->getBoard());
 
         // Paginator
-        $posts = $this->postService->findByTopic($topic->getId());
+        $posts = $postService->findByTopic($topic->getId());
         $paginator = new Paginator(new ArrayAdapter($posts));
         $page = $this->params('page');
 
@@ -164,7 +169,7 @@ class BoardController extends AbstractActionController
             'board' => $board,
             'topic' => $topic,
             'posts' => $paginator,
-            'postCreateForm' => $this->postCreateForm,
+            'postCreateForm' => $postCreateForm,
         ]);
 
         $redirectUrl = $this->url()->fromRoute('e4w/topic/view', [
@@ -182,7 +187,7 @@ class BoardController extends AbstractActionController
             return $viewModel;
         }
 
-        if (!$topic->isLocked() && $this->postService->create($prg, $topic, $identity)) {
+        if (!$topic->isLocked() && $postService->create($prg, $topic, $identity)) {
             return $this->redirect()->toUrl($redirectUrl);
         }
 
@@ -226,6 +231,7 @@ class BoardController extends AbstractActionController
     public function postEditAction()
     {
         $postService = $this->postService;
+        $topicService = $this->topicService;
         $authenticationService = $this->authenticationService;
 
         /** @var \E4W\Zf2Board\Entity\UserInterface $identity */
@@ -235,10 +241,8 @@ class BoardController extends AbstractActionController
             throw new \Exception('You need to be signed in to edit posts');
         }
 
-        /** @var \E4W\Zf2Board\Entity\UserInterface $identity */
-        $identity = $authenticationService->getIdentity();
-
-        $post = $postService->find($this->params('id'));
+        $postId = $this->params('id');
+        $post = $postService->find($postId);
 
         if (!$post) {
             throw new \Exception('The post does not exist');
@@ -268,7 +272,7 @@ class BoardController extends AbstractActionController
             return $viewModel;
         }
 
-        $topic = $this->topicService->find($post->getTopic());
+        $topic = $topicService->find($post->getTopic());
 
         if ($post = $postService->update($prg, $topic, $identity)) {
             return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
