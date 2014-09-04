@@ -1,5 +1,5 @@
 {
-    "name": "eye4web/e4w-zf2-board",
+    "name": "eye4web/eye4web-zf2-board",
     "description": "A generic bulletin board for zf2",
     "type": "library",
     "license": "MIT",

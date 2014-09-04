@@ -9,7 +9,7 @@ $topics = $this->topics;
 <a href="<?=$this->url('e4w/topic/create', ['board' => $board->getId()])?>"><?=$this->translate('Create new topic')?></a><br>
 <br>
 
-<?=$this->paginationControl($topics, 'sliding', ['e4w-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
+<?=$this->paginationControl($topics, 'sliding', ['eye4web-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
     'route' => 'e4w/board/view',
     'params' => [
         'id' => $board->getId(),
@@ -37,7 +37,7 @@ $topics = $this->topics;
     </tbody>
 </table>
 
-<?=$this->paginationControl($topics, 'sliding', ['e4w-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
+<?=$this->paginationControl($topics, 'sliding', ['eye4web-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
     'route' => 'e4w/board/view',
     'params' => [
         'id' => $board->getId(),

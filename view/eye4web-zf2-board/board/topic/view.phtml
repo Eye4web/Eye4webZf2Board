@@ -16,7 +16,7 @@ $postForm = $this->postCreateForm;
 <br>
 <?=$topic->getText()?>
 <br>
-<?=$this->paginationControl($posts, 'sliding', ['e4w-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
+<?=$this->paginationControl($posts, 'sliding', ['eye4web-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
     'route' => 'e4w/topic/view',
     'params' => [
         'id' => $topic->getId(),
@@ -40,7 +40,7 @@ $postForm = $this->postCreateForm;
     <hr />
 <?php } ?>
 
-<?=$this->paginationControl($posts, 'sliding', ['e4w-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
+<?=$this->paginationControl($posts, 'sliding', ['eye4web-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
     'route' => 'e4w/topic/view',
     'params' => [
         'id' => $topic->getId(),

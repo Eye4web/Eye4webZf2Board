@@ -88,7 +88,7 @@ class BoardController extends AbstractActionController
     public function boardListAction()
     {
         $viewModel = new ViewModel();
-        $viewModel->setTemplate('e4w-zf2-board/board/board/list.phtml');
+        $viewModel->setTemplate('eye4web-zf2-board/board/board/list.phtml');
 
         $viewModel->setVariables([
             'boards' => $this->boardService->findAll()
@@ -123,7 +123,7 @@ class BoardController extends AbstractActionController
         $paginator->setCurrentPageNumber($page);
 
         $viewModel = new ViewModel();
-        $viewModel->setTemplate('e4w-zf2-board/board/board/view.phtml');
+        $viewModel->setTemplate('eye4web-zf2-board/board/board/view.phtml');
 
         $viewModel->setVariables([
             'board' => $board,
@@ -163,7 +163,7 @@ class BoardController extends AbstractActionController
 
 
         $viewModel = new ViewModel();
-        $viewModel->setTemplate('e4w-zf2-board/board/topic/view.phtml');
+        $viewModel->setTemplate('eye4web-zf2-board/board/topic/view.phtml');
 
         $viewModel->setVariables([
             'board' => $board,
@@ -205,7 +205,7 @@ class BoardController extends AbstractActionController
         $form = $this->topicCreateForm;
 
         $viewModel = new ViewModel();
-        $viewModel->setTemplate('e4w-zf2-board/board/topic/create.phtml');
+        $viewModel->setTemplate('eye4web-zf2-board/board/topic/create.phtml');
         $viewModel->setVariable('form', $form);
 
         $redirectUrl = $this->url()->fromRoute('e4w/topic/create', ['board' => $board->getId()]);
@@ -256,7 +256,7 @@ class BoardController extends AbstractActionController
         $form->bind($post);
 
         $viewModel = new ViewModel();
-        $viewModel->setTemplate('e4w-zf2-board/board/post/edit.phtml');
+        $viewModel->setTemplate('eye4web-zf2-board/board/post/edit.phtml');
 
         $viewModel->setVariables([
             'form' => $form,
