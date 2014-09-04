@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Factory\Controller;
+namespace Eye4web\Zf2BoardTest\Factory\Controller;
 
-use E4W\Zf2Board\Factory\Controller\BoardControllerFactory;
+use Eye4web\Zf2Board\Factory\Controller\BoardControllerFactory;
 use Zend\Mvc\Controller\ControllerManager;
 use PHPUnit_Framework_TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -38,76 +38,76 @@ class BoardControllerFactoryTest extends PHPUnit_Framework_TestCase
 
     public function testCreateService()
     {
-        $moduleOptions = $this->getMockBuilder('E4W\Zf2Board\Options\ModuleOptions')
+        $moduleOptions = $this->getMockBuilder('Eye4web\Zf2Board\Options\ModuleOptions')
                               ->disableOriginalConstructor()
                               ->getMock();
 
         $this->serviceLocator->expects($this->at(0))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Options\ModuleOptions')
+                             ->with('Eye4web\Zf2Board\Options\ModuleOptions')
                              ->willReturn($moduleOptions);
 
-        $boardService = $this->getMockBuilder('E4W\Zf2Board\Service\BoardService')
+        $boardService = $this->getMockBuilder('Eye4web\Zf2Board\Service\BoardService')
                              ->disableOriginalConstructor()
                              ->getMock();
 
         $this->serviceLocator->expects($this->at(1))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Service\BoardService')
+                             ->with('Eye4web\Zf2Board\Service\BoardService')
                              ->willReturn($boardService);
 
-        $topicService = $this->getMockBuilder('E4W\Zf2Board\Service\TopicService')
+        $topicService = $this->getMockBuilder('Eye4web\Zf2Board\Service\TopicService')
                              ->disableOriginalConstructor()
                              ->getMock();
 
         $this->serviceLocator->expects($this->at(2))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Service\TopicService')
+                             ->with('Eye4web\Zf2Board\Service\TopicService')
                              ->willReturn($topicService);
 
-        $postService = $this->getMockBuilder('E4W\Zf2Board\Service\PostService')
+        $postService = $this->getMockBuilder('Eye4web\Zf2Board\Service\PostService')
                             ->disableOriginalConstructor()
                             ->getMock();
 
         $this->serviceLocator->expects($this->at(3))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Service\PostService')
+                             ->with('Eye4web\Zf2Board\Service\PostService')
                              ->willReturn($postService);
 
-        $boardCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Board\CreateForm')
+        $boardCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Board\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
         $this->serviceLocator->expects($this->at(4))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Form\Board\CreateForm')
+                             ->with('Eye4web\Zf2Board\Form\Board\CreateForm')
                              ->willReturn($boardCreateForm);
 
-        $topicCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Topic\CreateForm')
+        $topicCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Topic\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
         $this->serviceLocator->expects($this->at(5))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Form\Topic\CreateForm')
+                             ->with('Eye4web\Zf2Board\Form\Topic\CreateForm')
                              ->willReturn($topicCreateForm);
 
-        $postCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Post\CreateForm')
+        $postCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Post\CreateForm')
                                ->disableOriginalConstructor()
                                ->getMock();
 
         $this->serviceLocator->expects($this->at(6))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Form\Post\CreateForm')
+                             ->with('Eye4web\Zf2Board\Form\Post\CreateForm')
                              ->willReturn($postCreateForm);
 
-        $postEditForm = $this->getMockBuilder('E4W\Zf2Board\Form\Post\EditForm')
+        $postEditForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Post\EditForm')
                              ->disableOriginalConstructor()
                              ->getMock();
 
         $this->serviceLocator->expects($this->at(7))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Form\Post\EditForm')
+                             ->with('Eye4web\Zf2Board\Form\Post\EditForm')
                              ->willReturn($postEditForm);
 
         $moduleOptions->expects($this->once())
@@ -125,6 +125,6 @@ class BoardControllerFactoryTest extends PHPUnit_Framework_TestCase
 
         $result = $this->factory->createService($this->controllerManager);
 
-        $this->assertInstanceOf('E4W\Zf2Board\Controller\BoardController', $result);
+        $this->assertInstanceOf('Eye4web\Zf2Board\Controller\BoardController', $result);
     }
 }

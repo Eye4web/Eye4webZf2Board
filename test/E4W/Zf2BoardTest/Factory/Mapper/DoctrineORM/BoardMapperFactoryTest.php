@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Factory\Mapper\DoctrineORM;
+namespace Eye4web\Zf2BoardTest\Factory\Mapper\DoctrineORM;
 
-use E4W\Zf2Board\Factory\Mapper\DoctrineORM\BoardMapperFactory;
+use Eye4web\Zf2Board\Factory\Mapper\DoctrineORM\BoardMapperFactory;
 use Zend\Mvc\Controller\ControllerManager;
 use PHPUnit_Framework_TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -36,17 +36,17 @@ class BoardMapperFactoryTest extends PHPUnit_Framework_TestCase
                              ->with('Doctrine\ORM\EntityManager')
                              ->willReturn($objectManager);
 
-        $moduleOptions = $this->getMockBuilder('E4W\Zf2Board\Options\ModuleOptions')
+        $moduleOptions = $this->getMockBuilder('Eye4web\Zf2Board\Options\ModuleOptions')
                               ->disableOriginalConstructor()
                               ->getMock();
 
         $this->serviceLocator->expects($this->at(1))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Options\ModuleOptions')
+                             ->with('Eye4web\Zf2Board\Options\ModuleOptions')
                              ->willReturn($moduleOptions);
 
         $result = $this->factory->createService($this->serviceLocator);
 
-        $this->assertInstanceOf('E4W\Zf2Board\Mapper\DoctrineORM\BoardMapper', $result);
+        $this->assertInstanceOf('Eye4web\Zf2Board\Mapper\DoctrineORM\BoardMapper', $result);
     }
 }

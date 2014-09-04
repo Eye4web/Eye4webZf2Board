@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Options;
+namespace Eye4web\Zf2BoardTest\Options;
 
-use E4W\Zf2Board\Service\BoardService;
+use Eye4web\Zf2Board\Service\BoardService;
 use PHPUnit_Framework_TestCase;
 
 class BoardServiceTest extends PHPUnit_Framework_TestCase
@@ -10,7 +10,7 @@ class BoardServiceTest extends PHPUnit_Framework_TestCase
     /** @var BoardService */
     protected $service;
 
-    /** @var \E4W\Zf2Board\Mapper\AuthorMapperInterface */
+    /** @var \Eye4web\Zf2Board\Mapper\AuthorMapperInterface */
     protected $mapper;
 
     /** @var \Zend\Form\Form */
@@ -18,13 +18,13 @@ class BoardServiceTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        /** @var \E4W\Zf2Board\Mapper\BoardMapperInterface $mapper */
-        $mapper = $this->getMock('\E4W\Zf2Board\Mapper\BoardMapperInterface');
+        /** @var \Eye4web\Zf2Board\Mapper\BoardMapperInterface $mapper */
+        $mapper = $this->getMock('\Eye4web\Zf2Board\Mapper\BoardMapperInterface');
 
         $this->mapper = $mapper;
 
         /** @var \Zend\Form\Form $form */
-        $boardCreateForm = $this->getMockBuilder('\E4W\Zf2Board\Form\Board\CreateForm')
+        $boardCreateForm = $this->getMockBuilder('\Eye4web\Zf2Board\Form\Board\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 

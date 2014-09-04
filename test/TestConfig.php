@@ -4,6 +4,6 @@ define('ZF2_PATH', __DIR__ . '/../../../vendor/zendframework/zendframework/libra
 
 return [
     'modules' => [
-        'E4W\Zf2Board',
+        'Eye4web\Zf2Board',
     ],
 ];

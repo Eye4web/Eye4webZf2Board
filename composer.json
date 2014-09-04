@@ -8,7 +8,7 @@
         "board",
         "forum"
     ],
-    "homepage": "https://github.com/Eye4web/E4WZf2Board",
+    "homepage": "https://github.com/Eye4web/Eye4webZf2Board",
     "authors": [
         {
             "name": "Nikolaj Løvenhardt Petersen",
@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-0": {
-            "E4W\\Zf2Board": "src/"
+            "Eye4web\\Zf2Board": "src/"
         },
         "classmap": [
             "./Module.php"

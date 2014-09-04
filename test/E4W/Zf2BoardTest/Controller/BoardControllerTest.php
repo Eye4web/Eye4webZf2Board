@@ -1,37 +1,37 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Controller;
+namespace Eye4web\Zf2BoardTest\Controller;
 
-use E4W\Zf2Board\Controller\BoardController;
+use Eye4web\Zf2Board\Controller\BoardController;
 use PHPUnit_Framework_TestCase;
 
 class BoardControllerTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \E4W\Zf2Board\Controller\BoardController */
+    /** @var \Eye4web\Zf2Board\Controller\BoardController */
     protected $controller;
 
-    /** @var \E4W\Zf2Board\Service\BoardService */
+    /** @var \Eye4web\Zf2Board\Service\BoardService */
     protected $boardService;
 
     /** @var \Zend\Mvc\Controller\PluginManager */
     protected $pluginManager;
 
-    /** @var \E4W\Zf2Board\Service\TopicService */
+    /** @var \Eye4web\Zf2Board\Service\TopicService */
     protected $topicService;
 
-    /** @var \E4W\Zf2Board\Service\PostService */
+    /** @var \Eye4web\Zf2Board\Service\PostService */
     protected $postService;
 
-    /** @var \E4W\Zf2Board\Form\Board\CreateForm */
+    /** @var \Eye4web\Zf2Board\Form\Board\CreateForm */
     protected $boardCreateForm;
 
-    /** @var \E4W\Zf2Board\Form\Topic\CreateForm */
+    /** @var \Eye4web\Zf2Board\Form\Topic\CreateForm */
     protected $topicCreateForm;
 
-    /** @var \E4W\Zf2Board\Form\Post\CreateForm */
+    /** @var \Eye4web\Zf2Board\Form\Post\CreateForm */
     protected $postCreateForm;
 
-    /** @var \E4W\Zf2Board\Form\Post\EditForm */
+    /** @var \Eye4web\Zf2Board\Form\Post\EditForm */
     protected $postEditForm;
 
     /** @var \Zend\Authentication\AuthenticationService */
@@ -41,8 +41,8 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        /** @var \E4W\Zf2Board\Service\BoardService $boardService */
-        $boardService = $this->getMockBuilder('E4W\Zf2Board\Service\BoardService')
+        /** @var \Eye4web\Zf2Board\Service\BoardService $boardService */
+        $boardService = $this->getMockBuilder('Eye4web\Zf2Board\Service\BoardService')
                              ->disableOriginalConstructor()
                              ->getMock();
 
@@ -57,43 +57,43 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
         $this->pluginManager = $pluginManager;
 
-        /** @var \E4W\Zf2Board\Service\TopicService $topicService */
-        $topicService = $this->getMockBuilder('E4W\Zf2Board\Service\TopicService')
+        /** @var \Eye4web\Zf2Board\Service\TopicService $topicService */
+        $topicService = $this->getMockBuilder('Eye4web\Zf2Board\Service\TopicService')
                              ->disableOriginalConstructor()
                              ->getMock();
 
         $this->topicService = $topicService;
 
-        /** @var \E4W\Zf2Board\Service\PostService $postService */
-        $postService = $this->getMockBuilder('E4W\Zf2Board\Service\PostService')
+        /** @var \Eye4web\Zf2Board\Service\PostService $postService */
+        $postService = $this->getMockBuilder('Eye4web\Zf2Board\Service\PostService')
                             ->disableOriginalConstructor()
                             ->getMock();
 
         $this->postService = $postService;
 
         /** @var \Zend\Form\Form $boardCreateForm */
-        $boardCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Board\CreateForm')
+        $boardCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Board\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
         $this->boardCreateForm = $boardCreateForm;
 
         /** @var \Zend\Form\Form $topicCreateForm */
-        $topicCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Topic\CreateForm')
+        $topicCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Topic\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
         $this->topicCreateForm = $topicCreateForm;
 
         /** @var \Zend\Form\Form $postCreateForm */
-        $postCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Post\CreateForm')
+        $postCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Post\CreateForm')
                                ->disableOriginalConstructor()
                                ->getMock();
 
         $this->postCreateForm = $postCreateForm;
 
         /** @var \Zend\Form\Form $postEdit */
-        $postEditForm = $this->getMockBuilder('E4W\Zf2Board\Form\Post\EditForm')
+        $postEditForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Post\EditForm')
                              ->disableOriginalConstructor()
                              ->getMock();
 
@@ -104,8 +104,8 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
         $this->authenticationService = $authenticationService;
 
-        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $moduleOptions */
-        $moduleOptions = $this->getMock('E4W\Zf2Board\Options\ModuleOptions');
+        /** @var \Eye4web\Zf2Board\Options\ModuleOptionsInterface $moduleOptions */
+        $moduleOptions = $this->getMock('Eye4web\Zf2Board\Options\ModuleOptions');
 
         $this->authenticationService = $authenticationService;
 
@@ -150,7 +150,7 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testBoardActionBoardExistsWrongSlug()
     {
-        $boardMock = $this->getMock('\E4W\Zf2Board\Entity\Board');
+        $boardMock = $this->getMock('\Eye4web\Zf2Board\Entity\Board');
         $boardId = 1;
 
         $this->boardService->expects($this->once())
@@ -178,7 +178,7 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testBoardActionBoardExistsCorrectSlug()
     {
-        $boardMock = $this->getMock('\E4W\Zf2Board\Entity\Board');
+        $boardMock = $this->getMock('\Eye4web\Zf2Board\Entity\Board');
         $boardId = 1;
 
         $this->boardService->expects($this->once())
@@ -216,7 +216,7 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicActionTopicExistsWrongSlug()
     {
-        $topicMock = $this->getMock('\E4W\Zf2Board\Entity\Topic');
+        $topicMock = $this->getMock('\Eye4web\Zf2Board\Entity\Topic');
         $topicId = 1;
 
         $this->topicService->expects($this->once())
@@ -244,11 +244,11 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicActionTopicExistsCorrectSlug()
     {
-        $topicMock = $this->getMock('\E4W\Zf2Board\Entity\Topic');
+        $topicMock = $this->getMock('\Eye4web\Zf2Board\Entity\Topic');
         $topicId = 1;
         $redirectUrl = 'url';
         $postData = [];
-        $identity = $this->getMock('\E4W\Zf2Board\Entity\UserInterface');
+        $identity = $this->getMock('\Eye4web\Zf2Board\Entity\UserInterface');
 
         $this->topicService->expects($this->once())
              ->method('find')
@@ -300,11 +300,11 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicActionTopicExistsCorrectSlugPost()
     {
-        $topicMock = $this->getMock('\E4W\Zf2Board\Entity\Topic');
+        $topicMock = $this->getMock('\Eye4web\Zf2Board\Entity\Topic');
         $topicId = 1;
         $redirectUrl = 'url';
         $postData = [];
-        $identity = $this->getMock('\E4W\Zf2Board\Entity\UserInterface');
+        $identity = $this->getMock('\Eye4web\Zf2Board\Entity\UserInterface');
 
         $this->topicService->expects($this->once())
              ->method('find')
@@ -373,8 +373,8 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicCreateActionBoardExists()
     {
-        $boardMock = $this->getMock('E4W\Zf2Board\Entity\Board');
-        $identityMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
+        $boardMock = $this->getMock('Eye4web\Zf2Board\Entity\Board');
+        $identityMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
         $boardId = 1;
         $redirectUrl = 'url';
         $postData = [];
@@ -420,9 +420,9 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicCreateActionBoardExistsPost()
     {
-        $boardMock = $this->getMock('E4W\Zf2Board\Entity\Board');
-        $topicMock = $this->getMock('E4W\Zf2Board\Entity\Topic');
-        $identityMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
+        $boardMock = $this->getMock('Eye4web\Zf2Board\Entity\Board');
+        $topicMock = $this->getMock('Eye4web\Zf2Board\Entity\Topic');
+        $identityMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
         $boardId = 1;
         $redirectUrl = 'url';
         $postData = [];
@@ -510,8 +510,8 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testPostEditPostUsersNotIdentical()
     {
-        $postMock = $this->getMock('\E4W\Zf2Board\Entity\Post');
-        $identityMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
+        $postMock = $this->getMock('\Eye4web\Zf2Board\Entity\Post');
+        $identityMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
         $userOne = 1;
         $userTwo = 2;
 
@@ -542,9 +542,9 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testPostEditPostSuccess()
     {
-        $topicMock = $this->getMock('\E4W\Zf2Board\Entity\Topic');
-        $identityMock = $this->getMock('\E4W\Zf2Board\Entity\UserInterface');
-        $postMock = $this->getMock('\E4W\Zf2Board\Entity\Post');
+        $topicMock = $this->getMock('\Eye4web\Zf2Board\Entity\Topic');
+        $identityMock = $this->getMock('\Eye4web\Zf2Board\Entity\UserInterface');
+        $postMock = $this->getMock('\Eye4web\Zf2Board\Entity\Post');
         $postId = 1;
         $topicId = 1;
         $topicSlug = 'slug';

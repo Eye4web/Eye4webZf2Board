@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Options;
+namespace Eye4web\Zf2BoardTest\Options;
 
-use E4W\Zf2Board\View\Helper\BoardHelper;
+use Eye4web\Zf2Board\View\Helper\BoardHelper;
 use PHPUnit_Framework_TestCase;
 
 class BoardHelperTest extends PHPUnit_Framework_TestCase
@@ -10,7 +10,7 @@ class BoardHelperTest extends PHPUnit_Framework_TestCase
     /** @var BoardHelper */
     protected $helper;
 
-    /** @var \E4W\Zf2Board\Service\AuthorService */
+    /** @var \Eye4web\Zf2Board\Service\AuthorService */
     protected $authorService;
 
     /** @var \Zend\Authentication\AuthenticationService */
@@ -18,8 +18,8 @@ class BoardHelperTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        /** @var \E4W\Zf2Board\Service\AuthorService $authorService */
-        $authorService = $this->getMockBuilder('\E4W\Zf2Board\Service\AuthorService')
+        /** @var \Eye4web\Zf2Board\Service\AuthorService $authorService */
+        $authorService = $this->getMockBuilder('\Eye4web\Zf2Board\Service\AuthorService')
                               ->disableOriginalConstructor()
                               ->getMock();
 

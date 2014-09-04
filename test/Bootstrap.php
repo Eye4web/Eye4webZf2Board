@@ -1,6 +1,6 @@
 <?php
 
-namespace E4W\Zf2BoardTest;
+namespace Eye4web\Zf2BoardTest;
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;

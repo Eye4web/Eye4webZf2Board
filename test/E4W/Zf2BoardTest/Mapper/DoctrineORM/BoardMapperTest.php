@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Mapper\DoctrineORM;
+namespace Eye4web\Zf2BoardTest\Mapper\DoctrineORM;
 
-use E4W\Zf2Board\Mapper\DoctrineORM\BoardMapper;
+use Eye4web\Zf2Board\Mapper\DoctrineORM\BoardMapper;
 use PHPUnit_Framework_TestCase;
 
 class BoardMapperTest extends PHPUnit_Framework_TestCase
@@ -13,7 +13,7 @@ class BoardMapperTest extends PHPUnit_Framework_TestCase
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
-    /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface */
+    /** @var \Eye4web\Zf2Board\Options\ModuleOptionsInterface */
     protected $options;
 
     public function setUp()
@@ -25,8 +25,8 @@ class BoardMapperTest extends PHPUnit_Framework_TestCase
 
         $this->objectManager = $objectManager;
 
-        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $options */
-        $options = $this->getMock('E4W\Zf2Board\Options\ModuleOptions');
+        /** @var \Eye4web\Zf2Board\Options\ModuleOptionsInterface $options */
+        $options = $this->getMock('Eye4web\Zf2Board\Options\ModuleOptions');
 
         $this->options = $options;
 
@@ -38,7 +38,7 @@ class BoardMapperTest extends PHPUnit_Framework_TestCase
     public function testFind()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $boardEntity = 'E4W\Zf2Board\Entity\Board';
+        $boardEntity = 'Eye4web\Zf2Board\Entity\Board';
         $board = $this->getMock($boardEntity);
         $boardId = 1;
 
@@ -64,7 +64,7 @@ class BoardMapperTest extends PHPUnit_Framework_TestCase
     public function testFindAll()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $boardEntity = '\E4W\Zf2Board\Entity\Board';
+        $boardEntity = '\Eye4web\Zf2Board\Entity\Board';
         $boards = [];
 
         $this->options->expects($this->once())
@@ -88,7 +88,7 @@ class BoardMapperTest extends PHPUnit_Framework_TestCase
     public function testDeleteFail()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $boardEntity = 'E4W\Zf2Board\Entity\Board';
+        $boardEntity = 'Eye4web\Zf2Board\Entity\Board';
         $board = $this->getMock($boardEntity);
         $boardId = 1;
 
@@ -114,7 +114,7 @@ class BoardMapperTest extends PHPUnit_Framework_TestCase
     public function testDeleteSuccess()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $boardEntity = 'E4W\Zf2Board\Entity\Board';
+        $boardEntity = 'Eye4web\Zf2Board\Entity\Board';
         $board = $this->getMock($boardEntity);
         $boardId = 1;
 

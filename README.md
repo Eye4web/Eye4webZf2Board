@@ -1,4 +1,4 @@
-# E4W\Zf2Board
+# Eye4web\Zf2Board
 
 ## Installation
 

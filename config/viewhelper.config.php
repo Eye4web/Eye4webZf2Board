@@ -2,10 +2,10 @@
 
 return [
     'aliases' => [
-        'zf2BoardHelper' => 'E4W\Zf2Board\View\Helper\BoardHelper',
+        'zf2BoardHelper' => 'Eye4web\Zf2Board\View\Helper\BoardHelper',
     ],
 
     'factories' => [
-        'E4W\Zf2Board\View\Helper\BoardHelper' => 'E4W\Zf2Board\Factory\View\Helper\BoardHelperFactory',
+        'Eye4web\Zf2Board\View\Helper\BoardHelper' => 'Eye4web\Zf2Board\Factory\View\Helper\BoardHelperFactory',
     ]
 ];

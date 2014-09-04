@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Mapper\DoctrineORM;
+namespace Eye4web\Zf2BoardTest\Mapper\DoctrineORM;
 
-use E4W\Zf2Board\Mapper\DoctrineORM\AuthorMapper;
+use Eye4web\Zf2Board\Mapper\DoctrineORM\AuthorMapper;
 use PHPUnit_Framework_TestCase;
 
 class AuthorMapperTest extends PHPUnit_Framework_TestCase
@@ -13,7 +13,7 @@ class AuthorMapperTest extends PHPUnit_Framework_TestCase
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
-    /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface */
+    /** @var \Eye4web\Zf2Board\Options\ModuleOptionsInterface */
     protected $options;
 
     public function setUp()
@@ -25,8 +25,8 @@ class AuthorMapperTest extends PHPUnit_Framework_TestCase
 
         $this->objectManager = $objectManager;
 
-        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $options */
-        $options = $this->getMock('E4W\Zf2Board\Options\ModuleOptions');
+        /** @var \Eye4web\Zf2Board\Options\ModuleOptionsInterface $options */
+        $options = $this->getMock('Eye4web\Zf2Board\Options\ModuleOptions');
 
         $this->options = $options;
 
@@ -38,7 +38,7 @@ class AuthorMapperTest extends PHPUnit_Framework_TestCase
     public function testFind()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $authorEntity = 'E4W\Zf2Board\Entity\Author';
+        $authorEntity = 'Eye4web\Zf2Board\Entity\Author';
         $author = $this->getMock($authorEntity);
         $authorId = 1;
 

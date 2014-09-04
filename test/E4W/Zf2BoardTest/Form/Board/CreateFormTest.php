@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Form\Board;
+namespace Eye4web\Zf2BoardTest\Form\Board;
 
-use E4W\Zf2Board\Form\Board\CreateForm;
+use Eye4web\Zf2Board\Form\Board\CreateForm;
 use PHPUnit_Framework_TestCase;
 
 class CreateFormTest extends PHPUnit_Framework_TestCase
@@ -12,8 +12,8 @@ class CreateFormTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        /** @var \E4W\Zf2Board\Entity\BoardInterface $object */
-        $object = $this->getMock('\E4W\Zf2Board\Entity\Board');
+        /** @var \Eye4web\Zf2Board\Entity\BoardInterface $object */
+        $object = $this->getMock('\Eye4web\Zf2Board\Entity\Board');
 
         $this->form = new CreateForm($object);
     }

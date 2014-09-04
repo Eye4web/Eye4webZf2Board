@@ -1,6 +1,6 @@
 <phpunit bootstrap="test/Bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="E4W Zf2BoardTest">
+        <testsuite name="Eye4web Zf2BoardTest">
             <directory>./test</directory>
         </testsuite>
     </testsuites>
@@ -10,13 +10,13 @@
             <directory suffix=".php">./src</directory>
             <exclude>
                 <directory suffix=".php">./config</directory>
-                <directory suffix=".php">./src/E4W/Zf2Board/Entity</directory>
-                <file>./src/E4W/Zf2Board/Mapper/AuthorMapperInterface.php</file>
-                <file>./src/E4W/Zf2Board/Mapper/BoardMapperInterface.php</file>
-                <file>./src/E4W/Zf2Board/Mapper/PostMapperInterface.php</file>
-                <file>./src/E4W/Zf2Board/Mapper/TopicMapperInterface.php</file>
-                <file>./src/E4W/Zf2Board/Options/ModuleOptionsInterface.php</file>
-                <file>./src/E4W/Zf2Board/Service/SlugServiceInterface.php</file>
+                <directory suffix=".php">./src/Eye4web/Zf2Board/Entity</directory>
+                <file>./src/Eye4web/Zf2Board/Mapper/AuthorMapperInterface.php</file>
+                <file>./src/Eye4web/Zf2Board/Mapper/BoardMapperInterface.php</file>
+                <file>./src/Eye4web/Zf2Board/Mapper/PostMapperInterface.php</file>
+                <file>./src/Eye4web/Zf2Board/Mapper/TopicMapperInterface.php</file>
+                <file>./src/Eye4web/Zf2Board/Options/ModuleOptionsInterface.php</file>
+                <file>./src/Eye4web/Zf2Board/Service/SlugServiceInterface.php</file>
                 <file>./Module.php</file>
             </exclude>
         </whitelist>

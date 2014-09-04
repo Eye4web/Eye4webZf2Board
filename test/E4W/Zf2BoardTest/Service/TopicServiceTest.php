@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Options;
+namespace Eye4web\Zf2BoardTest\Options;
 
-use E4W\Zf2Board\Service\TopicService;
+use Eye4web\Zf2Board\Service\TopicService;
 use PHPUnit_Framework_TestCase;
 
 class TopicServiceTest extends PHPUnit_Framework_TestCase
@@ -10,7 +10,7 @@ class TopicServiceTest extends PHPUnit_Framework_TestCase
     /** @var TopicService */
     protected $service;
 
-    /** @var \E4W\Zf2Board\Mapper\TopicMapperInterface */
+    /** @var \Eye4web\Zf2Board\Mapper\TopicMapperInterface */
     protected $mapper;
 
     /** @var \Zend\Form\Form */
@@ -21,12 +21,12 @@ class TopicServiceTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        /** @var \E4W\Zf2Board\Mapper\TopicMapperInterface $mapper */
-        $mapper = $this->getMock('\E4W\Zf2Board\Mapper\TopicMapperInterface');
+        /** @var \Eye4web\Zf2Board\Mapper\TopicMapperInterface $mapper */
+        $mapper = $this->getMock('\Eye4web\Zf2Board\Mapper\TopicMapperInterface');
         $this->mapper = $mapper;
 
         /** @var \Zend\Form\Form $topicCreateForm */
-        $topicCreateForm = $this->getMockBuilder('\E4W\Zf2Board\Form\Post\CreateForm')
+        $topicCreateForm = $this->getMockBuilder('\Eye4web\Zf2Board\Form\Post\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
@@ -81,11 +81,11 @@ class TopicServiceTest extends PHPUnit_Framework_TestCase
     {
         $data = [];
 
-        /** @var \E4W\Zf2Board\Entity\UserInterface $userMock */
-        $userMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
+        /** @var \Eye4web\Zf2Board\Entity\UserInterface $userMock */
+        $userMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
 
-        /** @var \E4W\Zf2Board\Entity\BoardInterface $boardMock */
-        $boardMock = $this->getMock('E4W\Zf2Board\Entity\Board');
+        /** @var \Eye4web\Zf2Board\Entity\BoardInterface $boardMock */
+        $boardMock = $this->getMock('Eye4web\Zf2Board\Entity\Board');
 
         $topicCreateForm = $this->topicCreateForm;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Factory\Form\Topic;
+namespace Eye4web\Zf2BoardTest\Factory\Form\Topic;
 
-use E4W\Zf2Board\Factory\Form\Topic\CreateFormFactory;
+use Eye4web\Zf2Board\Factory\Form\Topic\CreateFormFactory;
 use Zend\Mvc\Controller\ControllerManager;
 use PHPUnit_Framework_TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,16 +27,16 @@ class CreateFormFactoryTest extends PHPUnit_Framework_TestCase
 
     public function testCreateService()
     {
-        $moduleOptions = $this->getMockBuilder('E4W\Zf2Board\Options\ModuleOptions')
+        $moduleOptions = $this->getMockBuilder('Eye4web\Zf2Board\Options\ModuleOptions')
                               ->disableOriginalConstructor()
                               ->getMock();
 
         $this->serviceLocator->expects($this->at(0))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Options\ModuleOptions')
+                             ->with('Eye4web\Zf2Board\Options\ModuleOptions')
                              ->willReturn($moduleOptions);
 
-        $topicEntityMock = $this->getMockBuilder('E4W\Zf2Board\Entity\Topic')
+        $topicEntityMock = $this->getMockBuilder('Eye4web\Zf2Board\Entity\Topic')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
@@ -46,6 +46,6 @@ class CreateFormFactoryTest extends PHPUnit_Framework_TestCase
 
         $result = $this->factory->createService($this->serviceLocator);
 
-        $this->assertInstanceOf('E4W\Zf2Board\Form\Topic\CreateForm', $result);
+        $this->assertInstanceOf('Eye4web\Zf2Board\Form\Topic\CreateForm', $result);
     }
 }

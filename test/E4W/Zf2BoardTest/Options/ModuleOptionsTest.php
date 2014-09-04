@@ -1,13 +1,13 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Options;
+namespace Eye4web\Zf2BoardTest\Options;
 
-use E4W\Zf2Board\Options\ModuleOptions;
+use Eye4web\Zf2Board\Options\ModuleOptions;
 use PHPUnit_Framework_TestCase;
 
 class ModuleOptionsTest extends PHPUnit_Framework_TestCase
 {
-    /** @var \E4W\Zf2Board\Options\ModuleOptions */
+    /** @var \Eye4web\Zf2Board\Options\ModuleOptions */
     protected $options;
 
     public function setUp()
@@ -19,8 +19,8 @@ class ModuleOptionsTest extends PHPUnit_Framework_TestCase
     public function testCorrectEntities()
     {
         $options = $this->options;
-        $before = 'E4W\Zf2Board\Entity\Board';
-        $after = '\E4W\Zf2Board\Entity\Board';
+        $before = 'Eye4web\Zf2Board\Entity\Board';
+        $after = '\Eye4web\Zf2Board\Entity\Board';
 
         $result = $options->correctEntity($before);
 

@@ -17,7 +17,7 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board;
+namespace Eye4web\Zf2Board;
 
 use Zend\Mvc\MvcEvent;
 

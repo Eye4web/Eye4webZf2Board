@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Mapper\DoctrineORM;
+namespace Eye4web\Zf2BoardTest\Mapper\DoctrineORM;
 
-use E4W\Zf2Board\Mapper\DoctrineORM\TopicMapper;
+use Eye4web\Zf2Board\Mapper\DoctrineORM\TopicMapper;
 use PHPUnit_Framework_TestCase;
 
 class TopicMapperTest extends PHPUnit_Framework_TestCase
@@ -13,10 +13,10 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
 
-    /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface */
+    /** @var \Eye4web\Zf2Board\Options\ModuleOptionsInterface */
     protected $options;
 
-    /** @var \E4W\Zf2Board\Service\SlugServiceInterface */
+    /** @var \Eye4web\Zf2Board\Service\SlugServiceInterface */
     protected $slugService;
 
     /** @var \Zend\EventManager\EventManager */
@@ -31,12 +31,12 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
 
         $this->objectManager = $objectManager;
 
-        /** @var \E4W\Zf2Board\Options\ModuleOptionsInterface $options */
-        $options = $this->getMock('E4W\Zf2Board\Options\ModuleOptions');
+        /** @var \Eye4web\Zf2Board\Options\ModuleOptionsInterface $options */
+        $options = $this->getMock('Eye4web\Zf2Board\Options\ModuleOptions');
         $this->options = $options;
 
-        /** @var \E4W\Zf2Board\Service\SlugServiceInterface $slugService */
-        $slugService = $this->getMock('E4W\Zf2Board\Service\SlugServiceInterface');
+        /** @var \Eye4web\Zf2Board\Service\SlugServiceInterface $slugService */
+        $slugService = $this->getMock('Eye4web\Zf2Board\Service\SlugServiceInterface');
         $this->slugService = $slugService;
 
         /** @var \Zend\EventManager\EventManager $eventManager */
@@ -52,7 +52,7 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
     public function testFind()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $topicEntity = 'E4W\Zf2Board\Entity\Topic';
+        $topicEntity = 'Eye4web\Zf2Board\Entity\Topic';
         $topicMock = $this->getMock($topicEntity);
         $topicId = 1;
 
@@ -78,7 +78,7 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
     public function testFindAll()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $topicEntity = 'E4W\Zf2Board\Entity\Topic';
+        $topicEntity = 'Eye4web\Zf2Board\Entity\Topic';
         $topics = [];
 
         $this->options->expects($this->once())
@@ -108,7 +108,7 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
 
         $boardId = 1;
-        $topicEntity = 'E4W\Zf2Board\Entity\Topic';
+        $topicEntity = 'Eye4web\Zf2Board\Entity\Topic';
         $topics = [];
 
         $this->options->expects($this->once())
@@ -133,7 +133,7 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
     public function testDeleteFail()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $topicEntity = 'E4W\Zf2Board\Entity\Topic';
+        $topicEntity = 'Eye4web\Zf2Board\Entity\Topic';
         $topicId = 1;
 
         $this->options->expects($this->once())
@@ -158,7 +158,7 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
     public function testDeleteSuccess()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $topicEntity = 'E4W\Zf2Board\Entity\Topic';
+        $topicEntity = 'Eye4web\Zf2Board\Entity\Topic';
         $topic = $this->getMock($topicEntity);
         $topicId = 1;
 
@@ -189,15 +189,15 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
     public function testCreateNotValid()
     {
         /** @var \Zend\Form\Form $form */
-        $form = $this->getMockBuilder('E4W\Zf2Board\Form\Topic\CreateForm')
+        $form = $this->getMockBuilder('Eye4web\Zf2Board\Form\Topic\CreateForm')
                      ->disableOriginalConstructor()
                      ->getMock();
 
-        /** @var \E4W\Zf2Board\Entity\BoardInterface $boardMock */
-        $boardMock = $this->getMock('E4W\Zf2Board\Entity\Board');
+        /** @var \Eye4web\Zf2Board\Entity\BoardInterface $boardMock */
+        $boardMock = $this->getMock('Eye4web\Zf2Board\Entity\Board');
 
-        /** @var \E4W\Zf2Board\Entity\UserInterface $userMock */
-        $userMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
+        /** @var \Eye4web\Zf2Board\Entity\UserInterface $userMock */
+        $userMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
 
         $form->expects($this->once())
              ->method('isValid')
@@ -211,20 +211,20 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
     public function testCreateValid()
     {
         /** @var \Zend\Form\Form $form */
-        $form = $this->getMockBuilder('E4W\Zf2Board\Form\Topic\CreateForm')
+        $form = $this->getMockBuilder('Eye4web\Zf2Board\Form\Topic\CreateForm')
                      ->disableOriginalConstructor()
                      ->getMock();
 
-        /** @var \E4W\Zf2Board\Entity\BoardInterface $boardMock */
-        $boardMock = $this->getMock('E4W\Zf2Board\Entity\Board');
+        /** @var \Eye4web\Zf2Board\Entity\BoardInterface $boardMock */
+        $boardMock = $this->getMock('Eye4web\Zf2Board\Entity\Board');
         $boardId = 1;
 
-        /** @var \E4W\Zf2Board\Entity\UserInterface $userMock */
-        $userMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
+        /** @var \Eye4web\Zf2Board\Entity\UserInterface $userMock */
+        $userMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
         $userId = 1;
 
-        /** @var \E4W\Zf2Board\Entity\TopicInterface $topicMock */
-        $topicMock = $this->getMock('E4W\Zf2Board\Entity\Topic');
+        /** @var \Eye4web\Zf2Board\Entity\TopicInterface $topicMock */
+        $topicMock = $this->getMock('Eye4web\Zf2Board\Entity\Topic');
 
         $form->expects($this->once())
              ->method('isValid')
@@ -286,8 +286,8 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
 
     public function testSaveSuccess()
     {
-        /** @var \E4W\Zf2Board\Entity\PostInterface $postMock */
-        $topicMock = $this->getMock('E4W\Zf2Board\Entity\TopicInterface');
+        /** @var \Eye4web\Zf2Board\Entity\PostInterface $postMock */
+        $topicMock = $this->getMock('Eye4web\Zf2Board\Entity\TopicInterface');
 
         $this->objectManager->expects($this->once())
              ->method('persist')

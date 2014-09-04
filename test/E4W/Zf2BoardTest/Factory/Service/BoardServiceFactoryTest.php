@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Factory\Service;
+namespace Eye4web\Zf2BoardTest\Factory\Service;
 
-use E4W\Zf2Board\Factory\Service\BoardServiceFactory;
+use Eye4web\Zf2Board\Factory\Service\BoardServiceFactory;
 use Zend\Mvc\Controller\ControllerManager;
 use PHPUnit_Framework_TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,13 +27,13 @@ class BoardServiceFactoryTest extends PHPUnit_Framework_TestCase
 
     public function testCreateService()
     {
-        $boardMapper = 'E4W\Zf2Board\Mapper\BoardMapperInterface';
+        $boardMapper = 'Eye4web\Zf2Board\Mapper\BoardMapperInterface';
 
-        $moduleOptions = $this->getMock('E4W\Zf2Board\Options\ModuleOptions');
+        $moduleOptions = $this->getMock('Eye4web\Zf2Board\Options\ModuleOptions');
 
         $this->serviceLocator->expects($this->at(0))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Options\ModuleOptions')
+                             ->with('Eye4web\Zf2Board\Options\ModuleOptions')
                              ->willReturn($moduleOptions);
 
         $moduleOptions->expects($this->once())
@@ -47,17 +47,17 @@ class BoardServiceFactoryTest extends PHPUnit_Framework_TestCase
                              ->with($boardMapper)
                              ->willReturn($boardMapperMock);
 
-        $boardCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Board\CreateForm')
+        $boardCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Board\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
         $this->serviceLocator->expects($this->at(2))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Form\Board\CreateForm')
+                             ->with('Eye4web\Zf2Board\Form\Board\CreateForm')
                              ->willReturn($boardCreateForm);
 
         $result = $this->factory->createService($this->serviceLocator);
 
-        $this->assertInstanceOf('E4W\Zf2Board\Service\BoardService', $result);
+        $this->assertInstanceOf('Eye4web\Zf2Board\Service\BoardService', $result);
     }
 }

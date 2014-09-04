@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Options;
+namespace Eye4web\Zf2BoardTest\Options;
 
-use E4W\Zf2Board\Service\AuthorService;
+use Eye4web\Zf2Board\Service\AuthorService;
 use PHPUnit_Framework_TestCase;
 
 class AuthorServiceTest extends PHPUnit_Framework_TestCase
@@ -10,13 +10,13 @@ class AuthorServiceTest extends PHPUnit_Framework_TestCase
     /** @var AuthorService */
     protected $service;
 
-    /** @var \E4W\Zf2Board\Mapper\AuthorMapperInterface */
+    /** @var \Eye4web\Zf2Board\Mapper\AuthorMapperInterface */
     protected $mapper;
 
     public function setUp()
     {
-        /** @var \E4W\Zf2Board\Mapper\AuthorMapperInterface $mapper */
-        $mapper = $this->getMock('\E4W\Zf2Board\Mapper\AuthorMapperInterface');
+        /** @var \Eye4web\Zf2Board\Mapper\AuthorMapperInterface $mapper */
+        $mapper = $this->getMock('\Eye4web\Zf2Board\Mapper\AuthorMapperInterface');
         $this->mapper = $mapper;
 
         $service = new AuthorService($mapper);

@@ -17,9 +17,9 @@
  * and is licensed under the MIT license.
  */
 
-namespace E4W\Zf2Board\Factory\View\Helper;
+namespace Eye4web\Zf2Board\Factory\View\Helper;
 
-use E4W\Zf2Board\View\Helper\BoardHelper;
+use Eye4web\Zf2Board\View\Helper\BoardHelper;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -40,11 +40,11 @@ class BoardHelperFactory implements FactoryInterface
         /** @var ServiceLocatorInterface $serviceLocator */
         $serviceLocator = $helperManager->getServiceLocator();
 
-        /** @var \E4W\Zf2Board\Service\AuthorService $authorService */
-        $authorService = $serviceLocator->get('E4W\Zf2Board\Service\AuthorService');
+        /** @var \Eye4web\Zf2Board\Service\AuthorService $authorService */
+        $authorService = $serviceLocator->get('Eye4web\Zf2Board\Service\AuthorService');
 
         /** @var \Zend\Authentication\AuthenticationService $authenticationService */
-        $authenticationService = $serviceLocator->get('E4W\Zf2Board\Service\AuthenticationService');
+        $authenticationService = $serviceLocator->get('Eye4web\Zf2Board\Service\AuthenticationService');
 
         if (!$authenticationService) {
             throw new \Exception('No authentication service has been provided');

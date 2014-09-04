@@ -20,30 +20,30 @@
 return [
     'factories' => [
         // Services
-        'E4W\Zf2Board\Service\AuthorService' => 'E4W\Zf2Board\Factory\Service\AuthorServiceFactory',
-        'E4W\Zf2Board\Service\BoardService' => 'E4W\Zf2Board\Factory\Service\BoardServiceFactory',
-        'E4W\Zf2Board\Service\TopicService' => 'E4W\Zf2Board\Factory\Service\TopicServiceFactory',
-        'E4W\Zf2Board\Service\PostService' => 'E4W\Zf2Board\Factory\Service\PostServiceFactory',
-        'E4W\Zf2Board\Service\SlugService' => 'E4W\Zf2Board\Factory\Service\SlugServiceFactory',
+        'Eye4web\Zf2Board\Service\AuthorService' => 'Eye4web\Zf2Board\Factory\Service\AuthorServiceFactory',
+        'Eye4web\Zf2Board\Service\BoardService' => 'Eye4web\Zf2Board\Factory\Service\BoardServiceFactory',
+        'Eye4web\Zf2Board\Service\TopicService' => 'Eye4web\Zf2Board\Factory\Service\TopicServiceFactory',
+        'Eye4web\Zf2Board\Service\PostService' => 'Eye4web\Zf2Board\Factory\Service\PostServiceFactory',
+        'Eye4web\Zf2Board\Service\SlugService' => 'Eye4web\Zf2Board\Factory\Service\SlugServiceFactory',
 
         // Mappers
-        'E4W\Zf2Board\Mapper\DoctrineORM\AuthorMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\AuthorMapperFactory',
-        'E4W\Zf2Board\Mapper\DoctrineORM\BoardMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\BoardMapperFactory',
-        'E4W\Zf2Board\Mapper\DoctrineORM\TopicMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\TopicMapperFactory',
-        'E4W\Zf2Board\Mapper\DoctrineORM\PostMapper' => 'E4W\Zf2Board\Factory\Mapper\DoctrineORM\PostMapperFactory',
+        'Eye4web\Zf2Board\Mapper\DoctrineORM\AuthorMapper' => 'Eye4web\Zf2Board\Factory\Mapper\DoctrineORM\AuthorMapperFactory',
+        'Eye4web\Zf2Board\Mapper\DoctrineORM\BoardMapper' => 'Eye4web\Zf2Board\Factory\Mapper\DoctrineORM\BoardMapperFactory',
+        'Eye4web\Zf2Board\Mapper\DoctrineORM\TopicMapper' => 'Eye4web\Zf2Board\Factory\Mapper\DoctrineORM\TopicMapperFactory',
+        'Eye4web\Zf2Board\Mapper\DoctrineORM\PostMapper' => 'Eye4web\Zf2Board\Factory\Mapper\DoctrineORM\PostMapperFactory',
 
         // Options
-        'E4W\Zf2Board\Options\ModuleOptions' => 'E4W\Zf2Board\Factory\Options\ModuleOptionsFactory',
+        'Eye4web\Zf2Board\Options\ModuleOptions' => 'Eye4web\Zf2Board\Factory\Options\ModuleOptionsFactory',
 
         // Forms
-        'E4W\Zf2Board\Form\Board\CreateForm' => 'E4W\Zf2Board\Factory\Form\Board\CreateFormFactory',
+        'Eye4web\Zf2Board\Form\Board\CreateForm' => 'Eye4web\Zf2Board\Factory\Form\Board\CreateFormFactory',
 
-        'E4W\Zf2Board\Form\Topic\CreateForm' => 'E4W\Zf2Board\Factory\Form\Topic\CreateFormFactory',
+        'Eye4web\Zf2Board\Form\Topic\CreateForm' => 'Eye4web\Zf2Board\Factory\Form\Topic\CreateFormFactory',
 
-        'E4W\Zf2Board\Form\Post\CreateForm' => 'E4W\Zf2Board\Factory\Form\Post\CreateFormFactory',
-        'E4W\Zf2Board\Form\Post\EditForm' => 'E4W\Zf2Board\Factory\Form\Post\EditFormFactory',
+        'Eye4web\Zf2Board\Form\Post\CreateForm' => 'Eye4web\Zf2Board\Factory\Form\Post\CreateFormFactory',
+        'Eye4web\Zf2Board\Form\Post\EditForm' => 'Eye4web\Zf2Board\Factory\Form\Post\EditFormFactory',
 
         // Authentication Service
-        'E4W\Zf2Board\Service\AuthenticationService' => 'E4W\Zf2Board\Factory\Service\AuthenticationServiceFactory',
+        'Eye4web\Zf2Board\Service\AuthenticationService' => 'Eye4web\Zf2Board\Factory\Service\AuthenticationServiceFactory',
     ]
 ];

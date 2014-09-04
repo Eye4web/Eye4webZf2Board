@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Options;
+namespace Eye4web\Zf2BoardTest\Options;
 
-use E4W\Zf2Board\Service\SlugService;
+use Eye4web\Zf2Board\Service\SlugService;
 use PHPUnit_Framework_TestCase;
 
 class SlugServiceTest extends PHPUnit_Framework_TestCase

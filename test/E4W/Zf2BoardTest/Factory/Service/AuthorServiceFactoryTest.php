@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Factory\Service;
+namespace Eye4web\Zf2BoardTest\Factory\Service;
 
-use E4W\Zf2Board\Factory\Service\AuthorServiceFactory;
+use Eye4web\Zf2Board\Factory\Service\AuthorServiceFactory;
 use Zend\Mvc\Controller\ControllerManager;
 use PHPUnit_Framework_TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,13 +27,13 @@ class AuthorServiceFactoryTest extends PHPUnit_Framework_TestCase
 
     public function testCreateService()
     {
-        $authorMapper = 'E4W\Zf2Board\Mapper\AuthorMapperInterface';
+        $authorMapper = 'Eye4web\Zf2Board\Mapper\AuthorMapperInterface';
 
-        $moduleOptions = $this->getMock('E4W\Zf2Board\Options\ModuleOptions');
+        $moduleOptions = $this->getMock('Eye4web\Zf2Board\Options\ModuleOptions');
 
         $this->serviceLocator->expects($this->at(0))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Options\ModuleOptions')
+                             ->with('Eye4web\Zf2Board\Options\ModuleOptions')
                              ->willReturn($moduleOptions);
 
         $moduleOptions->expects($this->once())
@@ -49,6 +49,6 @@ class AuthorServiceFactoryTest extends PHPUnit_Framework_TestCase
 
         $result = $this->factory->createService($this->serviceLocator);
 
-        $this->assertInstanceOf('E4W\Zf2Board\Service\AuthorService', $result);
+        $this->assertInstanceOf('Eye4web\Zf2Board\Service\AuthorService', $result);
     }
 }

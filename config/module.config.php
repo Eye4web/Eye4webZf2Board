@@ -39,7 +39,7 @@ return [
                                 'options' => [
                                     'route'    => '/list',
                                     'defaults' => [
-                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'controller' => 'Eye4web\Zf2Board\Controller\BoardController',
                                         'action'     => 'boardList',
                                     ],
                                 ],
@@ -49,7 +49,7 @@ return [
                                 'options' => [
                                     'route'    => '/view/:id{-}-:slug[/page/:page]',
                                     'defaults' => [
-                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'controller' => 'Eye4web\Zf2Board\Controller\BoardController',
                                         'action'     => 'board',
                                         'page'       => 1,
                                     ],
@@ -69,7 +69,7 @@ return [
                                 'options' => [
                                     'route'    => '/view/:id{-}-:slug[/page/:page]',
                                     'defaults' => [
-                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'controller' => 'Eye4web\Zf2Board\Controller\BoardController',
                                         'action'     => 'topic',
                                         'page'       => 1,
                                     ],
@@ -80,7 +80,7 @@ return [
                                 'options' => [
                                     'route'    => '/create/:board',
                                     'defaults' => [
-                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'controller' => 'Eye4web\Zf2Board\Controller\BoardController',
                                         'action'     => 'topicCreate',
                                     ],
                                 ],
@@ -99,7 +99,7 @@ return [
                                 'options' => [
                                     'route'    => '/edit/:id',
                                     'defaults' => [
-                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'controller' => 'Eye4web\Zf2Board\Controller\BoardController',
                                         'action'     => 'postEdit',
                                     ],
                                 ],
@@ -109,7 +109,7 @@ return [
                                 'options' => [
                                     'route'    => '/delete/:id',
                                     'defaults' => [
-                                        'controller' => 'E4W\Zf2Board\Controller\BoardController',
+                                        'controller' => 'Eye4web\Zf2Board\Controller\BoardController',
                                         'action'     => 'postDelete',
                                     ],
                                 ],
@@ -163,12 +163,12 @@ return [
             'zf2board_driver' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'paths' => [
-                    __DIR__ . '/../src/E4W/Zf2Board/Entity',
+                    __DIR__ . '/../src/Eye4web/Zf2Board/Entity',
                 ],
             ],
             'orm_default' => [
                 'drivers' => [
-                    'E4W\Zf2Board' => 'zf2board_driver'
+                    'Eye4web\Zf2Board' => 'zf2board_driver'
                 ]
             ]
         ],

@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Options;
+namespace Eye4web\Zf2BoardTest\Options;
 
-use E4W\Zf2Board\Service\PostService;
+use Eye4web\Zf2Board\Service\PostService;
 use PHPUnit_Framework_TestCase;
 
 class PostServiceTest extends PHPUnit_Framework_TestCase
@@ -10,7 +10,7 @@ class PostServiceTest extends PHPUnit_Framework_TestCase
     /** @var PostService */
     protected $service;
 
-    /** @var \E4W\Zf2Board\Mapper\PostMapperInterface */
+    /** @var \Eye4web\Zf2Board\Mapper\PostMapperInterface */
     protected $mapper;
 
     /** @var \Zend\Form\Form */
@@ -21,19 +21,19 @@ class PostServiceTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        /** @var \E4W\Zf2Board\Mapper\PostMapperInterface $mapper */
-        $mapper = $this->getMock('\E4W\Zf2Board\Mapper\PostMapperInterface');
+        /** @var \Eye4web\Zf2Board\Mapper\PostMapperInterface $mapper */
+        $mapper = $this->getMock('\Eye4web\Zf2Board\Mapper\PostMapperInterface');
         $this->mapper = $mapper;
 
         /** @var \Zend\Form\Form $postCreateForm */
-        $postCreateForm = $this->getMockBuilder('\E4W\Zf2Board\Form\Post\CreateForm')
+        $postCreateForm = $this->getMockBuilder('\Eye4web\Zf2Board\Form\Post\CreateForm')
                                ->disableOriginalConstructor()
                                ->getMock();
 
         $this->postCreateForm = $postCreateForm;
 
         /** @var \Zend\Form\Form $postEditForm */
-        $postEditForm = $this->getMockBuilder('\E4W\Zf2Board\Form\Post\EditForm')
+        $postEditForm = $this->getMockBuilder('\Eye4web\Zf2Board\Form\Post\EditForm')
                              ->disableOriginalConstructor()
                              ->getMock();
 
@@ -69,11 +69,11 @@ class PostServiceTest extends PHPUnit_Framework_TestCase
     {
         $data = [];
 
-        /** @var \E4W\Zf2Board\Entity\UserInterface $userMock */
-        $userMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
+        /** @var \Eye4web\Zf2Board\Entity\UserInterface $userMock */
+        $userMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
 
-        /** @var \E4W\Zf2Board\Entity\TopicInterface $topicMock */
-        $topicMock = $this->getMock('E4W\Zf2Board\Entity\Topic');
+        /** @var \Eye4web\Zf2Board\Entity\TopicInterface $topicMock */
+        $topicMock = $this->getMock('Eye4web\Zf2Board\Entity\Topic');
 
         $postCreateForm = $this->postCreateForm;
 
@@ -91,11 +91,11 @@ class PostServiceTest extends PHPUnit_Framework_TestCase
     {
         $data = [];
 
-        /** @var \E4W\Zf2Board\Entity\UserInterface $userMock */
-        $userMock = $this->getMock('E4W\Zf2Board\Entity\UserInterface');
+        /** @var \Eye4web\Zf2Board\Entity\UserInterface $userMock */
+        $userMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
 
-        /** @var \E4W\Zf2Board\Entity\TopicInterface $topicMock */
-        $topicMock = $this->getMock('E4W\Zf2Board\Entity\Topic');
+        /** @var \Eye4web\Zf2Board\Entity\TopicInterface $topicMock */
+        $topicMock = $this->getMock('Eye4web\Zf2Board\Entity\Topic');
 
         $postEditForm = $this->postEditForm;
 

@@ -19,6 +19,6 @@
 
 return [
     'factories' => [
-        'E4W\Zf2Board\Controller\BoardController' => 'E4W\Zf2Board\Factory\Controller\BoardControllerFactory',
+        'Eye4web\Zf2Board\Controller\BoardController' => 'Eye4web\Zf2Board\Factory\Controller\BoardControllerFactory',
     ]
 ];

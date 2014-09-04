@@ -1,8 +1,8 @@
 <?php
 
-namespace E4W\Zf2BoardTest\Factory\Service;
+namespace Eye4web\Zf2BoardTest\Factory\Service;
 
-use E4W\Zf2Board\Factory\Service\PostServiceFactory;
+use Eye4web\Zf2Board\Factory\Service\PostServiceFactory;
 use Zend\Mvc\Controller\ControllerManager;
 use PHPUnit_Framework_TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,13 +27,13 @@ class PostServiceFactoryTest extends PHPUnit_Framework_TestCase
 
     public function testCreateService()
     {
-        $postMapper = 'E4W\Zf2Board\Mapper\PostMapperInterface';
+        $postMapper = 'Eye4web\Zf2Board\Mapper\PostMapperInterface';
 
-        $moduleOptions = $this->getMock('E4W\Zf2Board\Options\ModuleOptions');
+        $moduleOptions = $this->getMock('Eye4web\Zf2Board\Options\ModuleOptions');
 
         $this->serviceLocator->expects($this->at(0))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Options\ModuleOptions')
+                             ->with('Eye4web\Zf2Board\Options\ModuleOptions')
                              ->willReturn($moduleOptions);
 
         $moduleOptions->expects($this->once())
@@ -47,26 +47,26 @@ class PostServiceFactoryTest extends PHPUnit_Framework_TestCase
                              ->with($postMapper)
                              ->willReturn($postMapperMock);
 
-        $postCreateForm = $this->getMockBuilder('E4W\Zf2Board\Form\Post\CreateForm')
+        $postCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Post\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
         $this->serviceLocator->expects($this->at(2))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Form\Post\CreateForm')
+                             ->with('Eye4web\Zf2Board\Form\Post\CreateForm')
                              ->willReturn($postCreateForm);
 
-        $postEditForm = $this->getMockBuilder('E4W\Zf2Board\Form\Post\EditForm')
+        $postEditForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Post\EditForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
         $this->serviceLocator->expects($this->at(3))
                              ->method('get')
-                             ->with('E4W\Zf2Board\Form\Post\EditForm')
+                             ->with('Eye4web\Zf2Board\Form\Post\EditForm')
                              ->willReturn($postEditForm);
 
         $result = $this->factory->createService($this->serviceLocator);
 
-        $this->assertInstanceOf('E4W\Zf2Board\Service\PostService', $result);
+        $this->assertInstanceOf('Eye4web\Zf2Board\Service\PostService', $result);
     }
 }
