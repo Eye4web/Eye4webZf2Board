@@ -626,6 +626,141 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
         $this->controller->postEditAction();
     }
 
+    public function testPostDeleteNotSignedIn()
+    {
+        $this->authenticationService->expects($this->once())
+            ->method('hasIdentity')
+            ->willReturn(false);
+
+        $this->setExpectedException('Exception');
+
+        $this->controller->postDeleteAction();
+    }
+
+    public function testPostDeletePostNotExisting()
+    {
+        $this->authenticationService->expects($this->once())
+            ->method('hasIdentity')
+            ->willReturn(true);
+
+        $this->postService->expects($this->once())
+                          ->method('find')
+                          ->willReturn(false);
+
+        $this->setExpectedException('Exception');
+
+        $this->controller->postDeleteAction();
+    }
+
+    public function testPostDeletePostUsersNotIdentical()
+    {
+        $postMock = $this->getMock('\Eye4web\Zf2Board\Entity\Post');
+        $identityMock = $this->getMock('Eye4web\Zf2Board\Entity\UserInterface');
+        $userOne = 1;
+        $userTwo = 2;
+
+        $this->authenticationService->expects($this->once())
+            ->method('hasIdentity')
+            ->willReturn(true);
+
+        $this->postService->expects($this->once())
+                          ->method('find')
+                          ->willReturn($postMock);
+
+        $postMock->expects($this->once())
+                 ->method('getUser')
+                 ->willReturn($userOne);
+
+        $this->authenticationService->expects($this->once())
+                                    ->method('getIdentity')
+                                    ->willReturn($identityMock);
+
+        $identityMock->expects($this->once())
+                     ->method('getId')
+                     ->willReturn($userTwo);
+
+        $this->setExpectedException('Exception');
+
+        $this->controller->postDeleteAction();
+    }
+
+    public function testPostDeletePostSuccess()
+    {
+        $topicMock = $this->getMock('\Eye4web\Zf2Board\Entity\Topic');
+        $identityMock = $this->getMock('\Eye4web\Zf2Board\Entity\UserInterface');
+        $postMock = $this->getMock('\Eye4web\Zf2Board\Entity\Post');
+        $postId = 1;
+        $topicId = 1;
+        $topicSlug = 'slug';
+        $redirectUrl = 'url';
+        $userOne = 1;
+        $userTwo = 1;
+
+        $this->authenticationService->expects($this->once())
+            ->method('hasIdentity')
+            ->willReturn(true);
+
+        $this->postService->expects($this->once())
+                          ->method('find')
+                          ->willReturn($postMock);
+
+        $postMock->expects($this->once())
+                 ->method('getUser')
+                 ->willReturn($userOne);
+
+        $this->authenticationService->expects($this->once())
+                                    ->method('getIdentity')
+                                    ->willReturn($identityMock);
+
+        $identityMock->expects($this->once())
+                     ->method('getId')
+                     ->willReturn($userTwo);
+
+        $postMock->expects($this->once())
+                 ->method('getId')
+                 ->willReturn($postId);
+
+        $url = $this->getMock('Zend\Mvc\Controller\Plugin\Url', ['fromRoute']);
+
+        $url->expects($this->once())
+            ->method('fromRoute')
+            ->with('e4w/topic/view', ['id' => $topicId, 'slug' => $topicSlug])
+            ->willReturn($redirectUrl);
+
+        $this->pluginManagerPlugins['url'] = $url;
+
+        $this->authenticationService->expects($this->once())
+                                    ->method('getIdentity')
+                                    ->willReturn($identityMock);
+
+        $this->topicService->expects($this->once())
+             ->method('find')
+             ->willReturn($topicMock);
+
+        $this->postService->expects($this->once())
+                          ->method('delete')
+                          ->with($postId)
+                          ->willReturn(true);
+
+        $topicMock->expects($this->once())
+                  ->method('getId')
+                  ->willReturn($topicId);
+
+        $topicMock->expects($this->once())
+                  ->method('getSlug')
+                  ->willReturn($topicSlug);
+
+        $redirect = $this->getMock('Zend\Mvc\Controller\Plugin\Redirect', ['toUrl']);
+
+        $redirect->expects($this->once())
+                 ->method('toUrl')
+                 ->with($redirectUrl);
+
+        $this->pluginManagerPlugins['redirect'] = $redirect;
+
+        $this->controller->postDeleteAction();
+    }
+
     public function helperMockCallbackPluginManagerGet($key)
     {
         return (array_key_exists($key, $this->pluginManagerPlugins))

@@ -280,4 +280,37 @@ class BoardController extends AbstractActionController
 
         return $viewModel;
     }
+
+    public function postDeleteAction()
+    {
+        $postService = $this->postService;
+        $topicService = $this->topicService;
+        $authenticationService = $this->authenticationService;
+
+        /** @var \Eye4web\Zf2Board\Entity\UserInterface $identity */
+        $identity = $authenticationService->getIdentity();
+
+        if (!$authenticationService->hasIdentity()) {
+            throw new \Exception('You need to be signed in to edit posts');
+        }
+
+        $postId = $this->params('id');
+        $post = $postService->find($postId);
+
+        if (!$post) {
+            throw new \Exception('The post does not exist');
+        }
+
+        if ($post->getUser() != $identity->getId()) {
+            throw new \Exception('You do not have the rights to delete this post');
+        }
+
+        $topic = $topicService->find($post->getTopic());
+
+        $url = $this->url()->fromRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+
+        $postService->delete($post->getId());
+
+        return $this->redirect()->toUrl($url);
+    }
 }

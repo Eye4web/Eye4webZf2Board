@@ -102,5 +102,7 @@ class TopicService implements EventManagerAwareInterface
             'user' => $user,
             'topic' => $topic,
         ]);
+
+        return $topic;
     }
 }

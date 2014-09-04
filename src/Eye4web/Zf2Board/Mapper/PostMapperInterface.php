@@ -52,4 +52,10 @@ interface PostMapperInterface
      * @return PostInterface|boolean
      */
     public function update($form, TopicInterface $topic, UserInterface $user);
+
+    /**
+     * @param int $id
+     * @return boolean
+     */
+    public function delete($id);
 }

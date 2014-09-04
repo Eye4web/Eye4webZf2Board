@@ -95,8 +95,8 @@ class Topic implements TopicInterface
     public function __construct()
     {
         $this->created = new \DateTime;
-        $this->pin = false;
-        $this->lock = false;
+        $this->pinned = false;
+        $this->locked = false;
     }
 
     /**

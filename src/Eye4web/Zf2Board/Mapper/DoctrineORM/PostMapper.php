@@ -132,6 +132,25 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
     }
 
     /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete($id)
+    {
+        $post = $this->find($id);
+
+        if (!$post) {
+            throw new \Exception('The post does not exist');
+        }
+
+        $this->objectManager->remove($post);
+        $this->objectManager->flush();
+
+        return true;
+    }
+
+    /**
      * @param PostInterface $post
      * @return PostInterface
      */
