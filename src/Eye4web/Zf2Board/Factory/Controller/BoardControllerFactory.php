@@ -75,6 +75,11 @@ class BoardControllerFactory implements FactoryInterface
             $moduleOptions
         );
 
+        /** @var \Zend\EventManager\EventManager $eventManager */
+        $eventManager = $serviceManager->get('EventManager');
+
+        $controller->setEventManager($eventManager);
+
         return $controller;
     }
 }

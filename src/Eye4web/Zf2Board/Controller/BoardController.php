@@ -29,6 +29,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
 use Zend\View\Model\ViewModel;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerAwareTrait;
 
 class BoardController extends AbstractActionController
 {
@@ -87,8 +89,14 @@ class BoardController extends AbstractActionController
 
     public function boardListAction()
     {
+
         $viewModel = new ViewModel();
         $viewModel->setTemplate('eye4web-zf2-board/board/board/list.phtml');
+
+        $this->getEventManager()->trigger('page.view', $this, [
+            'page' => 'boardList',
+            'view' => $viewModel,
+        ]);
 
         $viewModel->setVariables([
             'boards' => $this->boardService->findAll()
@@ -99,6 +107,14 @@ class BoardController extends AbstractActionController
 
     public function boardAction()
     {
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('eye4web-zf2-board/board/board/view.phtml');
+
+        $this->getEventManager()->trigger('page.view', $this, [
+            'page' => 'board',
+            'view' => $viewModel,
+        ]);
+
         $boardService = $this->boardService;
         $topicService = $this->topicService;
 
@@ -122,9 +138,6 @@ class BoardController extends AbstractActionController
         $paginator->setDefaultItemCountPerPage($this->options->getTopicsPerBoard());
         $paginator->setCurrentPageNumber($page);
 
-        $viewModel = new ViewModel();
-        $viewModel->setTemplate('eye4web-zf2-board/board/board/view.phtml');
-
         $viewModel->setVariables([
             'board' => $board,
             'topics' => $paginator,
@@ -135,6 +148,14 @@ class BoardController extends AbstractActionController
 
     public function topicAction()
     {
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('eye4web-zf2-board/board/topic/view.phtml');
+
+        $this->getEventManager()->trigger('page.view', $this, [
+            'page' => 'topic',
+            'view' => $viewModel,
+        ]);
+
         $boardService = $this->boardService;
         $topicService = $this->topicService;
         $postService = $this->postService;
@@ -161,9 +182,6 @@ class BoardController extends AbstractActionController
         $paginator->setDefaultItemCountPerPage($this->options->getPostsPerTopic());
         $paginator->setCurrentPageNumber($page);
 
-
-        $viewModel = new ViewModel();
-        $viewModel->setTemplate('eye4web-zf2-board/board/topic/view.phtml');
 
         $viewModel->setVariables([
             'board' => $board,
@@ -196,6 +214,14 @@ class BoardController extends AbstractActionController
 
     public function topicCreateAction()
     {
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('eye4web-zf2-board/board/topic/create.phtml');
+
+        $this->getEventManager()->trigger('page.view', $this, [
+            'page' => 'topic.create',
+            'view' => $viewModel,
+        ]);
+
         $board = $this->boardService->find($this->params('board'));
 
         if (!$board) {
@@ -204,8 +230,6 @@ class BoardController extends AbstractActionController
 
         $form = $this->topicCreateForm;
 
-        $viewModel = new ViewModel();
-        $viewModel->setTemplate('eye4web-zf2-board/board/topic/create.phtml');
         $viewModel->setVariable('form', $form);
 
         $redirectUrl = $this->url()->fromRoute('e4w/topic/create', ['board' => $board->getId()]);
@@ -230,6 +254,14 @@ class BoardController extends AbstractActionController
 
     public function postEditAction()
     {
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('eye4web-zf2-board/board/post/edit.phtml');
+
+        $this->getEventManager()->trigger('page.view', $this, [
+            'page' => 'post.edit',
+            'view' => $viewModel,
+        ]);
+
         $postService = $this->postService;
         $topicService = $this->topicService;
         $authenticationService = $this->authenticationService;
@@ -254,9 +286,6 @@ class BoardController extends AbstractActionController
 
         $form = $this->postEditForm;
         $form->bind($post);
-
-        $viewModel = new ViewModel();
-        $viewModel->setTemplate('eye4web-zf2-board/board/post/edit.phtml');
 
         $viewModel->setVariables([
             'form' => $form,

@@ -37,6 +37,9 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
     /** @var \Zend\Authentication\AuthenticationService */
     protected $authenticationService;
 
+    /** @var \Zend\EventManager\EventManager */
+    protected $eventManager;
+
     public $pluginManagerPlugins = [];
 
     public function setUp()
@@ -109,6 +112,9 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
         $this->authenticationService = $authenticationService;
 
+        $eventManager = $this->getMock('Zend\EventManager\EventManager');
+        $this->eventManager = $eventManager;
+
         $controller = new BoardController(
             $boardService,
             $topicService,
@@ -122,12 +128,19 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
         );
 
         $controller->setPluginManager($pluginManager);
+        $controller->setEventManager($eventManager);
 
         $this->controller = $controller;
     }
 
     public function testBoardListAction()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'boardList',
+        ]);
+
         $this->boardService->expects($this->once())
                            ->method('findAll')
                            ->willReturn([]);
@@ -139,6 +152,12 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testBoardActionBoardNotExisting()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'board',
+            ]);
+
         $this->boardService->expects($this->once())
                            ->method('find')
                            ->willReturn(null);
@@ -150,6 +169,12 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testBoardActionBoardExistsWrongSlug()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'board',
+            ]);
+
         $boardMock = $this->getMock('\Eye4web\Zf2Board\Entity\Board');
         $boardId = 1;
 
@@ -178,6 +203,12 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testBoardActionBoardExistsCorrectSlug()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'board',
+            ]);
+
         $boardMock = $this->getMock('\Eye4web\Zf2Board\Entity\Board');
         $boardId = 1;
 
@@ -205,6 +236,12 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicActionBoardNotExisting()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'topic',
+            ]);
+
         $this->topicService->expects($this->once())
              ->method('find')
              ->willReturn(null);
@@ -216,6 +253,12 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicActionTopicExistsWrongSlug()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'topic',
+            ]);
+
         $topicMock = $this->getMock('\Eye4web\Zf2Board\Entity\Topic');
         $topicId = 1;
 
@@ -244,6 +287,12 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicActionTopicExistsCorrectSlug()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'topic',
+            ]);
+
         $topicMock = $this->getMock('\Eye4web\Zf2Board\Entity\Topic');
         $topicId = 1;
         $redirectUrl = 'url';
@@ -300,6 +349,12 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicActionTopicExistsCorrectSlugPost()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'topic',
+            ]);
+
         $topicMock = $this->getMock('\Eye4web\Zf2Board\Entity\Topic');
         $topicId = 1;
         $redirectUrl = 'url';
@@ -362,6 +417,12 @@ class BoardControllerTest extends PHPUnit_Framework_TestCase
 
     public function testTopicCreateActionBoardNotExisting()
     {
+        $this->eventManager->expects($this->at(0))
+            ->method('trigger')
+            ->with('page.view', $this->controller, [
+                'page' => 'topicCreate',
+            ]);
+
         $this->boardService->expects($this->once())
             ->method('find')
             ->willReturn(null);
