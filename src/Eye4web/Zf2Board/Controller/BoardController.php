@@ -93,11 +93,6 @@ class BoardController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('eye4web-zf2-board/board/board/list.phtml');
 
-        $this->getEventManager()->trigger('page.view', $this, [
-            'page' => 'boardList',
-            'view' => $viewModel,
-        ]);
-
         $viewModel->setVariables([
             'boards' => $this->boardService->findAll()
         ]);
@@ -109,11 +104,6 @@ class BoardController extends AbstractActionController
     {
         $viewModel = new ViewModel();
         $viewModel->setTemplate('eye4web-zf2-board/board/board/view.phtml');
-
-        $this->getEventManager()->trigger('page.view', $this, [
-            'page' => 'board',
-            'view' => $viewModel,
-        ]);
 
         $boardService = $this->boardService;
         $topicService = $this->topicService;
@@ -128,6 +118,11 @@ class BoardController extends AbstractActionController
         if ($slug != $board->getSlug()) {
             return $this->redirect()->toRoute('e4w/board/view', ['id' => $board->getId(), 'slug' => $board->getSlug()]);
         }
+
+        $this->getEventManager()->trigger('board.read', $this, [
+            'board' => $board,
+            'view' => $viewModel,
+        ]);
 
         $topics = $topicService->findByBoard($board->getId());
 
@@ -151,11 +146,6 @@ class BoardController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('eye4web-zf2-board/board/topic/view.phtml');
 
-        $this->getEventManager()->trigger('page.view', $this, [
-            'page' => 'topic',
-            'view' => $viewModel,
-        ]);
-
         $boardService = $this->boardService;
         $topicService = $this->topicService;
         $postService = $this->postService;
@@ -174,6 +164,12 @@ class BoardController extends AbstractActionController
 
         $board = $boardService->find($topic->getBoard());
 
+        $this->getEventManager()->trigger('topic.read', $this, [
+            'board' => $board,
+            'topic' => $topic,
+            'view' => $viewModel,
+        ]);
+
         // Paginator
         $posts = $postService->findByTopic($topic->getId());
         $paginator = new Paginator(new ArrayAdapter($posts));
@@ -181,7 +177,6 @@ class BoardController extends AbstractActionController
 
         $paginator->setDefaultItemCountPerPage($this->options->getPostsPerTopic());
         $paginator->setCurrentPageNumber($page);
-
 
         $viewModel->setVariables([
             'board' => $board,
@@ -205,6 +200,12 @@ class BoardController extends AbstractActionController
             return $viewModel;
         }
 
+        $this->getEventManager()->trigger('post.write', $this, [
+            'board' => $board,
+            'topic' => $topic,
+            'view' => $viewModel,
+        ]);
+
         if (!$topic->isLocked() && $postService->create($prg, $topic, $identity)) {
             return $this->redirect()->toUrl($redirectUrl);
         }
@@ -217,8 +218,7 @@ class BoardController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('eye4web-zf2-board/board/topic/create.phtml');
 
-        $this->getEventManager()->trigger('page.view', $this, [
-            'page' => 'topic.create',
+        $this->getEventManager()->trigger('topic.write', $this, [
             'view' => $viewModel,
         ]);
 
@@ -257,11 +257,6 @@ class BoardController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('eye4web-zf2-board/board/post/edit.phtml');
 
-        $this->getEventManager()->trigger('page.view', $this, [
-            'page' => 'post.edit',
-            'view' => $viewModel,
-        ]);
-
         $postService = $this->postService;
         $topicService = $this->topicService;
         $authenticationService = $this->authenticationService;
@@ -283,6 +278,11 @@ class BoardController extends AbstractActionController
         if ($post->getUser() != $identity->getId()) {
             throw new \Exception('You do not have the rights to edit this post');
         }
+
+        $this->getEventManager()->trigger('post.edit', $this, [
+            'post' => $post,
+            'view' => $viewModel,
+        ]);
 
         $form = $this->postEditForm;
         $form->bind($post);
@@ -325,6 +325,10 @@ class BoardController extends AbstractActionController
 
         $postId = $this->params('id');
         $post = $postService->find($postId);
+
+        $this->getEventManager()->trigger('post.delete', $this, [
+            'post' => $post,
+        ]);
 
         if (!$post) {
             throw new \Exception('The post does not exist');
