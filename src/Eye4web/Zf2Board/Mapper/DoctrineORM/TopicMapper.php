@@ -27,6 +27,7 @@ use Eye4web\Zf2Board\Options\ModuleOptionsInterface;
 use Eye4web\Zf2Board\Service\SlugServiceInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerAwareTrait;
+use Zend\Form\FormInterface;
 
 class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
 {
@@ -133,6 +134,32 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
             'topic' => $topic,
             'user' => $user,
             'board' => $board,
+        ]);
+
+        return $topic;
+    }
+
+    /**
+     * @param FormInterface $form
+     * @return bool|TopicInterface|null
+     */
+    public function edit(FormInterface $form)
+    {
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        /** @var TopicInterface $topic */
+        $topic = $form->getData();
+
+        $this->getEventManager()->trigger('edit.pre', $this, [
+            'topic' => $topic,
+        ]);
+
+        $topic = $this->save($topic);
+
+        $this->getEventManager()->trigger('edit.post', $this, [
+            'topic' => $topic,
         ]);
 
         return $topic;

@@ -105,4 +105,22 @@ class TopicService implements EventManagerAwareInterface
 
         return $topic;
     }
+
+    /**
+     * @param array $data
+     * @param TopicInterface $topic
+     * @return bool|TopicInterface
+     */
+    public function edit(array $data, TopicInterface $topic)
+    {
+        $form = $this->topicCreateForm;
+        $form->bind($topic);
+
+        $form->setData($data);
+
+        $form->remove('csrf');
+        $form->getInputFilter()->remove('csrf');
+
+        return $this->topicMapper->edit($form);
+    }
 }

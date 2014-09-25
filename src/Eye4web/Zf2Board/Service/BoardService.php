@@ -24,6 +24,7 @@ use Eye4web\Zf2Board\Entity\UserInterface;
 use Eye4web\Zf2Board\Mapper\BoardMapperInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerAwareTrait;
+use Zend\Form\FormInterface;
 
 class BoardService implements EventManagerAwareInterface
 {
@@ -32,6 +33,7 @@ class BoardService implements EventManagerAwareInterface
     /** @var BoardMapperInterface */
     protected $boardMapper;
 
+    /** @var FormInterface */
     protected $boardCreateForm;
 
     public function __construct(BoardMapperInterface $boardMapper, $boardCreateForm)
@@ -77,5 +79,20 @@ class BoardService implements EventManagerAwareInterface
         $form->setData($data);
 
         return $this->boardMapper->create($form, $user);
+    }
+
+    /**
+     * @param array $data
+     * @param BoardInterface $board
+     * @return bool|BoardInterface
+     */
+    public function edit(array $data, BoardInterface $board)
+    {
+        $form = $this->boardCreateForm;
+        $form->bind($board);
+
+        $form->setData($data);
+
+        return $this->boardMapper->edit($form);
     }
 }

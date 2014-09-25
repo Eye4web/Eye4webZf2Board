@@ -22,6 +22,7 @@ namespace Eye4web\Zf2Board\Mapper;
 use Eye4web\Zf2Board\Entity\BoardInterface;
 use Eye4web\Zf2Board\Entity\TopicInterface;
 use Eye4web\Zf2Board\Entity\UserInterface;
+use Zend\Form\FormInterface;
 
 interface TopicMapperInterface
 {
@@ -56,4 +57,11 @@ interface TopicMapperInterface
      * @return TopicInterface|null
      */
     public function create($form, BoardInterface $board, UserInterface $user);
+
+
+    /**
+     * @param FormInterface $form
+     * @return bool|TopicInterface
+     */
+    public function edit(FormInterface $form);
 }

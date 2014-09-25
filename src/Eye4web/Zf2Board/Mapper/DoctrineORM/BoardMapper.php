@@ -75,4 +75,54 @@ class BoardMapper implements BoardMapperInterface
 
         return true;
     }
+
+    /**
+     * @param \Zend\Form\FormInterface $form
+     * @param UserInterface $user
+     * @return bool|BoardInterface
+     */
+    public function create(\Zend\Form\FormInterface $form, UserInterface $user)
+    {
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        /** @var BoardInterface $board */
+        $board = $form->getData();
+        $board->setUser($user);
+
+        return $this->save($board);
+    }
+
+    /**
+     * @param \Zend\Form\FormInterface $form
+     * @return bool|BoardInterface
+     */
+    public function edit(\Zend\Form\FormInterface $form)
+    {
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        /** @var BoardInterface $board */
+        $board = $form->getData();
+
+        return $this->save($board);
+    }
+
+    /**
+     * @param BoardInterface $board
+     * @param bool $flush
+     * @return BoardInterface
+     */
+    public function save(BoardInterface $board, $flush = true)
+    {
+        $this->objectManager->persist($board);
+
+        if ($flush) {
+            $this->objectManager->flush($board);
+        }
+
+        return $board;
+    }
 }

@@ -21,6 +21,7 @@ namespace Eye4web\Zf2Board\Mapper;
 
 use Eye4web\Zf2Board\Entity\BoardInterface;
 use Eye4web\Zf2Board\Entity\UserInterface;
+use Zend\Form\FormInterface;
 
 interface BoardMapperInterface
 {
@@ -41,4 +42,17 @@ interface BoardMapperInterface
      * @throws \Exception
      */
     public function delete($id);
+
+    /**
+     * @param FormInterface $form
+     * @param UserInterface $user
+     * @return bool|BoardInterface
+     */
+    public function create(FormInterface $form, UserInterface $user);
+
+    /**
+     * @param FormInterface $form
+     * @return bool|BoardInterface
+     */
+    public function edit(FormInterface $form);
 }
