@@ -21,13 +21,28 @@ namespace Eye4web\Zf2Board\Entity;
 
 interface PostInterface
 {
+    /**
+     * @return null|\DateTime
+     */
     public function getCreated();
 
+    /**
+     * @return null|int
+     */
     public function getId();
 
+    /**
+     * @return null|string
+     */
     public function getText();
 
+    /**
+     * @return null|int
+     */
     public function getTopic();
 
+    /**
+     * @return null|int
+     */
     public function getUser();
 }
