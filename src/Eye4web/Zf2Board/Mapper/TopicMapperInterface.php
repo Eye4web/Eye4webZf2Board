@@ -58,7 +58,6 @@ interface TopicMapperInterface
      */
     public function create($form, BoardInterface $board, UserInterface $user);
 
-
     /**
      * @param FormInterface $form
      * @return bool|TopicInterface

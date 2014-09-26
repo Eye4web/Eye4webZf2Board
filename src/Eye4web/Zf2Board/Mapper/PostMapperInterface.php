@@ -22,6 +22,7 @@ namespace Eye4web\Zf2Board\Mapper;
 use Eye4web\Zf2Board\Entity\PostInterface;
 use Eye4web\Zf2Board\Entity\TopicInterface;
 use Eye4web\Zf2Board\Entity\UserInterface;
+use Zend\Form\FormInterface;
 
 interface PostMapperInterface
 {

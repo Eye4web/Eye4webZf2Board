@@ -26,6 +26,7 @@ use Eye4web\Zf2Board\Mapper\PostMapperInterface;
 use Eye4web\Zf2Board\Options\ModuleOptionsInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerAwareTrait;
+use Zend\Form\FormInterface;
 
 class PostMapper implements PostMapperInterface, EventManagerAwareInterface
 {
