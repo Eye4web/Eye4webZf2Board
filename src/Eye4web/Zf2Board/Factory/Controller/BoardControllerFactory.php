@@ -48,9 +48,6 @@ class BoardControllerFactory implements FactoryInterface
         /** @var \Eye4web\Zf2Board\Service\PostService $postService */
         $postService = $serviceManager->get('Eye4web\Zf2Board\Service\PostService');
 
-        /** @var \Zend\Form\Form $boardCreateForm */
-        $boardCreateForm = $serviceManager->get('Eye4web\Zf2Board\Form\Board\CreateForm');
-
         /** @var \Zend\Form\Form $topicCreateForm */
         $topicCreateForm = $serviceManager->get('Eye4web\Zf2Board\Form\Topic\CreateForm');
 
@@ -67,7 +64,6 @@ class BoardControllerFactory implements FactoryInterface
             $boardService,
             $topicService,
             $postService,
-            $boardCreateForm,
             $topicCreateForm,
             $postCreateForm,
             $postEditForm,

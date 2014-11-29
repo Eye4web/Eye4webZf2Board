@@ -92,13 +92,4 @@ class PostService implements EventManagerAwareInterface
 
         return $this->postMapper->update($form, $topic, $user);
     }
-
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function delete($id)
-    {
-        return $this->postMapper->delete($id);
-    }
 }

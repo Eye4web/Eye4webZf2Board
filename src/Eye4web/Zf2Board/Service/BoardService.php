@@ -33,13 +33,9 @@ class BoardService implements EventManagerAwareInterface
     /** @var BoardMapperInterface */
     protected $boardMapper;
 
-    /** @var FormInterface */
-    protected $boardCreateForm;
-
-    public function __construct(BoardMapperInterface $boardMapper, $boardCreateForm)
+    public function __construct(BoardMapperInterface $boardMapper)
     {
         $this->boardMapper = $boardMapper;
-        $this->boardCreateForm = $boardCreateForm;
     }
 
     /**
@@ -57,42 +53,5 @@ class BoardService implements EventManagerAwareInterface
     public function findAll()
     {
         return $this->boardMapper->findAll();
-    }
-
-    /**
-     * @param $id
-     * @return boolean
-     */
-    public function delete($id)
-    {
-        return $this->boardMapper->delete($id);
-    }
-
-    /**
-     * @param array $data
-     * @param UserInterface $user
-     * @return bool|BoardInterface
-     */
-    public function create(array $data, UserInterface $user)
-    {
-        $form = $this->boardCreateForm;
-        $form->setData($data);
-
-        return $this->boardMapper->create($form, $user);
-    }
-
-    /**
-     * @param array $data
-     * @param BoardInterface $board
-     * @return bool|BoardInterface
-     */
-    public function edit(array $data, BoardInterface $board)
-    {
-        $form = $this->boardCreateForm;
-        $form->bind($board);
-
-        $form->setData($data);
-
-        return $this->boardMapper->edit($form);
     }
 }

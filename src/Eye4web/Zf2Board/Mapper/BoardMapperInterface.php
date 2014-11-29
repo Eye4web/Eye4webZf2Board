@@ -35,24 +35,4 @@ interface BoardMapperInterface
      * @return BoardInterface[]
      */
     public function findAll();
-
-    /**
-     * @param int $id
-     * @return boolean
-     * @throws \Exception
-     */
-    public function delete($id);
-
-    /**
-     * @param FormInterface $form
-     * @param UserInterface $user
-     * @return bool|BoardInterface
-     */
-    public function create(FormInterface $form, UserInterface $user);
-
-    /**
-     * @param FormInterface $form
-     * @return bool|BoardInterface
-     */
-    public function edit(FormInterface $form);
 }

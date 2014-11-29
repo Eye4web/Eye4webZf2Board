@@ -74,7 +74,7 @@ class Topic implements TopicInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Column(name="user_id", type="string", length=36)
      */
     protected $user;
 

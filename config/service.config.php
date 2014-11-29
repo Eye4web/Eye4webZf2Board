@@ -36,8 +36,6 @@ return [
         'Eye4web\Zf2Board\Options\ModuleOptions' => 'Eye4web\Zf2Board\Factory\Options\ModuleOptionsFactory',
 
         // Forms
-        'Eye4web\Zf2Board\Form\Board\CreateForm' => 'Eye4web\Zf2Board\Factory\Form\Board\CreateFormFactory',
-
         'Eye4web\Zf2Board\Form\Topic\CreateForm' => 'Eye4web\Zf2Board\Factory\Form\Topic\CreateFormFactory',
 
         'Eye4web\Zf2Board\Form\Post\CreateForm' => 'Eye4web\Zf2Board\Factory\Form\Post\CreateFormFactory',

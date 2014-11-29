@@ -58,59 +58,6 @@ class BoardMapper implements BoardMapperInterface
     }
 
     /**
-     * @param $id
-     * @return bool
-     * @throws \Exception
-     */
-    public function delete($id)
-    {
-        $board = $this->find($id);
-
-        if (!$board) {
-            throw new \Exception('The board does not exist');
-        }
-
-        $this->objectManager->remove($board);
-        $this->objectManager->flush();
-
-        return true;
-    }
-
-    /**
-     * @param \Zend\Form\FormInterface $form
-     * @param UserInterface $user
-     * @return bool|BoardInterface
-     */
-    public function create(\Zend\Form\FormInterface $form, UserInterface $user)
-    {
-        if (!$form->isValid()) {
-            return false;
-        }
-
-        /** @var BoardInterface $board */
-        $board = $form->getData();
-        $board->setUser($user);
-
-        return $this->save($board);
-    }
-
-    /**
-     * @param \Zend\Form\FormInterface $form
-     * @return bool|BoardInterface
-     */
-    public function edit(\Zend\Form\FormInterface $form)
-    {
-        if (!$form->isValid()) {
-            return false;
-        }
-
-        /** @var BoardInterface $board */
-        $board = $form->getData();
-
-        return $this->save($board);
-    }
-
-    /**
      * @param BoardInterface $board
      * @param bool $flush
      * @return BoardInterface

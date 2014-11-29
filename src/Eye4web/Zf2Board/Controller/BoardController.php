@@ -19,12 +19,14 @@
 
 namespace Eye4web\Zf2Board\Controller;
 
+use Eye4web\Zf2Board\Entity\UserInterface;
 use Eye4web\Zf2Board\Options\ModuleOptionsInterface;
 use Eye4web\Zf2Board\Service\BoardService;
 use Eye4web\Zf2Board\Service\PostService;
 use Eye4web\Zf2Board\Service\TopicService;
 use Zend\Authentication\AuthenticationService;
 use Zend\Form\Form;
+use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
@@ -42,9 +44,6 @@ class BoardController extends AbstractActionController
 
     /** @var PostService */
     protected $postService;
-
-    /** @var Form */
-    protected $boardCreateForm;
 
     /** @var Form */
     protected $topicCreateForm;
@@ -65,7 +64,6 @@ class BoardController extends AbstractActionController
         BoardService $boardService,
         TopicService $topicService,
         PostService $postService,
-        Form $boardCreateForm,
         Form $topicCreateForm,
         Form $postCreateForm,
         Form $postEditForm,
@@ -73,7 +71,6 @@ class BoardController extends AbstractActionController
         ModuleOptionsInterface $options
     ) {
         $this->boardService = $boardService;
-        $this->boardCreateForm = $boardCreateForm;
 
         $this->topicService = $topicService;
         $this->topicCreateForm = $topicCreateForm;
@@ -194,7 +191,7 @@ class BoardController extends AbstractActionController
 
         $identity = $this->authenticationService->getIdentity();
 
-        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+        if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg === false) {
             return $viewModel;
@@ -218,11 +215,12 @@ class BoardController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('eye4web-zf2-board/board/topic/create.phtml');
 
+        $board = $this->boardService->find($this->params('board'));
+
         $this->getEventManager()->trigger('topic.write', $this, [
             'view' => $viewModel,
+            'board' => $board
         ]);
-
-        $board = $this->boardService->find($this->params('board'));
 
         if (!$board) {
             throw new \Exception('The board does not exist');
@@ -239,7 +237,7 @@ class BoardController extends AbstractActionController
 
         $identity = $this->authenticationService->getIdentity();
 
-        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+        if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg === false) {
             return $viewModel;
@@ -261,7 +259,7 @@ class BoardController extends AbstractActionController
         $topicService = $this->topicService;
         $authenticationService = $this->authenticationService;
 
-        /** @var \Eye4web\Zf2Board\Entity\UserInterface $identity */
+        /** @var UserInterface $identity */
         $identity = $authenticationService->getIdentity();
 
         if (!$authenticationService->hasIdentity()) {
@@ -275,7 +273,7 @@ class BoardController extends AbstractActionController
             throw new \Exception('The post does not exist');
         }
 
-        if ($post->getUser() != $identity->getId()) {
+        if ($post->getUser() !== $identity->getId()) {
             throw new \Exception('You do not have the rights to edit this post');
         }
 
@@ -295,7 +293,7 @@ class BoardController extends AbstractActionController
         $redirectUrl = $this->url()->fromRoute('e4w/post/edit', ['id' => $post->getId()]);
         $prg = $this->prg($redirectUrl, true);
 
-        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+        if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg === false) {
             return $viewModel;
@@ -316,7 +314,7 @@ class BoardController extends AbstractActionController
         $topicService = $this->topicService;
         $authenticationService = $this->authenticationService;
 
-        /** @var \Eye4web\Zf2Board\Entity\UserInterface $identity */
+        /** @var UserInterface $identity */
         $identity = $authenticationService->getIdentity();
 
         if (!$authenticationService->hasIdentity()) {

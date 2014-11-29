@@ -69,15 +69,6 @@ class TopicService implements EventManagerAwareInterface
     }
 
     /**
-     * @param int $id
-     * @return boolean
-     */
-    public function delete($id)
-    {
-        return $this->topicMapper->delete($id);
-    }
-
-    /**
      * @param array $data
      * @param BoardInterface $board
      * @param UserInterface $user
