@@ -66,17 +66,6 @@ class TopicServiceTest extends PHPUnit_Framework_TestCase
         $this->service->findByBoard($boardId);
     }
 
-    public function testDelete()
-    {
-        $id = 1;
-
-        $this->mapper->expects($this->once())
-             ->method('delete')
-             ->with($id);
-
-        $this->service->delete($id);
-    }
-
     public function testCreate()
     {
         $data = [];

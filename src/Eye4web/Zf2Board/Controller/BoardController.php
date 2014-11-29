@@ -94,6 +94,10 @@ class BoardController extends AbstractActionController
             'boards' => $this->boardService->findAll()
         ]);
 
+        $this->getEventManager()->trigger('board.list', $this, [
+            'view' => $viewModel,
+        ]);
+
         return $viewModel;
     }
 

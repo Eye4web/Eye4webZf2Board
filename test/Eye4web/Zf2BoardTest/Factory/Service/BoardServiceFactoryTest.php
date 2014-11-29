@@ -47,15 +47,6 @@ class BoardServiceFactoryTest extends PHPUnit_Framework_TestCase
                              ->with($boardMapper)
                              ->willReturn($boardMapperMock);
 
-        $boardCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Board\CreateForm')
-                                ->disableOriginalConstructor()
-                                ->getMock();
-
-        $this->serviceLocator->expects($this->at(2))
-                             ->method('get')
-                             ->with('Eye4web\Zf2Board\Form\Board\CreateForm')
-                             ->willReturn($boardCreateForm);
-
         $result = $this->factory->createService($this->serviceLocator);
 
         $this->assertInstanceOf('Eye4web\Zf2Board\Service\BoardService', $result);

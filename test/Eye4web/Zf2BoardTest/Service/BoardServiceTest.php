@@ -52,15 +52,4 @@ class BoardServiceTest extends PHPUnit_Framework_TestCase
 
         $this->service->findAll();
     }
-
-    public function testDelete()
-    {
-        $id = 1;
-
-        $this->mapper->expects($this->once())
-                     ->method('delete')
-                     ->with($id);
-
-        $this->service->delete($id);
-    }
 }

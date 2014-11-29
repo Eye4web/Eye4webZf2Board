@@ -130,62 +130,6 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
         $this->assertSame($topics, $result);
     }
 
-    public function testDeleteFail()
-    {
-        $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $topicEntity = 'Eye4web\Zf2Board\Entity\Topic';
-        $topicId = 1;
-
-        $this->options->expects($this->once())
-             ->method('getTopicEntity')
-             ->willReturn($topicEntity);
-
-        $this->objectManager->expects($this->once())
-             ->method('getRepository')
-             ->with($topicEntity)
-             ->willReturn($objectRepository);
-
-        $objectRepository->expects($this->once())
-             ->method('find')
-             ->with($topicId)
-             ->willReturn(null);
-
-        $this->setExpectedException('Exception');
-
-        $this->mapper->delete($topicId);
-    }
-
-    public function testDeleteSuccess()
-    {
-        $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $topicEntity = 'Eye4web\Zf2Board\Entity\Topic';
-        $topic = $this->getMock($topicEntity);
-        $topicId = 1;
-
-        $this->options->expects($this->once())
-             ->method('getTopicEntity')
-             ->willReturn($topicEntity);
-
-        $this->objectManager->expects($this->once())
-             ->method('getRepository')
-             ->with($topicEntity)
-             ->willReturn($objectRepository);
-
-        $objectRepository->expects($this->once())
-                         ->method('find')
-                         ->with($topicId)
-                         ->willReturn($topic);
-
-        $this->objectManager->expects($this->once())
-                            ->method('remove')
-                            ->with($topic);
-
-        $this->objectManager->expects($this->once())
-                            ->method('flush');
-
-        $this->mapper->delete($topicId);
-    }
-
     public function testCreateNotValid()
     {
         /** @var \Zend\Form\Form $form */

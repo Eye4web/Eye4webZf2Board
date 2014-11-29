@@ -74,20 +74,11 @@ class BoardControllerFactoryTest extends PHPUnit_Framework_TestCase
                              ->with('Eye4web\Zf2Board\Service\PostService')
                              ->willReturn($postService);
 
-        $boardCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Board\CreateForm')
-                                ->disableOriginalConstructor()
-                                ->getMock();
-
-        $this->serviceLocator->expects($this->at(4))
-                             ->method('get')
-                             ->with('Eye4web\Zf2Board\Form\Board\CreateForm')
-                             ->willReturn($boardCreateForm);
-
         $topicCreateForm = $this->getMockBuilder('Eye4web\Zf2Board\Form\Topic\CreateForm')
                                 ->disableOriginalConstructor()
                                 ->getMock();
 
-        $this->serviceLocator->expects($this->at(5))
+        $this->serviceLocator->expects($this->at(4))
                              ->method('get')
                              ->with('Eye4web\Zf2Board\Form\Topic\CreateForm')
                              ->willReturn($topicCreateForm);
@@ -96,7 +87,7 @@ class BoardControllerFactoryTest extends PHPUnit_Framework_TestCase
                                ->disableOriginalConstructor()
                                ->getMock();
 
-        $this->serviceLocator->expects($this->at(6))
+        $this->serviceLocator->expects($this->at(5))
                              ->method('get')
                              ->with('Eye4web\Zf2Board\Form\Post\CreateForm')
                              ->willReturn($postCreateForm);
@@ -105,7 +96,7 @@ class BoardControllerFactoryTest extends PHPUnit_Framework_TestCase
                              ->disableOriginalConstructor()
                              ->getMock();
 
-        $this->serviceLocator->expects($this->at(7))
+        $this->serviceLocator->expects($this->at(6))
                              ->method('get')
                              ->with('Eye4web\Zf2Board\Form\Post\EditForm')
                              ->willReturn($postEditForm);
@@ -118,10 +109,18 @@ class BoardControllerFactoryTest extends PHPUnit_Framework_TestCase
                                       ->disableOriginalConstructor()
                                       ->getMock();
 
-        $this->serviceLocator->expects($this->at(8))
+        $this->serviceLocator->expects($this->at(7))
                              ->method('get')
                              ->with('AuthenticationService')
                              ->willReturn($authenticationService);
+
+        $eventManager = $this->getMockBuilder('Zend\EventManager\EventManagerInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->serviceLocator->expects($this->at(8))
+            ->method('get')
+            ->with('EventManager')
+            ->willReturn($eventManager);
 
         $result = $this->factory->createService($this->controllerManager);
 
