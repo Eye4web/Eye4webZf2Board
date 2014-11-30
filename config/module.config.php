@@ -161,7 +161,7 @@ return [
             ],
             'orm_default' => [
                 'drivers' => [
-                    'Eye4web\Zf2Board' => 'zf2board_driver'
+                    'Eye4web\Zf2Board\Entity' => 'zf2board_driver'
                 ]
             ]
         ],
