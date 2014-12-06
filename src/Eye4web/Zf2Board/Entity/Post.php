@@ -21,46 +21,30 @@ namespace Eye4web\Zf2Board\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="posts")
- */
 class Post implements PostInterface
 {
     /**
      * @var int|null
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text")
      */
     protected $text;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="datetime")
      */
     protected $created;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="user_id", type="string", length=36)
      */
     protected $user;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="topic_id", type="integer")
      */
     protected $topic;
 

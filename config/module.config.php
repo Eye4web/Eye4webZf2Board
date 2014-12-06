@@ -154,9 +154,9 @@ return [
     'doctrine' => [
         'driver' => [
             'zf2board_driver' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
                 'paths' => [
-                    __DIR__ . '/../src/Eye4web/Zf2Board/Entity',
+                    'default' => __DIR__ . '/doctrine',
                 ],
             ],
             'orm_default' => [
