@@ -21,10 +21,9 @@ namespace Eye4web\Zf2Board\Form\Topic;
 
 use Eye4web\Zf2Board\Entity\TopicInterface;
 use Zend\Form\Element;
-use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class CreateForm extends Form implements InputFilterProviderInterface
+class CreateForm extends \ZfcBase\Form\ProvidesEventsForm implements InputFilterProviderInterface
 {
     /** @var \Doctrine\ORM\EntityManager */
     protected $objectManager;
@@ -73,6 +72,8 @@ class CreateForm extends Form implements InputFilterProviderInterface
                 'class' => 'btn btn-success',
             ],
         ]);
+
+        $this->getEventManager()->trigger('init', $this);
     }
 
     public function getInputFilterSpecification()
