@@ -218,19 +218,19 @@ class BoardController extends AbstractActionController
     {
         $viewModel = new ViewModel();
         $viewModel->setTemplate('eye4web-zf2-board/board/topic/create.phtml');
+        $form = $this->topicCreateForm;
 
         $board = $this->boardService->find($this->params('board'));
-
-        $this->getEventManager()->trigger('topic.write', $this, [
-            'view' => $viewModel,
-            'board' => $board
-        ]);
 
         if (!$board) {
             throw new \Exception('The board does not exist');
         }
 
-        $form = $this->topicCreateForm;
+        $this->getEventManager()->trigger('topic.write', $this, [
+            'view' => $viewModel,
+            'board' => $board,
+            'form' => $form
+        ]);
 
         $viewModel->setVariable('form', $form);
 
