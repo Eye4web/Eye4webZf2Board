@@ -82,7 +82,7 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
         $post = $form->getData();
 
         $post->setUser($user->getId());
-        $post->setTopic($topic->getId());
+        $post->setTopic($topic);
 
         $this->getEventManager()->trigger('create.pre', $this, [
             'post' => $post,
@@ -115,7 +115,7 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
         $post = $form->getData();
 
         $post->setUser($user->getId());
-        $post->setTopic($topic->getId());
+        $post->setTopic($topic);
 
         $this->getEventManager()->trigger('update.pre', $this, [
             'post' => $post,

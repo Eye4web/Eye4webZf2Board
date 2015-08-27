@@ -11,7 +11,9 @@
         <field name="text" type="text"/>
         <field name="created" type="datetime"/>
         <field name="user" column="user_id" type="integer" length="36" />
-        <field name="topic" column="topic_id" type="integer" />
+        <many-to-one field="topic" target-entity="Eye4web\Zf2Board\Entity\Topic" inversed-by="posts">
+            <join-column name="topic_id" referenced-column-name="id"/>
+        </many-to-one>
     </entity>
 
 </doctrine-mapping>
