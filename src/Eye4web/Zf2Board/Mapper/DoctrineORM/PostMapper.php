@@ -63,7 +63,7 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
     {
         return $this->objectManager->getRepository($this->options->getPostEntity())->findBy([
             'topic' => $topicId
-        ]);
+        ], ['created' => 'ASC']);
     }
 
     /**

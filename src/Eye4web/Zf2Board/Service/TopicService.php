@@ -80,6 +80,86 @@ class TopicService implements EventManagerAwareInterface
     }
 
     /**
+     * @param $id
+     */
+    public function delete($id)
+    {
+        $this->getEventManager()->trigger('create.pre', $this, [
+            'topic' => $id
+        ]);
+
+        $this->topicMapper->delete($id);
+
+        $this->getEventManager()->trigger('create.post', $this, [
+            'topic' => $id
+        ]);
+    }
+
+    /**
+     * @param $id
+     */
+    public function lock($id)
+    {
+        $this->getEventManager()->trigger('lock.pre', $this, [
+            'topic' => $id
+        ]);
+
+        $this->topicMapper->lock($id);
+
+        $this->getEventManager()->trigger('lock.post', $this, [
+            'topic' => $id
+        ]);
+    }
+
+    /**
+     * @param $id
+     */
+    public function unlock($id)
+    {
+        $this->getEventManager()->trigger('unlock.pre', $this, [
+            'topic' => $id
+        ]);
+
+        $this->topicMapper->unlock($id);
+
+        $this->getEventManager()->trigger('unlock.post', $this, [
+            'topic' => $id
+        ]);
+    }
+
+    /**
+     * @param $id
+     */
+    public function pin($id)
+    {
+        $this->getEventManager()->trigger('pin.pre', $this, [
+            'topic' => $id
+        ]);
+
+        $this->topicMapper->unlock($id);
+
+        $this->getEventManager()->trigger('pin.post', $this, [
+            'topic' => $id
+        ]);
+    }
+
+    /**
+     * @param $id
+     */
+    public function unpin($id)
+    {
+        $this->getEventManager()->trigger('unpin.pre', $this, [
+            'topic' => $id
+        ]);
+
+        $this->topicMapper->unpin($id);
+
+        $this->getEventManager()->trigger('unpin.post', $this, [
+            'topic' => $id
+        ]);
+    }
+
+    /**
      * @param array $data
      * @param BoardInterface $board
      * @param UserInterface $user
@@ -97,6 +177,11 @@ class TopicService implements EventManagerAwareInterface
         ]);
 
         $topic = $this->topicMapper->create($form, $board, $user);
+
+        if (!$topic) {
+            return false;
+        }
+
         $post = $this->postService->create($data, $topic, $user);
 
         $this->getEventManager()->trigger('create.post', $this, [

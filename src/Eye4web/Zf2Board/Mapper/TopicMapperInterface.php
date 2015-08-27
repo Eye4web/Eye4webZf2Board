@@ -51,6 +51,30 @@ interface TopicMapperInterface
     public function delete($id);
 
     /**
+     * @param int $id
+     * @throws \Exception
+     */
+    public function pin($id);
+
+    /**
+     * @param int $id
+     * @throws \Exception
+     */
+    public function unpin($id);
+
+    /**
+     * @param int $id
+     * @throws \Exception
+     */
+    public function lock($id);
+
+    /**
+     * @param int $id
+     * @throws \Exception
+     */
+    public function unlock($id);
+
+    /**
      * @param $form
      * @param BoardInterface $board
      * @param UserInterface $user

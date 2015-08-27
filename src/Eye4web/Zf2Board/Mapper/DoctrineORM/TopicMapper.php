@@ -110,6 +110,74 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
     }
 
     /**
+     * @param int $id
+     * @throws \Exception
+     */
+    public function pin($id)
+    {
+        $topic = $this->find($id);
+
+        if (!$topic) {
+            throw new \Exception('The topic does not exist');
+        }
+
+        $topic->setPinned(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @param int $id
+     * @throws \Exception
+     */
+    public function unpin($id)
+    {
+        $topic = $this->find($id);
+
+        if (!$topic) {
+            throw new \Exception('The topic does not exist');
+        }
+
+        $topic->setPinned(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @param int $id
+     * @throws \Exception
+     */
+    public function lock($id)
+    {
+        $topic = $this->find($id);
+
+        if (!$topic) {
+            throw new \Exception('The topic does not exist');
+        }
+
+        $topic->setLocked(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @param int $id
+     * @throws \Exception
+     */
+    public function unlock($id)
+    {
+        $topic = $this->find($id);
+
+        if (!$topic) {
+            throw new \Exception('The topic does not exist');
+        }
+
+        $topic->setLocked(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param $form
      * @param BoardInterface $board
      * @param UserInterface $user
