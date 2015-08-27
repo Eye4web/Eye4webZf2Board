@@ -2,6 +2,7 @@
 
 namespace Eye4web\Zf2BoardTest\Mapper\DoctrineORM;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use Eye4web\Zf2Board\Mapper\DoctrineORM\TopicMapper;
 use PHPUnit_Framework_TestCase;
 
@@ -115,15 +116,30 @@ class TopicMapperTest extends PHPUnit_Framework_TestCase
                       ->method('getTopicEntity')
                       ->willReturn($topicEntity);
 
-        $this->objectManager->expects($this->once())
-                            ->method('getRepository')
-                            ->with($topicEntity)
-                            ->willReturn($objectRepository);
+        /** @var QueryBuilder $queryBuilder */
+        $queryBuilder = $this->getMockBuilder(QueryBuilder::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $objectRepository->expects($this->once())
-                         ->method('findBy')
-                         ->with(['board' => $boardId], ['pinned' => 'desc'])
-                         ->willReturn($topics);
+        $queryBuilder->expects($this->any())
+            ->method('select')
+            ->willReturn($queryBuilder);
+        $queryBuilder->expects($this->any())
+            ->method('from')
+            ->willReturn($queryBuilder);
+        $queryBuilder->expects($this->any())
+            ->method('leftJoin')
+            ->willReturn($queryBuilder);
+        $queryBuilder->expects($this->any())
+            ->method('where')
+            ->willReturn($queryBuilder);
+        $queryBuilder->expects($this->any())
+            ->method('orderBy')
+            ->willReturn($queryBuilder);
+
+        $this->objectManager->expects($this->once())
+                            ->method('createQueryBuilder')
+                            ->willReturn($queryBuilder);
 
         $result = $this->mapper->findByBoard($boardId);
 

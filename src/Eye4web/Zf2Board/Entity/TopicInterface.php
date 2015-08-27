@@ -47,11 +47,6 @@ interface TopicInterface
     public function getSlug();
 
     /**
-     * @return string
-     */
-    public function getText();
-
-    /**
      * @return int
      */
     public function getUser();

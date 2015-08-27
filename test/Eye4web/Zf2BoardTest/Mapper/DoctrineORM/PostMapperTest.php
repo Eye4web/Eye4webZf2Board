@@ -277,11 +277,6 @@ class PostMapperTest extends PHPUnit_Framework_TestCase
         $this->assertSame($postMock, $result);
     }
 
-    public function testSaveWrongInstance()
-    {
-        $this->setExpectedException('Exception');
-        $this->mapper->save(null);
-    }
 
     public function testSaveSuccess()
     {

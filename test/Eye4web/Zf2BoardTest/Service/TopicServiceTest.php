@@ -2,6 +2,7 @@
 
 namespace Eye4web\Zf2BoardTest\Options;
 
+use Eye4web\Zf2Board\Service\PostService;
 use Eye4web\Zf2Board\Service\TopicService;
 use PHPUnit_Framework_TestCase;
 
@@ -19,6 +20,9 @@ class TopicServiceTest extends PHPUnit_Framework_TestCase
     /** @var \Zend\Form\Form */
     protected $postEditForm;
 
+    /** @var  PostService */
+    protected $postService;
+
     public function setUp()
     {
         /** @var \Eye4web\Zf2Board\Mapper\TopicMapperInterface $mapper */
@@ -32,7 +36,11 @@ class TopicServiceTest extends PHPUnit_Framework_TestCase
 
         $this->topicCreateForm = $topicCreateForm;
 
-        $service = new TopicService($mapper, $topicCreateForm);
+        /** @var PostService $postService */
+        $postService = $this->getMock('\Eye4web\Zf2Board\Service\PostService');
+        $this->postService = $postService;
+
+        $service = new TopicService($mapper, $topicCreateForm, $postService);
         $this->service = $service;
     }
 

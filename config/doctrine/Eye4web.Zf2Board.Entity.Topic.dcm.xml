@@ -10,7 +10,6 @@
         </id>
         <field name="name" type="string" length="255"/>
         <field name="slug" type="string" length="255"/>
-        <field name="text" type="text"/>
         <field name="created" type="datetime"/>
         <field name="board" column="board_id" type="integer" />
         <field name="user" column="user_id" type="integer" length="36" />

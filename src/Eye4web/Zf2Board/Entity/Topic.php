@@ -41,11 +41,6 @@ class Topic implements TopicInterface
     /**
      * @var string
      */
-    protected $text;
-
-    /**
-     * @var string
-     */
     protected $created;
 
     /**
@@ -153,22 +148,6 @@ class Topic implements TopicInterface
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * @param string $text
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-    }
-
-    /**
-     * @return string
-     */
-    public function getText()
-    {
-        return $this->text;
     }
 
     /**

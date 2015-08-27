@@ -77,11 +77,17 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
      */
     public function findByBoard($boardId)
     {
-        return $this->objectManager->getRepository($this->options->getTopicEntity())->findBy([
-            'board' => $boardId,
-        ], [
-            'pinned' => 'desc',
-        ]);
+        $queryBuilder = $this->objectManager->createQueryBuilder();
+        $queryBuilder->select('t')
+            ->from($this->options->getTopicEntity(), 't')
+            ->leftJoin('t.posts', 'p')
+            ->where('t.board = :boardId')
+            ->orderBy('t.pinned', 'DESC')
+            ->orderBy('p.created', 'DESC');
+
+        $queryBuilder->setParameter('boardId', $boardId);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**

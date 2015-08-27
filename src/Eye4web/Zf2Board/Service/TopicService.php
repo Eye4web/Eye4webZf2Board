@@ -36,10 +36,21 @@ class TopicService implements EventManagerAwareInterface
     /** @var \Zend\Form\Form */
     protected $topicCreateForm;
 
-    public function __construct(TopicMapperInterface $topicMapper, $topicCreateForm)
+    /**
+     * @var PostService
+     */
+    private $postService;
+
+    /**
+     * @param TopicMapperInterface $topicMapper
+     * @param $topicCreateForm
+     * @param PostService $postService
+     */
+    public function __construct(TopicMapperInterface $topicMapper, $topicCreateForm, PostService $postService)
     {
         $this->topicMapper = $topicMapper;
         $this->topicCreateForm = $topicCreateForm;
+        $this->postService = $postService;
     }
 
     /**
@@ -86,12 +97,14 @@ class TopicService implements EventManagerAwareInterface
         ]);
 
         $topic = $this->topicMapper->create($form, $board, $user);
+        $post = $this->postService->create($data, $topic, $user);
 
         $this->getEventManager()->trigger('create.post', $this, [
             'data' => $data,
             'board' => $board,
             'user' => $user,
             'topic' => $topic,
+            'post' => $post,
         ]);
 
         return $topic;

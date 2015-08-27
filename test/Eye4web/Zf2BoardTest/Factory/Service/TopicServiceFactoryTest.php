@@ -56,6 +56,15 @@ class TopicServiceFactoryTest extends PHPUnit_Framework_TestCase
             ->with('Eye4web\Zf2Board\Form\Topic\CreateForm')
             ->willReturn($topicCreateForm);
 
+        $postService = $this->getMockBuilder('Eye4web\Zf2Board\Service\PostService')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->serviceLocator->expects($this->at(3))
+            ->method('get')
+            ->with('Eye4web\Zf2Board\Service\PostService')
+            ->willReturn($postService);
+
         $result = $this->factory->createService($this->serviceLocator);
 
         $this->assertInstanceOf('Eye4web\Zf2Board\Service\TopicService', $result);

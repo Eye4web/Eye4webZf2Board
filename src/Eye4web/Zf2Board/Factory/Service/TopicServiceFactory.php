@@ -19,6 +19,7 @@
 
 namespace Eye4web\Zf2Board\Factory\Service;
 
+use Eye4web\Zf2Board\Service\PostService;
 use Eye4web\Zf2Board\Service\TopicService;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -42,7 +43,10 @@ class TopicServiceFactory implements FactoryInterface
         /** @var \Zend\Form\Form $topicCreateForm */
         $topicCreateForm = $serviceLocator->get('Eye4web\Zf2Board\Form\Topic\CreateForm');
 
-        $service = new TopicService($mapper, $topicCreateForm);
+        /** @var PostService $postService */
+        $postService = $serviceLocator->get('Eye4web\Zf2Board\Service\PostService');
+
+        $service = new TopicService($mapper, $topicCreateForm, $postService);
 
         return $service;
     }

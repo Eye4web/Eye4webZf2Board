@@ -173,6 +173,7 @@ class BoardController extends AbstractActionController
 
         // Paginator
         $posts = $postService->findByTopic($topic->getId());
+        $topicPost = array_shift($posts);
         $paginator = new Paginator(new ArrayAdapter($posts));
         $page = $this->params('page');
 
@@ -184,6 +185,7 @@ class BoardController extends AbstractActionController
             'topic' => $topic,
             'posts' => $paginator,
             'postCreateForm' => $postCreateForm,
+            'topicPost' => $topicPost
         ]);
 
         $redirectUrl = $this->url()->fromRoute('e4w/topic/view', [

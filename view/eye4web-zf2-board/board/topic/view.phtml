@@ -8,13 +8,16 @@ $topic = $this->topic;
 /** @var \Eye4web\Zf2Board\Entity\PostInterface[] $posts */
 $posts = $this->posts;
 
+/** @var \Eye4web\Zf2Board\Entity\PostInterface $topicPost */
+$topicPost = $this->topicPost;
+
 /** @var \Eye4web\Zf2Board\Form\Post\CreateForm $postForm */
 $postForm = $this->postCreateForm;
 ?>
 <h1><?=$board->getName()?> > <?=$topic->getName()?></h1>
 <i><?=sprintf('Written by %s on %s.', $this->zf2BoardHelper()->getAuthor($topic->getUser())->getDisplayName(), $topic->getCreated()->format('Y/m/d H:i'))?></i><br>
 <br>
-<?=$topic->getText()?>
+<?=$topicPost->getText()?>
 <br>
 <?=$this->paginationControl($posts, 'sliding', ['eye4web-zf2-board/board/partials/paginator.phtml', 'Eye4web\Zf2Board'], [
     'route' => 'e4w/topic/view',
