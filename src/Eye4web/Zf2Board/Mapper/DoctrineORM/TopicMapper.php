@@ -82,8 +82,8 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
             ->from($this->options->getTopicEntity(), 't')
             ->leftJoin('t.posts', 'p')
             ->where('t.board = :boardId')
-            ->orderBy('t.pinned', 'DESC')
-            ->orderBy('p.created', 'DESC');
+            ->orderBy('p.created', 'DESC')
+            ->orderBy('t.pinned', 'DESC');
 
         $queryBuilder->setParameter('boardId', $boardId);
 
