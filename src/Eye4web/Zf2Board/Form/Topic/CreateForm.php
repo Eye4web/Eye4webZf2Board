@@ -110,7 +110,6 @@ class CreateForm extends \ZfcBase\Form\ProvidesEventsForm implements InputFilter
                         'options' => [
                             'encoding' => 'UTF-8',
                             'min'      => 1,
-                            'max'      => 5000,
                         ],
                     ],
                 ],
