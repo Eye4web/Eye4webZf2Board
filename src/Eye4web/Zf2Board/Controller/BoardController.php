@@ -193,12 +193,6 @@ class BoardController extends AbstractActionController
             'slug' => $topic->getSlug()
         ]);
 
-        $this->getEventManager()->trigger('post.write', $this, [
-            'board' => $board,
-            'topic' => $topic,
-            'view' => $viewModel,
-        ]);
-
         $prg = $this->prg($redirectUrl, true);
 
         $identity = $this->authenticationService->getIdentity();
@@ -210,6 +204,11 @@ class BoardController extends AbstractActionController
         }
 
         if (!$topic->isLocked() && $postService->create($prg, $topic, $identity)) {
+            $this->getEventManager()->trigger('post.write', $this, [
+                'board' => $board,
+                'topic' => $topic,
+                'view' => $viewModel,
+            ]);
             return $this->redirect()->toUrl($redirectUrl);
         }
 
