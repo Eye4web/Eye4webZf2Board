@@ -165,12 +165,6 @@ class BoardController extends AbstractActionController
 
         $board = $boardService->find($topic->getBoard());
 
-        $this->getEventManager()->trigger('topic.read', $this, [
-            'board' => $board,
-            'topic' => $topic,
-            'view' => $viewModel,
-        ]);
-
         // Paginator
         $posts = $postService->findByTopic($topic->getId());
         $topicPost = array_shift($posts);
@@ -186,6 +180,12 @@ class BoardController extends AbstractActionController
             'posts' => $paginator,
             'postCreateForm' => $postCreateForm,
             'topicPost' => $topicPost
+        ]);
+
+        $this->getEventManager()->trigger('topic.read', $this, [
+            'board' => $board,
+            'topic' => $topic,
+            'view' => $viewModel,
         ]);
 
         $redirectUrl = $this->url()->fromRoute('e4w/topic/view', [
