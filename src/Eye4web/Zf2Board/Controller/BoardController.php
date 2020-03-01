@@ -282,13 +282,14 @@ class BoardController extends AbstractActionController
             throw new \Exception('You do not have the rights to edit this post');
         }
 
+        $form = $this->postEditForm;
+        $form->bind($post);
+
         $this->getEventManager()->trigger('post.edit', $this, [
             'post' => $post,
             'view' => $viewModel,
+            'form' => $form,
         ]);
-
-        $form = $this->postEditForm;
-        $form->bind($post);
 
         $viewModel->setVariables([
             'form' => $form,
@@ -305,6 +306,11 @@ class BoardController extends AbstractActionController
         }
 
         $topic = $topicService->find($post->getTopic());
+
+        $this->getEventManager()->trigger('post.edit.prg', $this, [
+            'post' => $post,
+            'data' => $prg
+        ]);
 
         if ($post = $postService->update($prg, $topic, $identity)) {
             return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);

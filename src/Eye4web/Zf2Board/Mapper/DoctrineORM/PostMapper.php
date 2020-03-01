@@ -145,6 +145,10 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
             throw new \Exception('The post does not exist');
         }
 
+        $this->getEventManager()->trigger('delete.pre', $this, [
+            'post' => $post,
+        ]);
+
         $this->objectManager->remove($post);
         $this->objectManager->flush();
 

@@ -103,6 +103,10 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
             throw new \Exception('The topic does not exist');
         }
 
+        $this->getEventManager()->trigger('delete.pre', $this, [
+            'topic' => $topic,
+        ]);
+
         $this->objectManager->remove($topic);
         $this->objectManager->flush();
 
@@ -121,6 +125,10 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
             throw new \Exception('The topic does not exist');
         }
 
+        $this->getEventManager()->trigger('pin.pre', $this, [
+            'topic' => $topic,
+        ]);
+
         $topic->setPinned(true);
 
         $this->objectManager->flush();
@@ -137,6 +145,10 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
         if (!$topic) {
             throw new \Exception('The topic does not exist');
         }
+
+        $this->getEventManager()->trigger('unpin.pre', $this, [
+            'topic' => $topic,
+        ]);
 
         $topic->setPinned(false);
 
@@ -155,6 +167,10 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
             throw new \Exception('The topic does not exist');
         }
 
+        $this->getEventManager()->trigger('lock.pre', $this, [
+            'topic' => $topic,
+        ]);
+
         $topic->setLocked(true);
 
         $this->objectManager->flush();
@@ -171,6 +187,10 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
         if (!$topic) {
             throw new \Exception('The topic does not exist');
         }
+
+        $this->getEventManager()->trigger('unlock.pre', $this, [
+            'topic' => $topic,
+        ]);
 
         $topic->setLocked(false);
 
