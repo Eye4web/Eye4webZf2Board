@@ -19,7 +19,7 @@
         "php": ">=5.4",
         "zendframework/zend-mvc": "^3.0",
         "doctrine/orm": "~2.5",
-        "zf-commons/zfc-base": "0.*"
+        "zf-commons/zfc-base": "dev-upgrade-to-zf3"
     },
     "autoload": {
         "psr-0": {
@@ -35,5 +35,12 @@
         "squizlabs/php_codesniffer" : "1.5.*",
         "zendframework/zend-captcha" : "~2.1",
         "codeclimate/php-test-reporter": "dev-master"
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/samsonasik/ZfcBase",
+            "no-api": true
+        }
+    ]
 }
