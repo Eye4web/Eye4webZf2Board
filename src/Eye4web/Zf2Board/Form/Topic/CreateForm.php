@@ -33,7 +33,7 @@ class CreateForm extends \ZfcBase\Form\ProvidesEventsForm implements InputFilter
         parent::__construct($name);
 
         $this->setObject($object);
-        $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods(false));
+        $this->setHydrator(new \Zend\Hydrator\ClassMethods(false));
 
         $this->add([
             'name' => 'name',
