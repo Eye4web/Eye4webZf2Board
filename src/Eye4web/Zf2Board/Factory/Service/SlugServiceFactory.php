@@ -23,7 +23,7 @@ use Eye4web\Zf2Board\Service\SlugService;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class SlugServiceFactory implements FactoryInterface
+class SlugServiceFactory implements \Zend\ServiceManager\Factory\FactoryInterface
 {
     /**
      * Create controller
@@ -31,7 +31,7 @@ class SlugServiceFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator
      * @return SlugService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(\Interop\Container\ContainerInterface $serviceLocator, $requestedName, array $options = null)
     {
         $service = new SlugService();
 

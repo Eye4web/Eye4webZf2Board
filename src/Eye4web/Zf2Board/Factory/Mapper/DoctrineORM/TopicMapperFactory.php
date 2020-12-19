@@ -23,7 +23,7 @@ use Eye4web\Zf2Board\Mapper\DoctrineORM\TopicMapper;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class TopicMapperFactory implements FactoryInterface
+class TopicMapperFactory implements \Zend\ServiceManager\Factory\FactoryInterface
 {
     /**
      * Create mapper
@@ -31,7 +31,7 @@ class TopicMapperFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceManager
      * @return TopicMapper
      */
-    public function createService(ServiceLocatorInterface $serviceManager)
+    public function __invoke(\Interop\Container\ContainerInterface $serviceManager, $requestedName, array $options = null)
     {
         /** @var \Doctrine\ORM\EntityManager $objectManager */
         $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');

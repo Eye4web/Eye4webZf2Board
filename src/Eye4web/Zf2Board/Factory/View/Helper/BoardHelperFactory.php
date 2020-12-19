@@ -23,7 +23,7 @@ use Eye4web\Zf2Board\View\Helper\BoardHelper;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class BoardHelperFactory implements FactoryInterface
+class BoardHelperFactory implements \Zend\ServiceManager\Factory\FactoryInterface
 {
     /**
      * Create helper
@@ -32,7 +32,7 @@ class BoardHelperFactory implements FactoryInterface
      * @return BoardHelper
      * @throws \Exception
      */
-    public function createService(ServiceLocatorInterface $helperManager)
+    public function __invoke(\Interop\Container\ContainerInterface $helperManager, $requestedName, array $options = null)
     {
         /** @var ServiceLocatorInterface $serviceLocator */
         $serviceLocator = $helperManager->getServiceLocator();
