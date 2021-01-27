@@ -31,7 +31,7 @@ class EditForm extends Form implements InputFilterProviderInterface
         parent::__construct($name);
 
         $this->setObject($object);
-        $this->setHydrator(new \Zend\Hydrator\ClassMethods(false));
+        $this->setHydrator(new \Laminas\Hydrator\ClassMethodsHydrator(false));
 
         $this->add([
             'name' => 'text',
