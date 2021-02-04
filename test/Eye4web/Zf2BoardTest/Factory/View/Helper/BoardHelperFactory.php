@@ -34,9 +34,6 @@ class BoardHelperFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $helperManager)
     {
-        var_dump(get_class($helperManager));
-        exit;
-
         /** @var ServiceLocatorInterface $serviceLocator */
         $serviceLocator = $helperManager;
 
