@@ -35,7 +35,7 @@ class BoardHelperFactory implements \Zend\ServiceManager\Factory\FactoryInterfac
     public function __invoke(\Interop\Container\ContainerInterface $helperManager, $requestedName, array $options = null)
     {
         /** @var ServiceLocatorInterface $serviceLocator */
-        $serviceLocator = $helperManager->getServiceLocator();
+        $serviceLocator = $helperManager;
 
         /** @var \Eye4web\Zf2Board\Service\AuthorService $authorService */
         $authorService = $serviceLocator->get('Eye4web\Zf2Board\Service\AuthorService');

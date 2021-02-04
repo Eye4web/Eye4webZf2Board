@@ -34,7 +34,7 @@ class BoardControllerFactory implements \Zend\ServiceManager\Factory\FactoryInte
     public function __invoke(\Interop\Container\ContainerInterface $controllerManager, $requestedName, array $options = null)
     {
         /** @var ServiceLocatorInterface $serviceManager */
-        $serviceManager = $controllerManager->getServiceLocator();
+        $serviceManager = $controllerManager;
 
         /** @var \Eye4web\Zf2Board\Options\ModuleOptions $moduleOptions */
         $moduleOptions = $serviceManager->get('Eye4web\Zf2Board\Options\ModuleOptions');

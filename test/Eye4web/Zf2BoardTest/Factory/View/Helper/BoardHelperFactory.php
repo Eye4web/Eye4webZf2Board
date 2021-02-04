@@ -38,7 +38,7 @@ class BoardHelperFactory implements FactoryInterface
         exit;
 
         /** @var ServiceLocatorInterface $serviceLocator */
-        $serviceLocator = $helperManager->getServiceLocator();
+        $serviceLocator = $helperManager;
 
         /** @var \Eye4web\Zf2Board\Service\AuthorService $authorService */
         $authorService = $serviceLocator->get('Eye4web\Zf2Board\Service\AuthorService');
