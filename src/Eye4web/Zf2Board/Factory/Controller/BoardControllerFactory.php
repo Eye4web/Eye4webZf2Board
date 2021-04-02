@@ -31,7 +31,7 @@ class BoardControllerFactory implements \Zend\ServiceManager\Factory\FactoryInte
      * @param ServiceLocatorInterface $controllerManager
      * @return BoardController
      */
-    public function __invoke(\Interop\Container\ContainerInterface $controllerManager, $requestedName, array $options = null)
+    public function __invoke(\Psr\Container\ContainerInterface $controllerManager, $requestedName, array $options = null)
     {
         /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $controllerManager;

@@ -31,7 +31,7 @@ class BoardMapperFactory implements \Zend\ServiceManager\Factory\FactoryInterfac
      * @param ServiceLocatorInterface $serviceManager
      * @return BoardMapper
      */
-    public function __invoke(\Interop\Container\ContainerInterface $serviceManager, $requestedName, array $options = null)
+    public function __invoke(\Psr\Container\ContainerInterface $serviceManager, $requestedName, array $options = null)
     {
         /** @var \Doctrine\ORM\EntityManager $objectManager */
         $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');

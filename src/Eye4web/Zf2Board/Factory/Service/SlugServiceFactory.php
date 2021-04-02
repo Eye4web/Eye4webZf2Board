@@ -31,7 +31,7 @@ class SlugServiceFactory implements \Zend\ServiceManager\Factory\FactoryInterfac
      * @param ServiceLocatorInterface $serviceLocator
      * @return SlugService
      */
-    public function __invoke(\Interop\Container\ContainerInterface $serviceLocator, $requestedName, array $options = null)
+    public function __invoke(\Psr\Container\ContainerInterface $serviceLocator, $requestedName, array $options = null)
     {
         $service = new SlugService();
 

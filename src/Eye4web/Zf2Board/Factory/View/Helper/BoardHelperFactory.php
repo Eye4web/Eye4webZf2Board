@@ -32,7 +32,7 @@ class BoardHelperFactory implements \Zend\ServiceManager\Factory\FactoryInterfac
      * @return BoardHelper
      * @throws \Exception
      */
-    public function __invoke(\Interop\Container\ContainerInterface $helperManager, $requestedName, array $options = null)
+    public function __invoke(\Psr\Container\ContainerInterface $helperManager, $requestedName, array $options = null)
     {
         /** @var ServiceLocatorInterface $serviceLocator */
         $serviceLocator = $helperManager;
