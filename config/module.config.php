@@ -21,21 +21,21 @@ return [
     'router' => [
         'routes' => [
             'e4w' => [
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Router\Http\Literal',
                 'options' => [
                     'route' => '/'
                 ],
                 'may_terminate' => false,
                 'child_routes' => [
                     'board' => [
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Zend\Router\Http\Literal',
                         'options' => [
                             'route' => 'board'
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
                             'list' => [
-                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'type' => 'Zend\Router\Http\Segment',
                                 'options' => [
                                     'route'    => '/list',
                                     'defaults' => [
@@ -45,7 +45,7 @@ return [
                                 ],
                             ],
                             'view' => [
-                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'type' => 'Zend\Router\Http\Segment',
                                 'options' => [
                                     'route'    => '/view/:id{-}-:slug[/page/:page]',
                                     'defaults' => [
@@ -58,14 +58,14 @@ return [
                         ]
                     ],
                     'topic' => [
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Zend\Router\Http\Literal',
                         'options' => [
                             'route' => 'topic'
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
                             'view' => [
-                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'type' => 'Zend\Router\Http\Segment',
                                 'options' => [
                                     'route'    => '/view/:id{-}-:slug[/page/:page]',
                                     'defaults' => [
@@ -76,7 +76,7 @@ return [
                                 ],
                             ],
                             'create' => [
-                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'type' => 'Zend\Router\Http\Segment',
                                 'options' => [
                                     'route'    => '/create/:board',
                                     'defaults' => [
@@ -88,14 +88,14 @@ return [
                         ]
                     ],
                     'post' => [
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Zend\Router\Http\Literal',
                         'options' => [
                             'route' => 'post'
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
                             'edit' => [
-                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'type' => 'Zend\Router\Http\Segment',
                                 'options' => [
                                     'route'    => '/edit/:id',
                                     'defaults' => [
@@ -105,7 +105,7 @@ return [
                                 ],
                             ],
                             'delete' => [
-                                'type' => 'Zend\Mvc\Router\Http\Segment',
+                                'type' => 'Zend\Router\Http\Segment',
                                 'options' => [
                                     'route'    => '/delete/:id',
                                     'defaults' => [

@@ -43,7 +43,7 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
     protected $options;
 
     public function __construct(
-        \Doctrine\Common\Persistence\ObjectManager $objectManager,
+        \Doctrine\Persistence\ObjectManager $objectManager,
         SlugServiceInterface $slugService,
         ModuleOptionsInterface $options
     ) {

@@ -33,7 +33,7 @@ class BoardMapper implements BoardMapperInterface
     protected $options;
 
     public function __construct(
-        \Doctrine\Common\Persistence\ObjectManager $objectManager,
+        \Doctrine\Persistence\ObjectManager $objectManager,
         ModuleOptionsInterface $options
     ) {
         $this->objectManager = $objectManager;
