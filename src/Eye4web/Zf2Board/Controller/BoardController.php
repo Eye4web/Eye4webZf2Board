@@ -193,7 +193,7 @@ class BoardController extends AbstractActionController
             'slug' => $topic->getSlug()
         ]);
 
-        $prg = $this->prg($redirectUrl, true);
+        $prg = $this->prg($redirectUrl . "?" . http_build_query($_GET), true);
 
         $identity = $this->authenticationService->getIdentity();
 
@@ -236,7 +236,7 @@ class BoardController extends AbstractActionController
         $viewModel->setVariable('form', $form);
 
         $redirectUrl = $this->url()->fromRoute('e4w/topic/create', ['board' => $board->getId()]);
-        $prg = $this->prg($redirectUrl, true);
+        $prg = $this->prg($redirectUrl . "?" . http_build_query($_GET), true);
 
         $topicService = $this->topicService;
 
@@ -297,7 +297,7 @@ class BoardController extends AbstractActionController
         ]);
 
         $redirectUrl = $this->url()->fromRoute('e4w/post/edit', ['id' => $post->getId()]);
-        $prg = $this->prg($redirectUrl, true);
+        $prg = $this->prg($redirectUrl . "?" . http_build_query($_GET), true);
 
         if ($prg instanceof Response) {
             return $prg;
