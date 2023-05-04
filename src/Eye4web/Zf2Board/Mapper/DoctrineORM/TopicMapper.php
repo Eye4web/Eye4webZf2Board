@@ -218,6 +218,7 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
 
         $this->getEventManager()->trigger('create.pre', $this, [
             'topic' => $topic,
+            'form' => $form,
             'user' => $user,
             'board' => $board,
         ]);
@@ -226,6 +227,7 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
 
         $this->getEventManager()->trigger('create.post', $this, [
             'topic' => $topic,
+            'form' => $form,
             'user' => $user,
             'board' => $board,
         ]);
@@ -248,12 +250,14 @@ class TopicMapper implements TopicMapperInterface, EventManagerAwareInterface
 
         $this->getEventManager()->trigger('edit.pre', $this, [
             'topic' => $topic,
+            'form' => $form,
         ]);
 
         $topic = $this->save($topic);
 
         $this->getEventManager()->trigger('edit.post', $this, [
             'topic' => $topic,
+            'form' => $form,
         ]);
 
         return $topic;
