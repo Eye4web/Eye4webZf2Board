@@ -85,6 +85,7 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
         $post->setTopic($topic);
 
         $this->getEventManager()->trigger('create.pre', $this, [
+            'form' => $form,
             'post' => $post,
             'user' => $user,
         ]);
@@ -92,6 +93,7 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
         $post = $this->save($post);
 
         $this->getEventManager()->trigger('create.post', $this, [
+            'form' => $form,
             'post' => $post,
             'user' => $user,
         ]);
@@ -118,6 +120,7 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
         $post->setTopic($topic);
 
         $this->getEventManager()->trigger('update.pre', $this, [
+            'form' => $form,
             'post' => $post,
             'user' => $user,
         ]);
@@ -125,6 +128,7 @@ class PostMapper implements PostMapperInterface, EventManagerAwareInterface
         $post = $this->save($post);
 
         $this->getEventManager()->trigger('update.post', $this, [
+            'form' => $form,
             'post' => $post,
             'user' => $user,
         ]);
