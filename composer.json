@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "lamians/laminas-mvc": "^3.0",
+        "laminas/laminas-mvc": "^3.0",
         "doctrine/orm": "~2.5",
         "zf-commons/zfc-base": "dev-upgrade-to-laminas3"
     },
