@@ -16,10 +16,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4",
-        "zendframework/zend-mvc": "^3.0",
+        "php": "^8.1",
+        "laminas/laminas-mvc": "^3.0",
         "doctrine/orm": "~2.5",
-        "zf-commons/zfc-base": "dev-upgrade-to-zf3"
+        "zf-commons/zfc-base": "dev-upgrade-to-laminas3"
     },
     "autoload": {
         "psr-0": {
