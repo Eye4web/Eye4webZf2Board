@@ -116,7 +116,7 @@ class BoardController extends AbstractActionController
             throw new \Exception('The board does not exist');
         }
 
-        if ($slug != $board->getSlug()) {
+        if ($slug && $slug != $board->getSlug()) {
             return $this->redirect()->toRoute('e4w/board/view', ['id' => $board->getId(), 'slug' => $board->getSlug()]);
         }
 
@@ -159,7 +159,7 @@ class BoardController extends AbstractActionController
             throw new \Exception('The topic does not exist');
         }
 
-        if ($slug != $topic->getSlug()) {
+        if ($slug && $slug != $topic->getSlug()) {
             return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
         }
 
