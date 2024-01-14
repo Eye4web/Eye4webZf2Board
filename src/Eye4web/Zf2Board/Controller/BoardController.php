@@ -117,7 +117,7 @@ class BoardController extends AbstractActionController
         }
 
         if ($slug && $slug != $board->getSlug()) {
-            return $this->redirect()->toRoute('e4w/board/view', ['id' => $board->getId(), 'slug' => $board->getSlug()]);
+            return $this->redirect()->toRoute('e4w/board/view', ['id' => $board->getId()]);
         }
 
         $this->getEventManager()->trigger('board.read', $this, [
@@ -160,7 +160,7 @@ class BoardController extends AbstractActionController
         }
 
         if ($slug && $slug != $topic->getSlug()) {
-            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId()]);
         }
 
         $board = $boardService->find($topic->getBoard());
@@ -189,8 +189,7 @@ class BoardController extends AbstractActionController
         ]);
 
         $redirectUrl = $this->url()->fromRoute('e4w/topic/view', [
-            'id' => $topic->getId(),
-            'slug' => $topic->getSlug()
+            'id' => $topic->getId()
         ]);
 
         $prg = $this->prg($redirectUrl . "?" . http_build_query($_GET), true);
@@ -249,7 +248,7 @@ class BoardController extends AbstractActionController
         }
 
         if ($topic = $topicService->create($prg, $board, $identity)) {
-            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId()]);
         }
 
         return $viewModel;
@@ -313,7 +312,7 @@ class BoardController extends AbstractActionController
         ]);
 
         if ($post = $postService->update($prg, $topic, $identity)) {
-            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+            return $this->redirect()->toRoute('e4w/topic/view', ['id' => $topic->getId()]);
         }
 
         return $viewModel;
@@ -349,7 +348,7 @@ class BoardController extends AbstractActionController
 
         $topic = $topicService->find($post->getTopic());
 
-        $url = $this->url()->fromRoute('e4w/topic/view', ['id' => $topic->getId(), 'slug' => $topic->getSlug()]);
+        $url = $this->url()->fromRoute('e4w/topic/view', ['id' => $topic->getId()]);
 
         $postService->delete($post->getId());
 
