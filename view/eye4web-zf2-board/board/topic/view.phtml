@@ -55,6 +55,5 @@ $postForm = $this->postCreateForm;
 <?=$this->form()->openTag($postForm)?>
 <?=$this->formRow($postForm->get('text'))?><br />
 <?=$this->formButton($postForm->get('submit')->setLabel('Post'))?>
-<?=$this->formRow($postForm->get('csrf'))?>
 <?=$this->form()->closeTag($postForm)?>
 <?php } ?>

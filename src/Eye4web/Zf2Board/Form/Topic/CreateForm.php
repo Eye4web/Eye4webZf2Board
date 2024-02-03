@@ -47,11 +47,6 @@ class CreateForm extends \ZfcBase\Form\ProvidesEventsForm implements InputFilter
             ],
         ]);
 
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Csrf',
-            'name' => 'csrf',
-        ));
-
         $this->add([
             'name' => 'text',
             'type'  => 'Zend\Form\Element\Textarea',
@@ -113,10 +108,6 @@ class CreateForm extends \ZfcBase\Form\ProvidesEventsForm implements InputFilter
                         ],
                     ],
                 ],
-            ],
-            [
-                'name' => 'csrf',
-                'required' => true,
             ],
         ];
     }

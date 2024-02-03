@@ -45,11 +45,6 @@ class EditForm extends Form implements InputFilterProviderInterface
             ],
         ]);
 
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Csrf',
-            'name' => 'csrf',
-        ));
-
         $this->add([
             'name' => 'submit',
             'type' => 'Zend\Form\Element\Button',
@@ -75,10 +70,6 @@ class EditForm extends Form implements InputFilterProviderInterface
                         ],
                     ],
                 ],
-            ],
-            [
-                'name' => 'csrf',
-                'required' => true,
             ],
         ];
     }
