@@ -47,7 +47,7 @@ return [
                             'view' => [
                                 'type' => 'Zend\Router\Http\Segment',
                                 'options' => [
-                                    'route'    => '/view/:id{-}-:slug[/page/:page]',
+                                    'route'    => '/view/:id{-}[-:slug][/page/:page]',
                                     'defaults' => [
                                         'controller' => 'Eye4web\Zf2Board\Controller\BoardController',
                                         'action'     => 'board',
@@ -67,7 +67,7 @@ return [
                             'view' => [
                                 'type' => 'Zend\Router\Http\Segment',
                                 'options' => [
-                                    'route'    => '/view/:id{-}-:slug[/page/:page]',
+                                    'route'    => '/view/:id{-}[-:slug][/page/:page]',
                                     'defaults' => [
                                         'controller' => 'Eye4web\Zf2Board\Controller\BoardController',
                                         'action'     => 'topic',
